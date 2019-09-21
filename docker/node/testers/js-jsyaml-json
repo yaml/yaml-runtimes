@@ -1,0 +1,11 @@
+#!/usr/bin/env node
+
+const fs = require('fs')
+YAML = require('js-yaml')
+
+const src = fs.readFileSync('/dev/stdin').toString()
+docs = YAML.loadAll(src)
+docs.map( doc => {
+fs.writeSync(1, JSON.stringify(doc) + '\n')
+})
+

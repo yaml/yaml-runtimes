@@ -5,6 +5,8 @@ defaults:
   runtime: perl5
 - &c
   runtime: c
+- &node
+  runtime: node
 
 
 libraries:
@@ -48,3 +50,17 @@ libraries:
     version: 1.73
     source: https://cpan.metacpan.org/authors/id/E/ET/ETHER/YAML-Tiny-1.73.tar.gz
     tests: [json]
+
+  js-jsyaml:
+    <<: *node
+    version: 3.13.1
+    source: https://github.com/nodeca/js-yaml/archive/3.13.1.tar.gz
+    build-script: js-jsyaml-build.sh
+    tests: [json]
+
+  js-yaml:
+    <<: *node
+    version: 1.6.0
+    source: https://github.com/eemeli/yaml/archive/v1.6.0.tar.gz
+    build-script: js-yaml-build.sh
+    tests: [event, json]
