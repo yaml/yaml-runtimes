@@ -45,6 +45,7 @@ sub build {
         or die "No version for $library";
     my $runtime = $lib->{'runtime'}
         or die "No runtime for $library";
+    my $build_image = "builder-" . ($lib->{'build-image'} || $runtime);
 
     my $dir = "$Bin/../docker/$runtime";
     mkdir "$dir/build";
@@ -52,8 +53,8 @@ sub build {
     my $cmd = sprintf
         'docker run -it --rm --user %s -v%s/build:/build'
         . ' -v%s/utils:/buildutils'
-        . ' --env=VERSION --env=SOURCE yamlrun/builder-%s /buildutils/%s',
-        $<, $dir, $dir, $runtime, $buildscript;
+        . ' --env=VERSION --env=SOURCE yamlrun/%s /buildutils/%s',
+        $<, $dir, $dir, $build_image, $buildscript;
 
     warn __PACKAGE__.':'.__LINE__.": $cmd\n";
     {
