@@ -1,0 +1,13 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+use 5.010;
+
+use YAML::Tiny;
+use JSON::PP;
+use Encode;
+
+my $coder = JSON::PP->new->ascii->pretty->allow_nonref->allow_blessed->canonical;
+my $yaml = decode_utf8 do { local $/; <> };
+my @docs = YAML::Tiny::Load($yaml);
+print encode_utf8($coder->encode($_)) for @docs;

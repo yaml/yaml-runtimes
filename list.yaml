@@ -1,0 +1,42 @@
+---
+defaults:
+- &perl5
+  build-script: perl5-install.sh
+  runtime: perl5
+- &c
+  runtime: c
+
+
+libraries:
+
+  c-libyaml:
+    <<: *c
+    source: https://pyyaml.org/download/libyaml/yaml-0.2.2.tar.gz
+    version: 0.2.2
+    build-script: c-libyaml-build.sh
+    tests: [event]
+
+  c-libfyaml:
+    <<: *c
+    source: https://github.com/pantoniou/libfyaml/releases/download/v0.2/libfyaml-0.2.tar.gz
+    version: 0.2
+    build-script: c-libfyaml-build.sh
+    tests: [event]
+
+  perl5-pp:
+    <<: *perl5
+    version: 0.018
+    source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-PP-0.018.tar.gz
+    tests: [event, json]
+
+  perl5-xs:
+    <<: *perl5
+    version: 0.80
+    source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-LibYAML-0.80.tar.gz
+    tests: [json]
+
+  perl5-tiny:
+    <<: *perl5
+    version: 1.73
+    source: https://cpan.metacpan.org/authors/id/E/ET/ETHER/YAML-Tiny-1.73.tar.gz
+    tests: [json]

@@ -1,0 +1,16 @@
+--- libfyaml-0.2/src/lib/fy-doc.c
++++ libfyaml-0.2.patched/src/lib/fy-doc.c
+@@ -3602,11 +3602,13 @@
+ 	ctx.arg = arg;
+ 	ctx.fynpp = fynpp;
+ 	ctx.count = count;
++/*
+ #ifdef __APPLE__
+ 	qsort_r(fynpp, count, sizeof(*fynpp), &ctx, fy_node_mapping_sort_cmp);
+ #else
+ 	qsort_r(fynpp, count, sizeof(*fynpp), fy_node_mapping_sort_cmp, &ctx);
+ #endif
++*/
+ }
+ 
+ struct fy_node_pair **fy_node_mapping_sort_array(struct fy_node *fyn_map,
