@@ -1,13 +1,14 @@
 ---
-defaults:
-- &perl5
-  build-script: perl5-install.sh
-  runtime: perl5
-- &static
-  runtime: static
-- &node
-  runtime: node
 
+runtimes:
+
+  node: &node
+      runtime: node
+  perl5: &perl5
+      build-script: perl5-install.sh
+      runtime: perl5
+  static: &static
+      runtime: static
 
 libraries:
 

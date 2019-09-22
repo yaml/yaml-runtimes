@@ -4,7 +4,7 @@ set -x
 
 HOME=/tmp/home
 cd /tmp
-wget $SOURCE
+cp -p $SOURCE .
 tar xvf $VERSION.tar.gz
 cd js-yaml-$VERSION
 npm install .

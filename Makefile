@@ -34,7 +34,14 @@ $(NODE):
 test:
 	perl bin/build.pl test
 
-clean:
+clean: clean-build clean-sources
+
+clean-build:
 	rm -rf docker/perl5/build
 	rm -rf docker/c/build
 	rm -rf docker/node/build
+
+clean-sources:
+	rm -rf docker/perl5/sources
+	rm -rf docker/c/sources
+	rm -rf docker/node/sources

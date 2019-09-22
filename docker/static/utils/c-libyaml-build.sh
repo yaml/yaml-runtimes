@@ -2,7 +2,7 @@
 
 set -x
 cd /tmp
-wget $SOURCE
+cp -p $SOURCE .
 tar xvf yaml-$VERSION.tar.gz
 cd yaml-$VERSION
 ./configure --prefix /build
