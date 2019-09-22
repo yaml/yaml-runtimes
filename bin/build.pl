@@ -3,6 +3,7 @@ use strict;
 use warnings;
 use 5.010;
 
+use Test::More;
 use Data::Dumper;
 use YAML::PP;
 use File::Path qw/ make_path /;
@@ -34,22 +35,27 @@ if ($task eq 'build') {
     }
 }
 elsif ($task eq 'test') {
+    my @tests;
     if ($library and $libraries->{ $library }) {
-        test($library);
+        push @tests, $library;
     }
     elsif ($library and $runtimes->{ $library }) {
         my $runtime = $library;
         for my $library (sort keys %$libraries) {
             my $lib = $libraries->{ $library };
             next unless $lib->{runtime} eq $runtime;
-            test($library);
+            push @tests, $library;
         }
     }
     else {
         for my $library (sort keys %$libraries) {
-            test($library);
+            push @tests, $library;
         }
     }
+    for my $library (@tests) {
+        test($library);
+    }
+    done_testing;
 }
 elsif ($task eq 'fetch-sources') {
     if ($library) {
@@ -99,14 +105,14 @@ sub build {
 
 sub test {
     my ($library) = @_;
-    say "====================\nTesting $library";
+    note "Testing $library";
     my $lib = $libraries->{ $library }
         or die "Library $library not found";
     my $runtime = $lib->{'runtime'}
         or die "No runtime for $library";
     my $tests = $lib->{tests} || [];
     for my $type (@$tests) {
-        say "Testing $type";
+        note "Testing $type";
         my $output;
         my $input;
         if ($type eq 'event') {
@@ -120,7 +126,7 @@ sub test {
         my $cmd = sprintf
           'docker run -i --rm --user %s yamlrun/runtime-%s /yaml/%s-%s <tests/%s >tests/%s.%s',
             $<, $runtime, $library, $type, $input, $library, $type;
-        warn __PACKAGE__.':'.__LINE__.": $cmd\n";
+        note $cmd;
         system $cmd;
         if ($type eq 'json') {
             system "jq <tests/$library.$type >tests/$library.$type.jq && mv tests/$library.$type.jq tests/$library.$type";
@@ -129,11 +135,10 @@ sub test {
         my $rc = $?;
         unlink "tests/$library.$type";
         if ($rc) {
-            say "Test failed";
-            exit 1;
+            ok 0, "$library - $type";
         }
         else {
-            say "Test passed";
+            ok 1, "$library - $type";
         }
     }
 }
