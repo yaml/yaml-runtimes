@@ -2,7 +2,6 @@
 
 set -x
 
-HOME=/tmp/home
 cd /tmp
 cp -p $SOURCE .
 tar xvf v${VERSION}.tar.gz

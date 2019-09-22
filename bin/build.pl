@@ -10,6 +10,8 @@ use File::Path qw/ make_path /;
 use Getopt::Long;
 use FindBin '$Bin';
 
+my $container_home = '/tmp/home';
+
 GetOptions(
     'help|h' => \my $help,
 );
@@ -18,6 +20,7 @@ if ($help) {
     usage();
     exit;
 }
+
 
 my ($task, $library) = @ARGV;
 
@@ -90,9 +93,13 @@ sub build {
 
     my $cmd = sprintf
         'docker run -it --rm --user %s -v%s/build:/build'
+        . ' --env HOME=%s'
         . ' -v%s/utils:/buildutils -v%s/sources:/sources'
         . ' --env=VERSION --env=SOURCE yamlrun/%s /buildutils/%s',
-        $<, $dir, $dir, $dir, $build_image, $buildscript;
+        $<, $dir,
+        $container_home,
+        $dir, $dir,
+        $build_image, $buildscript;
 
     warn __PACKAGE__.':'.__LINE__.": $cmd\n";
     {
