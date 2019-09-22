@@ -1,0 +1,27 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+use 5.010;
+
+use Encode;
+
+use YAML::PP::Parser;
+use YAML::PP::Emitter;
+use YAML::PP::Writer;
+
+my $writer = YAML::PP::Writer->new;
+my $emitter = YAML::PP::Emitter->new;
+$emitter->set_writer($writer);
+
+my $parser = YAML::PP::Parser->new(
+  receiver => sub {
+    my ($self, $type, $info) = @_;
+    $emitter->$type($info);
+  },
+);
+
+my $yaml = decode_utf8 do { local $/; <> };
+$parser->parse_string($yaml);
+
+my $out_yaml = $emitter->writer->output;
+print encode_utf8 $out_yaml;

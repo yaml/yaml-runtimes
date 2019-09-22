@@ -3,14 +3,13 @@ use strict;
 use warnings;
 use 5.010;
 
-use YAML::PP;
+use YAML::Syck;
 use JSON::PP;
 use Encode;
+$YAML::Syck::ImplicitTyping = 1;
+$YAML::Syck::ImplicitUnicode = 1;
 
 my $coder = JSON::PP->new->ascii->pretty->allow_nonref->allow_blessed->canonical;
-my $yaml = decode_utf8 do { local $/; <> };
-my @docs = YAML::PP->new(
-    boolean => 'JSON::PP',
-    schema => ['Core'],
-)->load_string($yaml);
+my $yaml = do { local $/; <> };
+my @docs = YAML::Syck::Load($yaml);
 print encode_utf8($coder->encode($_)) for @docs;

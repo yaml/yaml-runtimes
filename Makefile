@@ -1,5 +1,5 @@
 
-PERL5 = perl5-pp perl5-xs perl5-tiny
+PERL5 = perl5-pp perl5-pplibyaml perl5-syck perl5-tiny perl5-xs perl5-yaml
 STATIC = c-libfyaml c-libyaml cpp-yamlcpp
 NIM = nim-nimyaml
 NODE = js-jsyaml js-yaml
@@ -16,7 +16,7 @@ python: $(PYTHON)
 $(PERL5):
 	make -C docker/perl5 builder
 	perl bin/build.pl build $@
-	make -C docker/PYTHON runtime
+	make -C docker/perl5 runtime
 
 $(PYTHON):
 	make -C docker/python builder

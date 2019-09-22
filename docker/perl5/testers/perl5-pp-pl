@@ -3,14 +3,17 @@ use strict;
 use warnings;
 use 5.010;
 
-use YAML::PP;
-use JSON::PP;
+use Data::Dumper;
 use Encode;
+use YAML::PP;
 
-my $coder = JSON::PP->new->ascii->pretty->allow_nonref->allow_blessed->canonical;
+$Data::Dumper::Sortkeys = 1;
+$Data::Dumper::Indent=2;
+$Data::Dumper::Terse=1;
+
 my $yaml = decode_utf8 do { local $/; <> };
 my @docs = YAML::PP->new(
     boolean => 'JSON::PP',
     schema => ['Core'],
 )->load_string($yaml);
-print encode_utf8($coder->encode($_)) for @docs;
+print Dumper @docs;

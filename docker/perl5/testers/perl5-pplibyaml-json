@@ -3,13 +3,13 @@ use strict;
 use warnings;
 use 5.010;
 
-use YAML::PP;
+use YAML::PP::LibYAML;
 use JSON::PP;
 use Encode;
 
 my $coder = JSON::PP->new->ascii->pretty->allow_nonref->allow_blessed->canonical;
 my $yaml = decode_utf8 do { local $/; <> };
-my @docs = YAML::PP->new(
+my @docs = YAML::PP::LibYAML->new(
     boolean => 'JSON::PP',
     schema => ['Core'],
 )->load_string($yaml);

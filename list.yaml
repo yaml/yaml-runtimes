@@ -50,16 +50,34 @@ libraries:
     source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-PP-0.018.tar.gz
     tests: [event, json]
 
-  perl5-xs:
+  perl5-pplibyaml:
     <<: *perl5
-    version: 0.80
-    source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-LibYAML-0.80.tar.gz
+    version: 0.003
+    source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-PP-LibYAML-0.003.tar.gz
+    tests: [json]
+
+  perl5-syck:
+    <<: *perl5
+    version: 1.31
+    source: https://cpan.metacpan.org/authors/id/T/TO/TODDR/YAML-Syck-1.31.tar.gz
     tests: [json]
 
   perl5-tiny:
     <<: *perl5
     version: 1.73
     source: https://cpan.metacpan.org/authors/id/E/ET/ETHER/YAML-Tiny-1.73.tar.gz
+    tests: [json]
+
+  perl5-xs:
+    <<: *perl5
+    version: 0.80
+    source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-LibYAML-0.80.tar.gz
+    tests: [json]
+
+  perl5-yaml:
+    <<: *perl5
+    version: 1.29
+    source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-1.29.tar.gz
     tests: [json]
 
   js-jsyaml:
