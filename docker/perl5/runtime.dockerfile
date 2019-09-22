@@ -5,6 +5,7 @@ RUN apk update && \
     less \
     perl \
     wget \
+    busybox \
   && true
 
 ENV PERL5LIB=/perl5/lib/perl5
