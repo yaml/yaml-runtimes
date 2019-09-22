@@ -26,6 +26,13 @@ libraries:
     build-script: c-libfyaml-build.sh
     tests: [event]
 
+  cpp-yamlcpp:
+    <<: *static
+    version: 0.6.2
+    source: https://github.com/jbeder/yaml-cpp/archive/yaml-cpp-0.6.2.tar.gz
+    build-script: cpp-yamlcpp-build.sh
+    tests: [event]
+
   nim-nimyaml:
     <<: *static
     source: https://github.com/flyx/NimYAML/archive/v0.12.0.tar.gz

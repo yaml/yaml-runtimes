@@ -9,5 +9,6 @@ RUN apk update && \
     make \
     g++ \
     m4 \
+    cmake \
   && true
 

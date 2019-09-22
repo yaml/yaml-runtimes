@@ -1,6 +1,6 @@
 
 PERL5 = perl5-pp perl5-xs perl5-tiny
-STATIC = c-libfyaml c-libyaml
+STATIC = c-libfyaml c-libyaml cpp-yamlcpp
 NIM = nim-nimyaml
 NODE = js-jsyaml js-yaml
 

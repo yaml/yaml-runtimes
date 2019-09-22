@@ -4,6 +4,7 @@ RUN apk update && \
   apk add \
     less \
     busybox \
+    libstdc++ \
   && true
 
 COPY build /

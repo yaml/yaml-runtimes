@@ -118,6 +118,11 @@ sub test {
         if ($type eq 'event') {
             $input = 'input.yaml';
             $output = 'output.event';
+            if ($library eq 'cpp-yamlcpp') {
+                # yamlcpp does not have information about implicit
+                # document start or end
+                $output = 'output.event.yamlcpp';
+            }
         }
         elsif ($type eq 'json') {
             $input = 'input.yaml';
