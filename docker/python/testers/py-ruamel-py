@@ -1,0 +1,37 @@
+#!/usr/bin/env python3
+
+import sys
+import pprint
+import ruamel.yaml
+
+class GenericObject:
+    def __init__(self, tag, content):
+        self.Content = content
+        self.Tag = tag
+    def __repr__(self):
+        return "%s(tag=%s, content=%s)" % \
+            (self.__class__.__name__, repr(self.Tag), repr(self.Content))
+
+class GenericScalar(GenericObject): pass
+
+class GenericMapping(GenericObject): pass
+
+class GenericSequence(GenericObject): pass
+
+def generic_constructor(loader, tag, node):
+    classname = node.__class__.__name__
+    if (classname == 'SequenceNode'):
+        resolved = loader.construct_sequence(node)
+        object = GenericSequence(tag=tag, content=resolved)
+    elif (classname == 'MappingNode'):
+        resolved = loader.construct_mapping(node)
+        object = GenericMapping(tag=tag, content=resolved)
+    else:
+        resolved = loader.construct_scalar(node)
+        object = GenericScalar(tag=tag, content=resolved)
+    return object
+
+ruamel.yaml.add_multi_constructor('', generic_constructor)
+
+for doc in ruamel.yaml.load_all(sys.stdin.read(), Loader=ruamel.yaml.Loader):
+    pprint.pprint(doc)

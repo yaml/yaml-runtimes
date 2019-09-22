@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+
+import sys
+import pprint
+import yaml
+import json
+
+def generic_constructor(loader, tag, node):
+    classname = node.__class__.__name__
+    if (classname == 'SequenceNode'):
+        return loader.construct_sequence(node)
+    elif (classname == 'MappingNode'):
+        return loader.construct_mapping(node)
+    else:
+        return loader.construct_scalar(node)
+
+yaml.add_multi_constructor('', generic_constructor, Loader=yaml.FullLoader)
+
+for doc in yaml.load_all(sys.stdin.read(), Loader=yaml.FullLoader):
+    try:
+        print(json.dumps(doc, sort_keys=True, skipkeys=True, indent=2))
+    except:
+        print("Error json.dumps:", sys.exc_info()[0])
+        raise

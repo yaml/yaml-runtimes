@@ -1,0 +1,68 @@
+#!/usr/bin/env python3
+
+import sys
+import pprint
+import yaml
+
+for event in yaml.parse(sys.stdin.read()):
+
+    name = event.__class__.__name__
+    if (name == 'StreamStartEvent'):
+        print('+STR')
+    elif (name == 'StreamEndEvent'):
+        print('-STR')
+    elif (name == 'DocumentStartEvent'):
+        sys.stdout.write('+DOC')
+        if event.explicit:
+            sys.stdout.write(' ---')
+        print()
+    elif (name == 'DocumentEndEvent'):
+        sys.stdout.write('-DOC')
+        if event.explicit:
+            sys.stdout.write(' ...')
+        print()
+    elif (name == 'MappingStartEvent'):
+        sys.stdout.write('+MAP')
+        if (event.anchor):
+            sys.stdout.write(' &' + event.anchor)
+        if (event.tag):
+            sys.stdout.write(' <' + event.tag + '>')
+        print()
+
+    elif (name == 'SequenceStartEvent'):
+        sys.stdout.write('+SEQ')
+        if (event.anchor):
+            sys.stdout.write(' &' + event.anchor)
+        if (event.tag):
+            sys.stdout.write(' <' + event.tag + '>')
+        print()
+
+    elif (name == 'ScalarEvent'):
+        sys.stdout.write('=VAL')
+        if (event.anchor):
+            sys.stdout.write(' &' + event.anchor)
+        if (event.tag):
+            sys.stdout.write(' <' + event.tag + '>')
+        value = event.value
+        value = value.replace('\\', '\\\\')
+        value = value.replace('\n', '\\n')
+        value = value.replace('\r', '\\r')
+        value = value.replace('\t', '\\t')
+        value = value.replace('\b', '\\b')
+        style = ':'
+        if (event.style):
+            style = event.style
+        sys.stdout.write(' ' + style + value)
+        print()
+
+    elif (name == 'AliasEvent'):
+        sys.stdout.write('=ALI')
+        sys.stdout.write(' *' + event.anchor)
+        print()
+
+    elif (name == 'SequenceEndEvent'):
+        print('-SEQ')
+    elif (name == 'MappingEndEvent'):
+        print('-MAP')
+    else:
+        print(event)

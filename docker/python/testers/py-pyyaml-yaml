@@ -1,0 +1,12 @@
+#!/usr/bin/env python3
+
+import sys
+import pprint
+import yaml
+
+events = []
+for event in yaml.parse(sys.stdin.read()):
+    events.append(event)
+
+output = yaml.emit(events)
+print(output)
