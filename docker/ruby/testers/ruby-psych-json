@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require 'json'
+require 'yaml'
+
+YAML.load_stream($stdin.read).each do |doc|
+  puts JSON.dump doc
+end

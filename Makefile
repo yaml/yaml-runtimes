@@ -4,14 +4,16 @@ STATIC = c-libfyaml c-libyaml cpp-yamlcpp
 NIM = nim-nimyaml
 NODE = js-jsyaml js-yaml
 PYTHON = py-pyyaml py-ruamel
+RUBY = ruby-psych
 
-build: $(STATIC) $(PERL5) $(NIM) $(NODE)
+build: $(NIM) $(NODE) $(PERL5) $(PYTHON) $(RUBY) $(STATIC)
 
 perl5: $(PERL5)
 static: $(STATIC)
 nim: $(NIM)
 node: $(NODE)
 python: $(PYTHON)
+ruby: $(RUBY)
 
 $(PERL5):
 	make -C docker/perl5 builder
@@ -22,6 +24,9 @@ $(PYTHON):
 	make -C docker/python builder
 	perl bin/build.pl build $@
 	make -C docker/python runtime
+
+$(RUBY):
+	make -C docker/ruby runtime
 
 $(STATIC):
 	make -C docker/static builder

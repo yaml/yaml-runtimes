@@ -163,7 +163,7 @@ sub source {
     my $runtime = $lib->{runtime}
         or die "No runtime for $library";
     my $source = $lib->{source}
-        or die "No source for $library";
+        or return;
     my ($filename) = $source =~ m{.*/(.*)\z};
     my $srcdir = "$Bin/../docker/$runtime/sources";
     make_path $srcdir;
