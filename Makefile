@@ -1,5 +1,6 @@
 
 HASKELL = hs-hsyaml hs-reference
+JAVA = java-snakeyaml
 PERL5 = perl5-pp perl5-pplibyaml perl5-syck perl5-tiny perl5-xs perl5-yaml
 STATIC = c-libfyaml c-libyaml cpp-yamlcpp
 NIM = nim-nimyaml
@@ -7,9 +8,10 @@ NODE = js-jsyaml js-yaml
 PYTHON = py-pyyaml py-ruamel
 RUBY = ruby-psych
 
-build: $(HASKELL) $(NIM) $(NODE) $(PERL5) $(PYTHON) $(RUBY) $(STATIC)
+build: $(HASKELL) $(JAVA) $(NIM) $(NODE) $(PERL5) $(PYTHON) $(RUBY) $(STATIC)
 
 haskell: $(HASKELL)
+java: $(JAVA)
 perl5: $(PERL5)
 static: $(STATIC)
 nim: $(NIM)
@@ -21,6 +23,11 @@ $(HASKELL):
 	make -C docker/haskell builder
 	perl bin/build.pl build $@
 	make -C docker/haskell runtime
+
+$(JAVA):
+	make -C docker/java builder
+	perl bin/build.pl build $@
+	make -C docker/java runtime
 
 $(PERL5):
 	make -C docker/perl5 builder
@@ -57,6 +64,7 @@ clean: clean-build clean-sources
 
 clean-build:
 	rm -rf docker/haskell/build
+	rm -rf docker/java/build
 	rm -rf docker/perl5/build
 	rm -rf docker/python/build
 	rm -rf docker/static/build
@@ -64,6 +72,7 @@ clean-build:
 
 clean-sources:
 	rm -rf docker/haskell/sources
+	rm -rf docker/java/sources
 	rm -rf docker/perl5/sources
 	rm -rf docker/python/sources
 	rm -rf docker/static/sources

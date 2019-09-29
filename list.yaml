@@ -5,6 +5,9 @@ runtimes:
   haskell: &haskell
       runtime: haskell
       build-script: hs-build.sh
+  java: &java
+      runtime: java
+      build-script: java-build.sh
   node: &node
       runtime: node
   perl5: &perl5
@@ -45,6 +48,12 @@ libraries:
     source: https://github.com/orenbenkiki/yamlreference/archive/master.zip
     version: master
     tests: [yeast]
+
+  java-snakeyaml:
+    <<: *java
+    source: https://bitbucket.org/asomov/snakeyaml/get/snakeyaml-1.25.tar.gz
+    version: 1.25
+    tests: [event, json]
 
   cpp-yamlcpp:
     <<: *static

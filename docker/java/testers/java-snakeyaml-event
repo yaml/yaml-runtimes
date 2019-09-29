@@ -1,0 +1,5 @@
+#!/bin/sh
+
+set -e
+
+java -cp /java/snake2json-*-jar-with-dependencies.jar org.yaml.editor.Snake2Events
