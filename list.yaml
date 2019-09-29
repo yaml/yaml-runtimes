@@ -13,6 +13,9 @@ runtimes:
   perl5: &perl5
       build-script: perl5-install.sh
       runtime: perl5
+  perl6: &perl6
+      build-script: perl6-install.sh
+      runtime: perl6
   python: &python
       build-script: python-install.sh
       runtime: python
@@ -104,6 +107,13 @@ libraries:
     <<: *perl5
     version: 1.29
     source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-1.29.tar.gz
+    tests: [json]
+
+  perl6-yamlish:
+    <<: *perl6
+    version: 0.0.5
+    # TODO
+    source: https://github.com/Leont/yamlish/archive/master.zip
     tests: [json]
 
   ruby-psych:

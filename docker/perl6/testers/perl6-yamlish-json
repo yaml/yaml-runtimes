@@ -1,0 +1,13 @@
+#!/usr/bin/env perl6
+use lib "/lib";
+
+use YAMLish;
+use JSON::Tiny;
+
+for load-yamls(slurp) -> $doc {
+    if ($doc ~~ Failure) {
+        note $doc;
+        exit 1;
+    }
+    say to-json $doc;
+}
