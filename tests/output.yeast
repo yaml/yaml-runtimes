@@ -1,0 +1,24 @@
+Line  Col Char Byte Token|Content
+   1    0    0    0 +DOC |
+   1    0    0    0 =HEAD|---
+   1    3    3    3 +NODE|
+   1    3    3    3 =EOL |\x0a
+   2    0    4    4 +MAP |
+   2    0    4    4 +PAIR|
+   2    0    4    4 +NODE|
+   2    0    4    4 +VAL |
+   2    0    4    4 =TEXT|foo
+   2    3    7    7 -VAL |
+   2    3    7    7 -NODE|
+   2    3    7    7 =SYNX|:
+   2    4    8    8 =WSPC|.
+   2    5    9    9 +NODE|
+   2    5    9    9 +VAL |
+   2    5    9    9 =TEXT|bar
+   2    8   12   12 -VAL |
+   2    8   12   12 -NODE|
+   2    8   12   12 =EOL |\x0a
+   3    0   13   13 -PAIR|
+   3    0   13   13 -MAP |
+   3    0   13   13 -NODE|
+   3    0   13   13 -DOC |

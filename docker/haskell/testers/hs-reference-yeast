@@ -1,0 +1,58 @@
+#!/bin/sh
+
+echo "Line  Col Char Byte Token|Content"
+
+yaml2yeast | perl -CO -Mutf8 -p0e '
+my %map = qw(
+  U =BOM
+  T =TEXT
+  t =META
+  b =EOL
+  L =NEWL
+  l =FOLD
+  I =SYNX
+  w =WSPC
+  i =DENT
+  K =HEAD
+  k =FOOT
+  E +ESC
+  e -ESC
+  C +COMM
+  c -COMM
+  D +DIR
+  d -DIR
+  G +TAG
+  g -TAG
+  H +HAND
+  h -HAND
+  A +ANCH
+  a -ANCH
+  P +PROP
+  p -PROP
+  R +ALI
+  r -ALI
+  S +VAL
+  s -VAL
+  Q +SEQ
+  q -SEQ
+  M +MAP
+  m -MAP
+  N +NODE
+  n -NODE
+  X +PAIR
+  x -PAIR
+  O +DOC
+  o -DOC
+  ! =ERR
+  - =REST
+  $ =PARA
+);
+
+s{^# B: (\d+), C: (\d+), L: (\d+), c: (\d+)\n(.)(.*)\n}
+  {
+    sprintf "%4d %4d %4d %4d %-5s|%s\n",
+    $3, $4, $2, $1, $map{$5}, $6
+  }gem;
+
+s/\|.*/$&=~y, ,.,r/ge;
+'

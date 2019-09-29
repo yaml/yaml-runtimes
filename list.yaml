@@ -2,6 +2,9 @@
 
 runtimes:
 
+  haskell: &haskell
+      runtime: haskell
+      build-script: hs-build.sh
   node: &node
       runtime: node
   perl5: &perl5
@@ -30,6 +33,18 @@ libraries:
     version: 0.2
     build-script: c-libfyaml-build.sh
     tests: [event]
+
+  hs-hsyaml:
+    <<: *haskell
+    source: https://github.com/haskell-hvr/HsYAML/archive/v0.2.0.0.tar.gz
+    version: 0.2.0.0
+    tests: [event]
+
+  hs-reference:
+    <<: *haskell
+    source: https://github.com/orenbenkiki/yamlreference/archive/master.zip
+    version: master
+    tests: [yeast]
 
   cpp-yamlcpp:
     <<: *static

@@ -92,19 +92,17 @@ sub build {
     mkdir "$dir/build";
 
     my $cmd = sprintf
-        'docker run -it --rm --user %s -v%s/build:/build'
-        . ' --env HOME=%s'
-        . ' -v%s/utils:/buildutils -v%s/sources:/sources'
-        . ' --env=VERSION --env=SOURCE yamlrun/%s /buildutils/%s',
-        $<, $dir,
-        $container_home,
-        $dir, $dir,
+        'docker run -it --rm --user %s'
+        . ' --env HOME=%s --env VERSION=%s --env SOURCE=%s --env LIBNAME=%s'
+        . ' -v%s/build:/build -v%s/utils:/buildutils -v%s/sources:/sources'
+        . ' yamlrun/%s /buildutils/%s',
+        $<,
+        $container_home, $version, "/sources/$filename", $library,
+        ($dir) x 3,
         $build_image, $buildscript;
 
     warn __PACKAGE__.':'.__LINE__.": $cmd\n";
     {
-        local $ENV{SOURCE} = "/sources/$filename";
-        local $ENV{VERSION} = $version;
         chdir "$Bin/../docker/$runtime";
         system $cmd;
     }
@@ -112,14 +110,12 @@ sub build {
 
 sub test {
     my ($library) = @_;
-    note "Testing $library";
     my $lib = $libraries->{ $library }
         or die "Library $library not found";
     my $runtime = $lib->{'runtime'}
         or die "No runtime for $library";
     my $tests = $lib->{tests} || [];
     for my $type (@$tests) {
-        note "Testing $type";
         my $output;
         my $input;
         if ($type eq 'event') {
@@ -135,22 +131,31 @@ sub test {
             $input = 'input.yaml';
             $output = 'output.json';
         }
+        elsif ($type eq 'yeast') {
+            $input = 'input.yaml';
+            $output = 'output.yeast';
+        }
         my $cmd = sprintf
           'docker run -i --rm --user %s yamlrun/runtime-%s /yaml/%s-%s <tests/%s >tests/%s.%s',
             $<, $runtime, $library, $type, $input, $library, $type;
         note $cmd;
         system $cmd;
+        my $rc = $?;
+        is($rc, 0, "$library-$type executed successfully");
         if ($type eq 'json') {
             system "jq <tests/$library.$type >tests/$library.$type.jq && mv tests/$library.$type.jq tests/$library.$type";
         }
         system "diff tests/$output tests/$library.$type";
-        my $rc = $?;
+        $rc = $?;
         unlink "tests/$library.$type";
-        if ($rc) {
-            ok 0, "$library - $type";
+        if ($library eq 'hs-hsyaml') {
+            TODO: {
+                local $TODO = "hsyaml not yet working correctly";
+                is($rc, 0, "$library-$type output like expected");
+            }
         }
         else {
-            ok 1, "$library - $type";
+            is($rc, 0, "$library-$type output like expected");
         }
     }
 }
