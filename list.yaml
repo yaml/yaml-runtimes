@@ -42,9 +42,9 @@ libraries:
 
   hs-hsyaml:
     <<: *haskell
-    source: https://github.com/haskell-hvr/HsYAML/archive/v0.2.0.0.tar.gz
-    version: 0.2.0.0
-    tests: [event]
+    source: https://github.com/haskell-hvr/HsYAML/archive/0.2.zip
+    version: 0.2
+    tests: [event, json]
 
   hs-reference:
     <<: *haskell

@@ -11,4 +11,3 @@ RUN apk update && \
     cabal \
   && true
 
-RUN cabal update

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+hsyaml-parser yaml2json

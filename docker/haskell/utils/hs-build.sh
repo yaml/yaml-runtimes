@@ -8,7 +8,7 @@ cp -p $SOURCE .
     hs-hsyaml)
         build_file=yaml-test
         target_file=hsyaml-parser
-        tar xvf v$VERSION.tar.gz
+        unzip $VERSION.zip
         cd HsYAML-$VERSION
     ;;
     hs-reference)

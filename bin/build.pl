@@ -149,15 +149,15 @@ sub test {
         system "diff tests/$output tests/$library.$type";
         $rc = $?;
         unlink "tests/$library.$type";
-        if ($library eq 'hs-hsyaml') {
-            TODO: {
-                local $TODO = "hsyaml not yet working correctly";
-                is($rc, 0, "$library-$type output like expected");
-            }
-        }
-        else {
+#        if ($library eq '...') {
+#            TODO: {
+#                local $TODO = "... not yet working correctly";
+#                is($rc, 0, "$library-$type output like expected");
+#            }
+#        }
+#        else {
             is($rc, 0, "$library-$type output like expected");
-        }
+#        }
     }
 }
 
