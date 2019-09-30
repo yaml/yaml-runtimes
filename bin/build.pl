@@ -144,7 +144,13 @@ sub test {
         my $rc = $?;
         is($rc, 0, "$library-$type executed successfully");
         if ($type eq 'json') {
-            system "jq <tests/$library.$type >tests/$library.$type.jq && mv tests/$library.$type.jq tests/$library.$type";
+            my $cmd = "jq . <tests/$library.$type >tests/$library.$type.jq && mv tests/$library.$type.jq tests/$library.$type";
+            system $cmd;
+            if ($?) {
+                diag "jq command '$cmd' failed";
+                ok(0, "jq failed");
+                next;
+            }
         }
         system "diff tests/$output tests/$library.$type";
         $rc = $?;
