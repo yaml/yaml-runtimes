@@ -8,6 +8,9 @@ runtimes:
   java: &java
       runtime: java
       build-script: java-build.sh
+  lua: &lua
+      runtime: lua
+      build-script: lua-build.sh
   node: &node
       runtime: node
   perl5: &perl5
@@ -64,6 +67,24 @@ libraries:
     source: https://github.com/jbeder/yaml-cpp/archive/yaml-cpp-0.6.2.tar.gz
     build-script: cpp-yamlcpp-build.sh
     tests: [event]
+
+#  lua-lua-yaml:
+#    <<: *lua
+#    source: https://luarocks.org/lua-yaml-1.2-1.src.rock
+#    version: 1.2-1
+#    tests: [json]
+
+#  lua-yaml:
+#    <<: *lua
+#    source: https://luarocks.org/yaml-1.1.2-1.src.rock
+#    version: 1.1.2-1
+#    tests: [json]
+
+  lua-lyaml:
+    <<: *lua
+    source: https://luarocks.org/lyaml-6.2.4-1.src.rock
+    version: 6.2.4-1
+    tests: [json]
 
   nim-nimyaml:
     <<: *static

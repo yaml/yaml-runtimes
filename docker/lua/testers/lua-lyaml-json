@@ -1,0 +1,9 @@
+#!/usr/bin/env luajit
+
+lyaml = require "lyaml"
+json = require "cjson"
+
+docs=lyaml.load(io.read("*all"), { all = true })
+for i = 1, #docs do
+    print(json.encode(docs[i]))
+end
