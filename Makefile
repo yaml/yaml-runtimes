@@ -1,4 +1,5 @@
 
+DOTNET = dotnet-yamldotnet
 HASKELL = hs-hsyaml hs-reference
 JAVA = java-snakeyaml
 PERL5 = perl5-pp perl5-pplibyaml perl5-syck perl5-tiny perl5-xs perl5-yaml
@@ -10,8 +11,9 @@ NODE = js-jsyaml js-yaml
 PYTHON = py-pyyaml py-ruamel
 RUBY = ruby-psych
 
-build: $(HASKELL) $(JAVA) $(LUA) $(NIM) $(NODE) $(PERL5) $(PERL6) $(PYTHON) $(RUBY) $(STATIC)
+build: $(DOTNET) $(HASKELL) $(JAVA) $(LUA) $(NIM) $(NODE) $(PERL5) $(PERL6) $(PYTHON) $(RUBY) $(STATIC)
 
+dotnet: $(DOTNET)
 haskell: $(HASKELL)
 java: $(JAVA)
 perl5: $(PERL5)
@@ -22,6 +24,11 @@ nim: $(NIM)
 node: $(NODE)
 python: $(PYTHON)
 ruby: $(RUBY)
+
+$(DOTNET):
+	make -C docker/dotnet builder
+	perl bin/build.pl build $@
+	make -C docker/dotnet runtime
 
 $(HASKELL):
 	make -C docker/haskell builder
@@ -77,6 +84,7 @@ test:
 clean: clean-build clean-sources
 
 clean-build:
+	rm -rf docker/dotnet/build
 	rm -rf docker/haskell/build
 	rm -rf docker/java/build
 	rm -rf docker/lua/build
@@ -87,6 +95,7 @@ clean-build:
 	rm -rf docker/node/build
 
 clean-sources:
+	rm -rf docker/dotnet/sources
 	rm -rf docker/haskell/sources
 	rm -rf docker/java/sources
 	rm -rf docker/lua/sources

@@ -2,6 +2,9 @@
 
 runtimes:
 
+  dotnet: &dotnet
+      runtime: dotnet
+      build-script: dotnet-yamldotnet.sh
   haskell: &haskell
       runtime: haskell
       build-script: hs-build.sh
@@ -42,6 +45,12 @@ libraries:
     version: 0.2
     build-script: c-libfyaml-build.sh
     tests: [event]
+
+  dotnet-yamldotnet:
+    <<: *dotnet
+    source: https://github.com/aaubry/YamlDotNet/archive/v6.1.2.tar.gz
+    version: 6.1.2
+    tests: [event, json]
 
   hs-hsyaml:
     <<: *haskell
