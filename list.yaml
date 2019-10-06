@@ -5,6 +5,7 @@ runtimes:
   dotnet: &dotnet
       runtime: dotnet
       build-script: dotnet-yamldotnet.sh
+      lang: C#
   haskell: &haskell
       runtime: haskell
       build-script: hs-build.sh
@@ -73,7 +74,6 @@ libraries:
     <<: *dotnet
     name: YamlDotNet
     homepage: https://github.com/aaubry/YamlDotNet
-    lang: dotnet
     source: https://github.com/aaubry/YamlDotNet/archive/v6.1.2.tar.gz
     version: 6.1.2
     tests: [event, json]
