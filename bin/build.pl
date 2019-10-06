@@ -30,7 +30,17 @@ my ($libs) = $yp->load_file("$Bin/../list.yaml");
 my $libraries = $libs->{libraries};
 my $runtimes = $libs->{runtimes};
 
-if ($task eq 'build') {
+if ($task eq 'list') {
+    my $format = '%-17s | %-10s | %-18s | %-5s';
+        say sprintf $format,
+            qw/ ID Language Name Version /;
+    for my $id (sort keys %$libraries) {
+        my $lib = $libraries->{ $id };
+        say sprintf $format,
+            $id, $lib->{lang}, $lib->{name}, $lib->{version};
+    }
+}
+elsif ($task eq 'build') {
     if ($library) {
         my $lib = $libraries->{ $library }
             or die "Library $library not found";

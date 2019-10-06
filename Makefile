@@ -78,6 +78,8 @@ $(NODE):
 	perl bin/build.pl build $@
 	make -C docker/node runtime
 
+list:
+	perl bin/build.pl list
 test:
 	perl bin/build.pl test
 

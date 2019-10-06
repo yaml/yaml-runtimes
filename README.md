@@ -17,11 +17,21 @@ smaller images and allow to only build or download the containers you need.
 Requirements:
 * perl
 * YAML::PP module
+* jq
 
 To install YAML::PP, run (debian example):
 
     apt-get install cpanminus
     cpanm YAML::PP
+
+To install the module locally instead, do this:
+
+    cpanm -l local YAML::PP
+    export PERL5LIB=$PWD/local/lib/perl5
+
+To list all libraries:
+
+    make list
 
 To build all images, do
 

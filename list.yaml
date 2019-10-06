@@ -8,25 +8,33 @@ runtimes:
   haskell: &haskell
       runtime: haskell
       build-script: hs-build.sh
+      lang: Haskell
   java: &java
       runtime: java
       build-script: java-build.sh
+      lang: Java
   lua: &lua
       runtime: lua
       build-script: lua-build.sh
+      lang: Lua
   node: &node
       runtime: node
+      lang: Javascript
   perl5: &perl5
       build-script: perl5-install.sh
       runtime: perl5
+      lang: Perl5
   perl6: &perl6
       build-script: perl6-install.sh
       runtime: perl6
+      lang: Perl6
   python: &python
       build-script: python-install.sh
       runtime: python
+      lang: Python
   ruby: &ruby
       runtime: ruby
+      lang: Ruby
   static: &static
       runtime: static
 
@@ -34,6 +42,9 @@ libraries:
 
   c-libyaml:
     <<: *static
+    name: libyaml
+    homepage: https://github.com/yaml/libyaml
+    lang: C
     source: https://pyyaml.org/download/libyaml/yaml-0.2.2.tar.gz
     version: 0.2.2
     build-script: c-libyaml-build.sh
@@ -41,62 +52,88 @@ libraries:
 
   c-libfyaml:
     <<: *static
+    name: libfyaml
+    homepage: https://github.com/pantoniou/libfyaml
+    lang: C
     source: https://github.com/pantoniou/libfyaml/releases/download/v0.2/libfyaml-0.2.tar.gz
     version: 0.2
     build-script: c-libfyaml-build.sh
     tests: [event]
 
+  cpp-yamlcpp:
+    <<: *static
+    name: yaml-cpp
+    homepage: https://github.com/jbeder/yaml-cpp
+    lang: C++
+    version: 0.6.2
+    source: https://github.com/jbeder/yaml-cpp/archive/yaml-cpp-0.6.2.tar.gz
+    build-script: cpp-yamlcpp-build.sh
+    tests: [event]
+
   dotnet-yamldotnet:
     <<: *dotnet
+    name: YamlDotNet
+    homepage: https://github.com/aaubry/YamlDotNet
+    lang: dotnet
     source: https://github.com/aaubry/YamlDotNet/archive/v6.1.2.tar.gz
     version: 6.1.2
     tests: [event, json]
 
   hs-hsyaml:
     <<: *haskell
+    name: HsYAML
+    homepage: https://github.com/haskell-hvr/HsYAML
     source: https://github.com/haskell-hvr/HsYAML/archive/0.2.zip
     version: 0.2
     tests: [event, json]
 
   hs-reference:
     <<: *haskell
+    name: YAMLReference
+    homepage: https://github.com/orenbenkiki/yamlreference
     source: https://github.com/orenbenkiki/yamlreference/archive/master.zip
     version: master
     tests: [yeast]
 
   java-snakeyaml:
     <<: *java
+    name: SnakeYAML
+    homepage: https://bitbucket.org/asomov/snakeyaml
     source: https://bitbucket.org/asomov/snakeyaml/get/snakeyaml-1.25.tar.gz
     version: 1.25
     tests: [event, json]
 
-  cpp-yamlcpp:
-    <<: *static
-    version: 0.6.2
-    source: https://github.com/jbeder/yaml-cpp/archive/yaml-cpp-0.6.2.tar.gz
-    build-script: cpp-yamlcpp-build.sh
-    tests: [event]
+  js-jsyaml:
+    <<: *node
+    name: js-yaml
+    homepage: https://github.com/nodeca/js-yaml
+    version: 3.13.1
+    source: https://github.com/nodeca/js-yaml/archive/3.13.1.tar.gz
+    build-script: js-jsyaml-build.sh
+    tests: [json]
 
-#  lua-lua-yaml:
-#    <<: *lua
-#    source: https://luarocks.org/lua-yaml-1.2-1.src.rock
-#    version: 1.2-1
-#    tests: [json]
-
-#  lua-yaml:
-#    <<: *lua
-#    source: https://luarocks.org/yaml-1.1.2-1.src.rock
-#    version: 1.1.2-1
-#    tests: [json]
+  js-yaml:
+    <<: *node
+    name: yaml
+    homepage: https://github.com/eemeli/yaml
+    version: 1.6.0
+    source: https://github.com/eemeli/yaml/archive/v1.6.0.tar.gz
+    build-script: js-yaml-build.sh
+    tests: [event, json]
 
   lua-lyaml:
     <<: *lua
+    name: lyaml
+    homepage: https://github.com/gvvaughan/lyaml
     source: https://luarocks.org/lyaml-6.2.4-1.src.rock
     version: 6.2.4-1
     tests: [json]
 
   nim-nimyaml:
     <<: *static
+    name: NimYAML
+    homepage: https://github.com/flyx/NimYAML
+    lang: Nim
     source: https://github.com/flyx/NimYAML/archive/v0.12.0.tar.gz
     version: 0.12.0
     build-script: nimyaml-build.sh
@@ -105,74 +142,81 @@ libraries:
 
   perl5-pp:
     <<: *perl5
+    name: YAML::PP
+    homepage: https://metacpan.org/release/YAML-PP
     version: 0.018
     source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-PP-0.018.tar.gz
     tests: [event, json]
 
   perl5-pplibyaml:
     <<: *perl5
+    name: YAML::PP::LiBYAML
+    homepage: https://metacpan.org/release/YAML-PP-LibYAML
     version: 0.003
     source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-PP-LibYAML-0.003.tar.gz
     tests: [json]
 
   perl5-syck:
     <<: *perl5
+    name: YAML::Syck
+    homepage: https://metacpan.org/release/YAML-Syck
     version: 1.31
     source: https://cpan.metacpan.org/authors/id/T/TO/TODDR/YAML-Syck-1.31.tar.gz
     tests: [json]
 
   perl5-tiny:
     <<: *perl5
+    name: YAML::Tiny
+    homepage: https://metacpan.org/release/YAML-Tiny
     version: 1.73
     source: https://cpan.metacpan.org/authors/id/E/ET/ETHER/YAML-Tiny-1.73.tar.gz
     tests: [json]
 
   perl5-xs:
     <<: *perl5
-    version: 0.80
+    name: YAML::XS (libyaml)
+    homepage: https://metacpan.org/release/YAML-LibYAML
+    version: '0.80'
     source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-LibYAML-0.80.tar.gz
     tests: [json]
 
   perl5-yaml:
     <<: *perl5
+    name: YAML.pm
+    homepage: https://metacpan.org/release/YAML
     version: 1.29
     source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-1.29.tar.gz
     tests: [json]
 
   perl6-yamlish:
     <<: *perl6
+    name: YAMLish
+    homepage: https://github.com/Leont/yamlish
     version: 0.0.5
-    # TODO
     source: https://github.com/Leont/yamlish/archive/master.zip
     tests: [json]
 
-  ruby-psych:
-    <<: *ruby
-    version: builtin
-    tests: [json]
-
-  js-jsyaml:
-    <<: *node
-    version: 3.13.1
-    source: https://github.com/nodeca/js-yaml/archive/3.13.1.tar.gz
-    build-script: js-jsyaml-build.sh
-    tests: [json]
-
-  js-yaml:
-    <<: *node
-    version: 1.6.0
-    source: https://github.com/eemeli/yaml/archive/v1.6.0.tar.gz
-    build-script: js-yaml-build.sh
-    tests: [event, json]
-
   py-pyyaml:
     <<: *python
+    name: PyYAML
+    homepage: https://github.com/yaml/pyyaml
     version: 5.1.2
     source: https://files.pythonhosted.org/packages/e3/e8/b3212641ee2718d556df0f23f78de8303f068fe29cdaa7a91018849582fe/PyYAML-5.1.2.tar.gz
     tests: [event, json]
 
   py-ruamel:
     <<: *python
+    homepage: https://bitbucket.org/ruamel/yaml
+    name: ruamel.yaml
     version: 0.16.5
     source: https://files.pythonhosted.org/packages/de/76/cf97d739365eff258e2af0457a150bf2818f3eaa460328610eafeed0894a/ruamel.yaml-0.16.5.tar.gz
     tests: [event, json]
+
+  ruby-psych:
+    <<: *ruby
+    name: psych
+    homepage: https://github.com/ruby/psych
+    version: builtin
+    tests: [json]
+
+
