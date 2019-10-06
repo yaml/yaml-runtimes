@@ -11,7 +11,6 @@ runtimes:
       lang: Haskell
   java: &java
       runtime: java
-      build-script: java-build.sh
       lang: Java
   lua: &lua
       runtime: lua
@@ -101,6 +100,7 @@ libraries:
     homepage: https://bitbucket.org/asomov/snakeyaml
     source: https://bitbucket.org/asomov/snakeyaml/get/snakeyaml-1.25.tar.gz
     version: 1.25
+    build-script: java-snakeyaml-build.sh
     tests: [event, json]
 
   js-jsyaml:
@@ -150,7 +150,7 @@ libraries:
 
   perl5-pplibyaml:
     <<: *perl5
-    name: YAML::PP::LiBYAML
+    name: YAML::PP::LibYAML
     homepage: https://metacpan.org/release/YAML-PP-LibYAML
     version: 0.003
     source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-PP-LibYAML-0.003.tar.gz
