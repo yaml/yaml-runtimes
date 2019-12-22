@@ -13,6 +13,9 @@ RUBY = ruby-psych
 
 build: $(DOTNET) $(HASKELL) $(JAVA) $(LUA) $(NIM) $(NODE) $(PERL5) $(PERL6) $(PYTHON) $(RUBY) $(STATIC)
 
+runtime-all:
+	$(MAKE) -C docker runtime-all
+
 dotnet: $(DOTNET)
 haskell: $(HASKELL)
 java: $(JAVA)
@@ -92,6 +95,7 @@ clean-build:
 	rm -rf docker/lua/build
 	rm -rf docker/perl5/build
 	rm -rf docker/perl6/build
+	rm -rf docker/perl6/rakudo-runtime
 	rm -rf docker/python/build
 	rm -rf docker/static/build
 	rm -rf docker/node/build

@@ -2,3 +2,4 @@
 build/
 sources/
 /local/
+/docker/perl6/rakudo-runtime

@@ -9,7 +9,6 @@ RUN apk update && \
     make \
     g++ \
     git \
-
   && cd /tmp \
   && wget https://github.com/rakudo/rakudo/releases/download/2019.07.1/rakudo-2019.07.1.tar.gz \
   && tar xvf rakudo-2019.07.1.tar.gz \
@@ -20,7 +19,6 @@ RUN apk update && \
   && cd /tmp \
   && rm rakudo-2019.07.1.tar.gz \
   && rm -rf rakudo-2019.07.1 \
-
   && apk del \
     make \
     g++ \

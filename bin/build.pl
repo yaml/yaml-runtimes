@@ -145,6 +145,7 @@ sub test {
             $input = 'input.yaml';
             $output = 'output.yeast';
         }
+        $runtime = $ENV{RUNTIME} if $ENV{RUNTIME};
         my $cmd = sprintf
           'docker run -i --rm --user %s yamlrun/runtime-%s /yaml/%s-%s <tests/%s >tests/%s.%s',
             $<, $runtime, $library, $type, $input, $library, $type;
