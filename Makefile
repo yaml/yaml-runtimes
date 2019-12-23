@@ -84,7 +84,9 @@ $(NODE):
 list:
 	perl bin/build.pl list
 test:
-	perl bin/build.pl test
+	prove t/10.basic.t
+testv:
+	prove -v t/10.basic.t
 
 clean: clean-build clean-sources
 
