@@ -8,4 +8,4 @@ RUN apk update && \
   && true
 
 COPY build /
-COPY testers /yaml
+COPY testers /yaml/bin/

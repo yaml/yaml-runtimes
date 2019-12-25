@@ -11,4 +11,4 @@ RUN apk update && \
 ENV PERL5LIB=/perl5/lib/perl5
 
 COPY build /
-COPY testers /yaml/
+COPY testers /yaml/bin/

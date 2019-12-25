@@ -69,7 +69,7 @@ sub test {
             $output = 'output.yeast';
         }
         my $cmd = sprintf
-          'docker run -i --rm --user %s yamlrun/runtime-%s /yaml/%s-%s <tests/%s >tests/%s.%s',
+          'docker run -i --rm --user %s yamlrun/runtime-%s /yaml/bin/%s-%s <tests/%s >tests/%s.%s',
             $<, $runtime, $library, $type, $input, $library, $type;
         chdir "$Bin/..";
         note $cmd;

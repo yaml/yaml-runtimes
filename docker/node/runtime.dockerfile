@@ -11,4 +11,4 @@ RUN apk update && \
 ENV NODE_PATH=/node/node_modules
 
 COPY build /
-COPY testers /yaml/
+COPY testers /yaml/bin/

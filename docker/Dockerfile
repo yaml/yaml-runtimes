@@ -20,25 +20,25 @@ RUN apk update && \
   && true
 
 COPY dotnet/build /
-COPY dotnet/testers /yaml
+COPY dotnet/testers /yaml/bin/
 COPY haskell/build /
-COPY haskell/testers /yaml
+COPY haskell/testers /yaml/bin/
 COPY java/build /
-COPY java/testers /yaml
+COPY java/testers /yaml/bin/
 COPY lua/build /
-COPY lua/testers /yaml
+COPY lua/testers /yaml/bin/
 COPY node/build /
-COPY node/testers /yaml
+COPY node/testers /yaml/bin/
 COPY perl5/build /
-COPY perl5/testers /yaml
+COPY perl5/testers /yaml/bin/
 COPY perl6/build /
-COPY perl6/testers /yaml
+COPY perl6/testers /yaml/bin/
 COPY perl6/rakudo-runtime /rakudo
 COPY python/build /
-COPY python/testers /yaml
-COPY ruby/testers /yaml
+COPY python/testers /yaml/bin/
+COPY ruby/testers /yaml/bin/
 COPY static/build /
-COPY static/testers /yaml
+COPY static/testers /yaml/bin/
 
 ENV NODE_PATH=/node/node_modules
 ENV PERL5LIB=/perl5/lib/perl5

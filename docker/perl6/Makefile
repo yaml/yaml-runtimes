@@ -7,4 +7,4 @@ runtime:
 	docker build -t yamlrun/runtime-perl6 -f runtime.dockerfile .
 	rm -rf ./rakudo-runtime
 	mkdir -p rakudo-runtime
-	docker run -it --rm --user $$(id -u) -v$(PWD)/rakudo-runtime:/rakudo-copy -v$(PWD)/utils:/buildutils yamlrun/runtime-perl6 /buildutils/copy-rakudo.sh
+	docker run -it --rm --user $$(id -u) -v$$(pwd)/rakudo-runtime:/rakudo-copy -v$$(pwd)/utils:/buildutils yamlrun/runtime-perl6 /buildutils/copy-rakudo.sh

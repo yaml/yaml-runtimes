@@ -27,7 +27,7 @@ RUN apk update && \
   && true
 
 COPY build /
-COPY testers /yaml/
+COPY testers /yaml/bin/
 
 ENV PATH="/rakudo/bin:$PATH"
 ENV PERL6LIB="inst#/perl6"

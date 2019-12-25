@@ -11,4 +11,4 @@ RUN apk update && \
 ENV PYTHONPATH=/python/lib/python3.7/site-packages
 
 COPY build /
-COPY testers /yaml/
+COPY testers /yaml/bin/
