@@ -23,7 +23,7 @@ my @tests;
 if ($testlibrary and $libraries->{ $testlibrary }) {
     push @tests, $testlibrary;
 }
-elsif ($testruntime and $runtimes->{ $testruntime }) {
+elsif ($testruntime and grep { $_->{name} eq $testruntime } @$runtimes) {
     my $runtime = $testruntime;
     for my $library (sort keys %$libraries) {
         my $lib = $libraries->{ $library };

@@ -27,7 +27,6 @@ my $yp = YAML::PP->new( schema => [qw/ JSON Merge /] );
 my ($libs) = $yp->load_file("$Bin/../list.yaml");
 
 my $libraries = $libs->{libraries};
-my $runtimes = $libs->{runtimes};
 
 if ($task eq 'list') {
     my $format = '%-17s | %-10s | %-18s | %-5s';
@@ -112,6 +111,7 @@ NAME: $library
 VERSION: '$version'
 SOURCE: $source
 HOMEPAGE: $homepage
+LANG: $lang
 EOM
         close $fh;
     }

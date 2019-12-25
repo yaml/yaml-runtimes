@@ -2,41 +2,41 @@
 
 runtimes:
 
-  dotnet: &dotnet
-      runtime: dotnet
-      build-script: dotnet-yamldotnet.sh
-      lang: C#
-  haskell: &haskell
-      runtime: haskell
-      build-script: hs-build.sh
-      lang: Haskell
-  java: &java
-      runtime: java
-      lang: Java
-  lua: &lua
-      runtime: lua
-      build-script: lua-build.sh
-      lang: Lua
-  node: &node
-      runtime: node
-      lang: Javascript
-  perl5: &perl5
-      build-script: perl5-install.sh
-      runtime: perl5
-      lang: Perl5
-  perl6: &perl6
-      build-script: perl6-install.sh
-      runtime: perl6
-      lang: Perl6
-  python: &python
-      build-script: python-install.sh
-      runtime: python
-      lang: Python
-  ruby: &ruby
-      runtime: ruby
-      lang: Ruby
-  static: &static
-      runtime: static
+- &dotnet
+  runtime: dotnet
+  build-script: dotnet-yamldotnet.sh
+  lang: C#
+- &haskell
+  runtime: haskell
+  build-script: hs-build.sh
+  lang: Haskell
+- &java
+  runtime: java
+  lang: Java
+- &lua
+  runtime: lua
+  build-script: lua-build.sh
+  lang: Lua
+- &node
+  runtime: node
+  lang: Javascript
+- &perl5
+  build-script: perl5-install.sh
+  runtime: perl5
+  lang: Perl5
+- &perl6
+  build-script: perl6-install.sh
+  runtime: perl6
+  lang: Perl6
+- &python
+  build-script: python-install.sh
+  runtime: python
+  lang: Python
+- &ruby
+  runtime: ruby
+  lang: Ruby
+- &static
+  runtime: static
 
 libraries:
 
