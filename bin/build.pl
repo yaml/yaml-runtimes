@@ -76,6 +76,15 @@ sub build {
 
     my $dir = "$Bin/../docker/$runtime";
     mkdir "$dir/build";
+    my $info_file = "$dir/build/yaml/info/$library";
+    if (-e $info_file) {
+        my $info = YAML::PP->new->load_file($info_file);
+
+        if ($info->{VERSION} eq $version) {
+            say "$library version $version is already installed";
+            return;
+        }
+    }
 
     my $cmd = sprintf
         'docker run -it --rm --user %s'
@@ -87,10 +96,28 @@ sub build {
         ($dir) x 3,
         $build_image, $buildscript;
 
-    warn __PACKAGE__.':'.__LINE__.": $cmd\n";
-    {
-        chdir "$Bin/../docker/$runtime";
-        system $cmd;
+    say "Building $library...";
+    say "# $cmd";
+    chdir $dir;
+    my $rc = system $cmd;
+    if ($rc == 0) {
+        say "ok, built $library $version";
+        make_path "$dir/build/yaml/info";
+        my $source = $lib->{source} // '-';
+        my $homepage = $lib->{homepage} // '-';
+        my $lang = $lib->{lang} // '-';
+        open my $fh, '>', $info_file or die $!;
+        print $fh <<"EOM";
+NAME: $library
+VERSION: '$version'
+SOURCE: $source
+HOMEPAGE: $homepage
+EOM
+        close $fh;
+    }
+    else {
+        say "failed";
+        unlink $info_file;
     }
 }
 
