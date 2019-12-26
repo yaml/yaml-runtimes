@@ -7,9 +7,11 @@ use Data::Dumper;
 use YAML::PP;
 use File::Path qw/ make_path /;
 use Getopt::Long;
+use Term::ANSIColor qw/ colored /;
 use FindBin '$Bin';
 
 my $container_home = '/tmp/home';
+my $cachedir = "$Bin/../.cache";
 
 GetOptions(
     'help|h' => \my $help,
@@ -27,6 +29,7 @@ my $yp = YAML::PP->new( schema => [qw/ JSON Merge /] );
 my ($libs) = $yp->load_file("$Bin/../list.yaml");
 
 my $libraries = $libs->{libraries};
+my $runtimes = $libs->{runtimes};
 
 if ($task eq 'list') {
     my $format = '%-17s | %-10s | %-18s | %-5s';
@@ -37,6 +40,9 @@ if ($task eq 'list') {
         say sprintf $format,
             $id, $lib->{lang}, $lib->{name}, $lib->{version};
     }
+}
+elsif ($task eq 'list-images') {
+    list_images();
 }
 elsif ($task eq 'build') {
     if ($library) {
@@ -56,19 +62,86 @@ elsif ($task eq 'fetch-sources') {
     }
 }
 
+sub list_images {
+    my $cmd = 'docker images --format "{{.Repository}}\t{{.Tag}}\t{{.ID}}\t{{.CreatedAt}}\t{{.Size}}" "yamlrun/runtime-*"';
+    my @lines = qx{$cmd};
+    my @image_fields = qw/ image tag id created size /;
+    my %images;
+    make_path $cachedir;
+    for my $line (@lines) {
+        chomp $line;
+        my %info;
+        @info{ @image_fields } = split m/\t/, $line;
+        $images{ $info{image} } = \%info;
+    }
+    for my $item (@$runtimes) {
+        my $runtime = $item->{runtime};
+        my $image = "yamlrun/runtime-$runtime";
+        my $info = $images{ $image };
+        my $fmt_image = "%-25s | %-5s | %-12s | %s | %s";
+        my $fmt = "%2s %-17s %-20s %-10s %-7s | %-8s";
+        if ($info) {
+            say colored (['grey12 bold'], sprintf $fmt_image, @$info{ @image_fields });
+        }
+        else {
+            say colored (['grey12 bold'], sprintf $fmt_image, $image, ('-') x 4);
+            say sprintf $fmt, ('') x 6;
+            next;
+        }
+
+        my %installed = info_from_image($info->{id}, $info->{image});
+        $info->{installed} = \%installed;
+
+        my @libraries = keys %$libraries;
+        $runtime ne 'all' and @libraries = grep {
+            $info->{image} eq "yamlrun/runtime-$libraries->{ $_ }->{runtime}"
+        } @libraries;
+        for my $name (sort { $a cmp $b } @libraries) {
+            my $lib = $libraries->{ $name };
+            my $installed = $info->{installed}->{ $name };
+            say sprintf $fmt,
+                '', $name, @$lib{qw/ name lang version /}, $installed->{VERSION} // '-';
+        }
+        say sprintf $fmt, ('') x 6;
+    }
+    return;
+}
+
+sub info_from_image {
+    my ($id, $image) = @_;
+    my $infofile = "$cachedir/$id-info.yaml";
+    my @docs;
+    if (-e $infofile) {
+        @docs = $yp->load_file($infofile);
+    }
+    else {
+        my $cmd = "docker run -i --rm -v$Bin/../docker/global:/utils '$image' /utils/info.sh";
+#        say "# $cmd";
+        my $out = qx{$cmd};
+        return if $?;
+        @docs = $yp->load_string($out);
+        $yp->dump_file($infofile, @docs);
+    }
+    my %installed;
+    for my $doc (@docs) {
+        next unless $doc;
+        $installed{ $doc->{ID} } = $doc;
+    }
+    return %installed;
+}
+
 sub build {
     my ($library) = @_;
     say "Building $library";
     source($library);
     my $lib = $libraries->{ $library }
         or die "Library $library not found";
-    my $buildscript = $lib->{'build-script'}
-        or die "No build-script for $library";
+    my $buildscript = $lib->{'build-script'};
+    unless ($buildscript) {
+        warn "No build-script for $library";
+    }
     my $name = $lib->{name}
         or die "No name for $library";
-    my $source = $lib->{'source'}
-        or die "No source for $library";
-    my ($filename) = $source =~ m{.*/(.*)\z};
     my $version = $lib->{'version'}
         or die "No version for $library";
     my $runtime = $lib->{'runtime'}
@@ -87,24 +160,31 @@ sub build {
         }
     }
 
-    my $cmd = sprintf
-        'docker run -it --rm --user %s'
-        . ' --env HOME=%s --env VERSION=%s --env SOURCE=%s --env LIBNAME=%s'
-        . ' -v%s/build:/build -v%s/utils:/buildutils -v%s/sources:/sources'
-        . ' yamlrun/%s /buildutils/%s',
-        $<,
-        $container_home, $version, "/sources/$filename", $library,
-        ($dir) x 3,
-        $build_image, $buildscript;
+    my $ok = 1;
+    if ($buildscript) {
+        my $source = $lib->{'source'}
+            or die "No source for $library";
+        my ($filename) = $source =~ m{.*/(.*)\z};
+        my $cmd = sprintf
+            'docker run -it --rm --user %s'
+            . ' --env HOME=%s --env VERSION=%s --env SOURCE=%s --env LIBNAME=%s'
+            . ' -v%s/build:/build -v%s/utils:/buildutils -v%s/sources:/sources'
+            . ' yamlrun/%s /buildutils/%s',
+            $<,
+            $container_home, $version, "/sources/$filename", $library,
+            ($dir) x 3,
+            $build_image, $buildscript;
 
-    say "Building $library...";
-    say "# $cmd";
-    chdir $dir;
-    my $rc = system $cmd;
-    if ($rc == 0) {
+        say "Building $library...";
+        say "# $cmd";
+        chdir $dir;
+        my $rc = system $cmd;
+        $ok = $rc ? 0 : 1;
+    }
+    if ($ok) {
         say "ok, built $library $version";
         make_path "$dir/build/yaml/info";
-        my $source = $lib->{source} // '-';
+        my $source = $lib->{source} // '';
         my $homepage = $lib->{homepage} // '-';
         my $lang = $lib->{lang} // '-';
         open my $fh, '>', $info_file or die $!;

@@ -2,6 +2,8 @@
 
 runtimes:
 
+- &static
+  runtime: all
 - &dotnet
   runtime: dotnet
   build-script: dotnet-yamldotnet.sh

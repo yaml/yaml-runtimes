@@ -9,4 +9,5 @@ RUN apk update && \
     busybox \
   && true
 
+COPY build /
 COPY testers /yaml/bin/

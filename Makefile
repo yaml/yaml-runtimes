@@ -62,6 +62,7 @@ $(PYTHON):
 	make -C docker/python runtime
 
 $(RUBY):
+	perl bin/build.pl build $@
 	make -C docker/ruby runtime
 
 $(STATIC):
@@ -86,6 +87,8 @@ $(NODE):
 
 list:
 	perl bin/build.pl list
+list-images:
+	perl bin/build.pl list-images
 test:
 	prove t/10.basic.t
 testv:
