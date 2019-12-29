@@ -11,6 +11,9 @@ NODE = js-jsyaml js-yaml
 PYTHON = py-pyyaml py-ruamel
 RUBY = ruby-psych
 
+RUNTIME :=
+LIBRARY :=
+
 build: $(DOTNET) $(HASKELL) $(JAVA) $(LUA) $(NIM) $(NODE) $(PERL5) $(PERL6) $(PYTHON) $(RUBY) $(STATIC)
 
 runtime-all:

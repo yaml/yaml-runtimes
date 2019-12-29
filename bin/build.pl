@@ -64,6 +64,8 @@ sub build {
         or die "Library $library not found";
     my $buildscript = $lib->{'build-script'}
         or die "No build-script for $library";
+    my $name = $lib->{name}
+        or die "No name for $library";
     my $source = $lib->{'source'}
         or die "No source for $library";
     my ($filename) = $source =~ m{.*/(.*)\z};
@@ -107,7 +109,9 @@ sub build {
         my $lang = $lib->{lang} // '-';
         open my $fh, '>', $info_file or die $!;
         print $fh <<"EOM";
-NAME: $library
+---
+ID: $library
+NAME: $name
 VERSION: '$version'
 SOURCE: $source
 HOMEPAGE: $homepage
