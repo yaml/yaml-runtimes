@@ -58,7 +58,7 @@ libraries:
     source: https://github.com/pantoniou/libfyaml/releases/download/v0.2/libfyaml-0.2.tar.gz
     version: 0.2
     build-script: c-libfyaml-build.sh
-    tests: [event]
+    tests: [event, json]
 
   cpp-yamlcpp:
     <<: *static

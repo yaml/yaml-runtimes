@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ $# -gt 0 ]; then
+    fy-tool --dump $@
+else
+    fy-tool --dump -
+fi

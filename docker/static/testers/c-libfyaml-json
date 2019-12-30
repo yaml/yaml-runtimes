@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ $# -gt 0 ]; then
+    fy-tool -mjson $@
+else
+    fy-tool -mjson -
+fi
