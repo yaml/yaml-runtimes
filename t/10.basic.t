@@ -8,6 +8,8 @@ use Data::Dumper;
 use YAML::PP;
 use FindBin '$Bin';
 
+my $prefix = 'yamlrun';
+
 my $yp = YAML::PP->new( schema => [qw/ JSON Merge /] );
 my ($libs) = $yp->load_file("$Bin/../list.yaml");
 
@@ -69,7 +71,7 @@ sub test {
             $output = 'output.yeast';
         }
         my $cmd = sprintf
-          'docker run -i --rm --user %s yamlrun/runtime-%s /yaml/bin/%s-%s <tests/%s >tests/%s.%s',
+          qq,docker run -i --rm --user %s $prefix/runtime-%s /yaml/bin/%s-%s <tests/%s >tests/%s.%s,,
             $<, $runtime, $library, $type, $input, $library, $type;
         chdir "$Bin/..";
         note $cmd;

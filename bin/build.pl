@@ -12,6 +12,7 @@ use FindBin '$Bin';
 
 my $container_home = '/tmp/home';
 my $cachedir = "$Bin/../.cache";
+my $prefix = 'yamlrun';
 
 GetOptions(
     'help|h' => \my $help,
@@ -63,7 +64,7 @@ elsif ($task eq 'fetch-sources') {
 }
 
 sub list_images {
-    my $cmd = 'docker images --format "{{.Repository}}\t{{.Tag}}\t{{.ID}}\t{{.CreatedAt}}\t{{.Size}}" "yamlrun/runtime-*"';
+    my $cmd = qq,docker images --format "{{.Repository}}\t{{.Tag}}\t{{.ID}}\t{{.CreatedAt}}\t{{.Size}}" "$prefix/runtime-*",;
     my @lines = qx{$cmd};
     my @image_fields = qw/ image tag id created size /;
     my %images;
@@ -76,7 +77,7 @@ sub list_images {
     }
     for my $item (@$runtimes) {
         my $runtime = $item->{runtime};
-        my $image = "yamlrun/runtime-$runtime";
+        my $image = "$prefix/runtime-$runtime";
         my $info = $images{ $image };
         my $fmt_image = "%-25s | %-5s | %-12s | %s | %s";
         my $fmt = "%2s %-17s %-20s %-10s %-7s | %-8s";
@@ -94,7 +95,7 @@ sub list_images {
 
         my @libraries = keys %$libraries;
         $runtime ne 'all' and @libraries = grep {
-            $info->{image} eq "yamlrun/runtime-$libraries->{ $_ }->{runtime}"
+            $info->{image} eq "$prefix/runtime-$libraries->{ $_ }->{runtime}"
         } @libraries;
         for my $name (sort { $a cmp $b } @libraries) {
             my $lib = $libraries->{ $name };
@@ -169,7 +170,7 @@ sub build {
             'docker run -it --rm --user %s'
             . ' --env HOME=%s --env VERSION=%s --env SOURCE=%s --env LIBNAME=%s'
             . ' -v%s/build:/build -v%s/utils:/buildutils -v%s/sources:/sources'
-            . ' yamlrun/%s /buildutils/%s',
+            . " $prefix/%s /buildutils/%s",
             $<,
             $container_home, $version, "/sources/$filename", $library,
             ($dir) x 3,
