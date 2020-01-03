@@ -25,6 +25,11 @@ my @tests;
 if ($testlibrary and $libraries->{ $testlibrary }) {
     push @tests, $testlibrary;
 }
+elsif ($testruntime and $testruntime eq 'all') {
+    for my $library (sort keys %$libraries) {
+        push @tests, $library;
+    }
+}
 elsif ($testruntime and grep { $_->{runtime} eq $testruntime } @$runtimes) {
     my $runtime = $testruntime;
     for my $library (sort keys %$libraries) {
@@ -50,36 +55,27 @@ sub test {
         or die "No runtime for $library";
     $runtime = $testruntime if $testruntime;
     my $tests = $lib->{tests} || [];
+    my $testdir = "t/data";
+    chdir "$Bin/..";
     for my $type (@$tests) {
-        my $output;
-        my $input;
+        my $input = 'input.yaml';
+        my $output = "output.$type";
         if ($type eq 'event') {
-            $input = 'input.yaml';
-            $output = 'output.event';
             if ($library eq 'cpp-yamlcpp') {
                 # yamlcpp does not have information about implicit
                 # document start or end
                 $output = 'output.event.yamlcpp';
             }
         }
-        elsif ($type eq 'json') {
-            $input = 'input.yaml';
-            $output = 'output.json';
-        }
-        elsif ($type eq 'yeast') {
-            $input = 'input.yaml';
-            $output = 'output.yeast';
-        }
         my $cmd = sprintf
-          qq,docker run -i --rm --user %s $prefix/runtime-%s /yaml/bin/%s-%s <tests/%s >tests/%s.%s,,
+          qq,docker run -i --rm --user %s $prefix/runtime-%s /yaml/bin/%s-%s <$testdir/%s >$testdir/%s.%s,,
             $<, $runtime, $library, $type, $input, $library, $type;
-        chdir "$Bin/..";
         note $cmd;
         system $cmd;
         my $rc = $?;
         is($rc, 0, "$library-$type executed successfully");
         if ($type eq 'json') {
-            my $cmd = "jq . <tests/$library.$type >tests/$library.$type.jq && mv tests/$library.$type.jq tests/$library.$type";
+            my $cmd = "jq . <$testdir/$library.$type >$testdir/$library.$type.jq && mv $testdir/$library.$type.jq $testdir/$library.$type";
             system $cmd;
             if ($?) {
                 diag "jq command '$cmd' failed";
@@ -87,9 +83,9 @@ sub test {
                 next;
             }
         }
-        system "diff tests/$output tests/$library.$type";
+        system "diff $testdir/$output $testdir/$library.$type";
         $rc = $?;
-        unlink "tests/$library.$type";
+        unlink "$testdir/$library.$type";
 #        if ($library eq '...') {
 #            TODO: {
 #                local $TODO = "... not yet working correctly";

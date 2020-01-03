@@ -1,0 +1,27 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+use Encode;
+use YAML::PP::LibYAML::Parser;
+use YAML::PP::Common;
+
+my ($file) = @ARGV;
+
+my $parser = YAML::PP::LibYAML::Parser->new(
+    receiver => sub {
+      my ($self, undef, $event) = @_;
+      print encode_utf8(YAML::PP::Common::event_to_test_suite($event)), "\n";
+    },
+    $file ? (reader => YAML::PP::Reader::File->new) : (),
+);
+if ($file) {
+    $parser->parse_file($file);
+}
+else {
+    my $yaml;
+    $yaml = do { local $/; <STDIN> };
+    $yaml = decode_utf8($yaml);
+    $parser->parse_string($yaml);
+}
+

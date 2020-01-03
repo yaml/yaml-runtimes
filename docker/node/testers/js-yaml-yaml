@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs')
-const YAML = require('yaml').default
+const YAML = require('yaml')
 
 const src = fs.readFileSync('/dev/stdin').toString()
 const docs = YAML.parseAllDocuments(src).map(doc => {

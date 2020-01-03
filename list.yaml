@@ -50,7 +50,7 @@ libraries:
     source: https://pyyaml.org/download/libyaml/yaml-0.2.2.tar.gz
     version: 0.2.2
     build-script: c-libyaml-build.sh
-    tests: [event]
+    tests: [event, yaml]
 
   c-libfyaml:
     <<: *static
@@ -60,7 +60,7 @@ libraries:
     source: https://github.com/pantoniou/libfyaml/releases/download/v0.2/libfyaml-0.2.tar.gz
     version: 0.2
     build-script: c-libfyaml-build.sh
-    tests: [event, json]
+    tests: [event, json, yaml]
 
   cpp-yamlcpp:
     <<: *static
@@ -121,7 +121,7 @@ libraries:
     version: 1.6.0
     source: https://github.com/eemeli/yaml/archive/v1.6.0.tar.gz
     build-script: js-yaml-build.sh
-    tests: [event, json]
+    tests: [event, json, yaml]
 
   lua-lyaml:
     <<: *lua
@@ -148,7 +148,7 @@ libraries:
     homepage: https://metacpan.org/release/YAML-PP
     version: 0.018
     source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-PP-0.018.tar.gz
-    tests: [event, json]
+    tests: [event, json, yaml, pl]
 
   perl5-pplibyaml:
     <<: *perl5
@@ -156,7 +156,7 @@ libraries:
     homepage: https://metacpan.org/release/YAML-PP-LibYAML
     version: 0.003
     source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-PP-LibYAML-0.003.tar.gz
-    tests: [json]
+    tests: [event, json, yaml, pl]
 
   perl5-syck:
     <<: *perl5
@@ -164,7 +164,7 @@ libraries:
     homepage: https://metacpan.org/release/YAML-Syck
     version: 1.31
     source: https://cpan.metacpan.org/authors/id/T/TO/TODDR/YAML-Syck-1.31.tar.gz
-    tests: [json]
+    tests: [json, pl]
 
   perl5-tiny:
     <<: *perl5
@@ -172,7 +172,7 @@ libraries:
     homepage: https://metacpan.org/release/YAML-Tiny
     version: 1.73
     source: https://cpan.metacpan.org/authors/id/E/ET/ETHER/YAML-Tiny-1.73.tar.gz
-    tests: [json]
+    tests: [json, pl]
 
   perl5-xs:
     <<: *perl5
@@ -180,7 +180,7 @@ libraries:
     homepage: https://metacpan.org/release/YAML-LibYAML
     version: '0.80'
     source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-LibYAML-0.80.tar.gz
-    tests: [json]
+    tests: [json, pl]
 
   perl5-yaml:
     <<: *perl5
@@ -188,7 +188,7 @@ libraries:
     homepage: https://metacpan.org/release/YAML
     version: 1.29
     source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-1.29.tar.gz
-    tests: [json]
+    tests: [json, pl]
 
   perl6-yamlish:
     <<: *perl6
@@ -196,7 +196,7 @@ libraries:
     homepage: https://github.com/Leont/yamlish
     version: 0.0.5
     source: https://github.com/Leont/yamlish/archive/master.zip
-    tests: [json]
+    tests: [json, p6]
 
   py-pyyaml:
     <<: *python
@@ -204,7 +204,7 @@ libraries:
     homepage: https://github.com/yaml/pyyaml
     version: '5.2'
     source: https://files.pythonhosted.org/packages/8d/c9/e5be955a117a1ac548cdd31e37e8fd7b02ce987f9655f5c7563c656d5dcb/PyYAML-5.2.tar.gz
-    tests: [event, json]
+    tests: [event, json, py, yaml]
 
   py-ruamel:
     <<: *python
@@ -212,7 +212,7 @@ libraries:
     name: ruamel.yaml
     version: 0.16.5
     source: https://files.pythonhosted.org/packages/de/76/cf97d739365eff258e2af0457a150bf2818f3eaa460328610eafeed0894a/ruamel.yaml-0.16.5.tar.gz
-    tests: [event, json]
+    tests: [event, json, py, yaml]
 
   ruby-psych:
     <<: *ruby

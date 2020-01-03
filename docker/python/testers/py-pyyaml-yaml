@@ -9,4 +9,4 @@ for event in yaml.parse(sys.stdin.read()):
     events.append(event)
 
 output = yaml.emit(events)
-print(output)
+sys.stdout.write(output)

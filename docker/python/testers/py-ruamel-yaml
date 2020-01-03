@@ -9,4 +9,4 @@ for event in ruamel.yaml.parse(sys.stdin.read()):
     events.append(event)
 
 output = ruamel.yaml.emit(events)
-print(output)
+sys.stdout.write(output)
