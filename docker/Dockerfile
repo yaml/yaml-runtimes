@@ -46,3 +46,4 @@ ENV PERL6LIB="inst#/perl6"
 ENV PYTHONPATH=/python/lib/python3.7/site-packages
 ENV PATH="/rakudo/bin:$PATH"
 
+ENV PATH="/yaml/bin:$PATH"

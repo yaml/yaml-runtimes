@@ -12,3 +12,5 @@ ENV PERL5LIB=/perl5/lib/perl5
 
 COPY build /
 COPY testers /yaml/bin/
+
+ENV PATH="/yaml/bin:$PATH"

@@ -4,3 +4,5 @@ RUN apk add icu-libs libintl
 
 COPY build /
 COPY testers /yaml/bin/
+
+ENV PATH="/yaml/bin:$PATH"

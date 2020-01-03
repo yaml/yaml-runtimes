@@ -12,3 +12,5 @@ ENV NODE_PATH=/node/node_modules
 
 COPY build /
 COPY testers /yaml/bin/
+
+ENV PATH="/yaml/bin:$PATH"

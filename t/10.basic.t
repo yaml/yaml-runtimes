@@ -68,7 +68,7 @@ sub test {
             }
         }
         my $cmd = sprintf
-          qq,docker run -i --rm --user %s $prefix/runtime-%s /yaml/bin/%s-%s <$testdir/%s >$testdir/%s.%s,,
+          qq,docker run -i --rm --user %s $prefix/runtime-%s %s-%s <$testdir/%s >$testdir/%s.%s,,
             $<, $runtime, $library, $type, $input, $library, $type;
         note $cmd;
         system $cmd;

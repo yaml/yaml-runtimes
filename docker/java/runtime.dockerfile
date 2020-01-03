@@ -9,3 +9,5 @@ RUN apk update && \
 
 COPY build /
 COPY testers /yaml/bin/
+
+ENV PATH="/yaml/bin:$PATH"

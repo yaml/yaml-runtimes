@@ -31,3 +31,5 @@ COPY testers /yaml/bin/
 
 ENV PATH="/rakudo/bin:$PATH"
 ENV PERL6LIB="inst#/perl6"
+
+ENV PATH="/yaml/bin:$PATH"
