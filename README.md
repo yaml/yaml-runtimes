@@ -1,5 +1,13 @@
 # Docker images for YAML Runtimes
 
+* [Usage](#Usage)
+* [Build](#Build)
+* [Test](#Test)
+* [Play](#Play)
+* [Example](#Example)
+* [Architecture](#Architecture)
+* [List of Libraries](#List-of-Libraries)
+
 This repository provides Dockerfiles for several YAML processors. The goal is
 to be able to compare the behaviour of the most common processors.
 
@@ -22,17 +30,21 @@ we can build all processors on Alpine Linux).
 
 Requirements:
 * perl
-* YAML::PP module
+* YAML::PP perl module
 * jq
 
-To install YAML::PP, run (debian example):
+To install YAML::PP, first install the `cpanm` client (debian example):
 
     apt-get install cpanminus
-    cpanm YAML::PP
 
-To install the module locally instead, do this:
+Then install the module with `cpanm`:
 
-    cpanm -l local YAML::PP
+    # Install YAML::PP into the local/ directory
+    cpanm -l local --notest YAML::PP
+
+The scripts will automatically use the `local/` directory to search for
+modules. You could also do this manyally by setting `PERL5LIB`:
+
     export PERL5LIB=$PWD/local/lib/perl5
 
 To list all libraries:
@@ -54,6 +66,10 @@ You can also just build a single environment or library:
     # build perl5 YAML::PP
     make perl5-pp
 
+To list all images, do
+
+    make list-images
+
 ### Test
 
 To see if the build was successful and all programs work, run
@@ -69,6 +85,26 @@ To test only one runtime or library:
     make test LIBRARY=c-libyaml
     make testv RUNTIME=perl5
     make testv RUNTIME=all LIBRARY=hs-hsyaml
+    # Test all libraries in runtime-all image
+    make testv RUNTIME=all
+
+### Play
+
+To play around with the several processors, call them like this:
+
+    docker run -i --rm yamlrun/runtime-static c-libfyaml-event <t/data/input.yaml
+
+### Example
+
+If you want to test a certain library, for example `c-libfyaml`, the steps would
+be:
+
+    make c-libfyaml
+    make list-images
+    make testv LIBRARY=c-libfyaml
+    docker run -i --rm yamlrun/runtime-static c-libfyaml-event <t/data/input.yaml
+    docker run -i --rm yamlrun/runtime-static c-libfyaml-json <t/data/input.yaml
+
 
 ## Architecture
 
@@ -78,9 +114,38 @@ For each environment there is a builder image and a runtime image.
 The libraries are built in the builder containers, and all necessary
 files are then copied into the runtime images.
 
-## Libraries
+## List of Libraries
 
 Currently only official releases of the libraries are build. Allowing to
 build from sources like git might be added at some point.
 
-Look into [list.yaml](list.yaml) to see the current list.
+The list of libraries and their configuration can be found in
+[list.yaml](list.yaml).
+
+Type `make list` to see the following list:
+
+| ID                | Language   | Name               | Version  | Runtime |
+| ----------------- | ---------- | ------------------ | -------- | ------- |
+| c-libfyaml        | C          | libfyaml           | 0.2      | static  |
+| c-libyaml         | C          | libyaml            | 0.2.2    | static  |
+| cpp-yamlcpp       | C++        | yaml-cpp           | 0.6.2    | static  |
+| dotnet-yamldotnet | C#         | YamlDotNet         | 6.1.2    | dotnet  |
+| hs-hsyaml         | Haskell    | HsYAML             | 0.2      | haskell |
+| hs-reference      | Haskell    | YAMLReference      | master   | haskell |
+| java-snakeyaml    | Java       | SnakeYAML          | 1.25     | java    |
+| js-jsyaml         | Javascript | js-yaml            | 3.13.1   | node    |
+| js-yaml           | Javascript | yaml               | 1.6.0    | node    |
+| lua-lyaml         | Lua        | lyaml              | 6.2.4-1  | lua     |
+| nim-nimyaml       | Nim        | NimYAML            | 0.12.0   | static  |
+| perl5-pp          | Perl5      | YAML::PP           | 0.018    | perl5   |
+| perl5-pplibyaml   | Perl5      | YAML::PP::LibYAML  | 0.003    | perl5   |
+| perl5-syck        | Perl5      | YAML::Syck         | 1.31     | perl5   |
+| perl5-tiny        | Perl5      | YAML::Tiny         | 1.73     | perl5   |
+| perl5-xs          | Perl5      | YAML::XS (libyaml) | 0.80     | perl5   |
+| perl5-yaml        | Perl5      | YAML.pm            | 1.29     | perl5   |
+| perl6-yamlish     | Perl6      | YAMLish            | 0.0.5    | perl6   |
+| py-pyyaml         | Python     | PyYAML             | 5.2      | python  |
+| py-ruamel         | Python     | ruamel.yaml        | 0.16.5   | python  |
+| ruby-psych        | Ruby       | psych              | builtin  | ruby    |
+
+

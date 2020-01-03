@@ -4,11 +4,13 @@ use warnings;
 use 5.010;
 
 use Data::Dumper;
-use YAML::PP;
 use File::Path qw/ make_path /;
 use Getopt::Long;
 use Term::ANSIColor qw/ colored /;
+
 use FindBin '$Bin';
+use lib "$Bin/../local/lib/perl5";
+use YAML::PP;
 
 my $container_home = '/tmp/home';
 my $cachedir = "$Bin/../.cache";
@@ -33,14 +35,19 @@ my $libraries = $libs->{libraries};
 my $runtimes = $libs->{runtimes};
 
 if ($task eq 'list') {
-    my $format = '%-17s | %-10s | %-18s | %-5s';
-        say sprintf $format,
-            qw/ ID Language Name Version /;
-    for my $id (sort keys %$libraries) {
-        my $lib = $libraries->{ $id };
-        say sprintf $format,
-            $id, $lib->{lang}, $lib->{name}, $lib->{version};
-    }
+    my $output = list_libraries();
+    say $output;
+}
+elsif ($task eq 'update-readme') {
+    my $output = list_libraries();
+    my $readme = "$Bin/../README.md";
+    open my $fh, '<', $readme or die $!;
+    my $lines = do { local $/; <$fh> };
+    close $fh;
+    $lines =~ s/^(\| ID).*\|\n\n/$output\n/s;
+    open $fh, '>', $readme or die $!;
+    print $fh $lines;
+    close $fh;
 }
 elsif ($task eq 'list-images') {
     list_images();
@@ -61,6 +68,20 @@ elsif ($task eq 'fetch-sources') {
             source($library);
         }
     }
+}
+
+sub list_libraries {
+    my $output = '';
+    my $format = "| %-17s | %-10s | %-18s | %-8s | %-7s |\n";
+    $output .= sprintf $format,
+        qw/ ID Language Name Version Runtime /;
+    $output .= sprintf $format, '-'x17, '-'x10, '-'x18, '-'x8, '-'x7;
+    for my $id (sort keys %$libraries) {
+        my $lib = $libraries->{ $id };
+        $output .= sprintf $format,
+            $id, @$lib{qw/ lang name version runtime /};
+    }
+    return $output;
 }
 
 sub list_images {

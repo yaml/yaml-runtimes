@@ -5,8 +5,10 @@ use 5.010;
 
 use Test::More;
 use Data::Dumper;
-use YAML::PP;
 use FindBin '$Bin';
+use lib "$Bin/../local/lib/perl5";
+use YAML::PP;
+
 
 my $prefix = 'yamlrun';
 

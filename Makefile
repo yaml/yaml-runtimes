@@ -94,6 +94,9 @@ test:
 testv:
 	prove -v t/10.basic.t
 
+README.md: list.yaml
+	perl bin/build.pl update-readme
+
 clean: clean-build clean-sources
 
 clean-build:
