@@ -22,10 +22,10 @@ runtimes:
 - &node
   runtime: node
   lang: Javascript
-- &perl5
-  build-script: perl5-install.sh
-  runtime: perl5
-  lang: Perl5
+- &perl
+  build-script: perl-install.sh
+  runtime: perl
+  lang: Perl
 - &rakudo
   build-script: rakudo-install.sh
   runtime: rakudo
@@ -142,53 +142,53 @@ libraries:
     tests: [event]
     build-image: nim
 
-  perl5-pp:
-    <<: *perl5
+  perl-pp:
+    <<: *perl
     name: YAML::PP
     homepage: https://metacpan.org/release/YAML-PP
     version: 0.018
     source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-PP-0.018.tar.gz
-    tests: [event, json, yaml, pl]
+    tests: [event, json, yaml, perl]
 
-  perl5-pplibyaml:
-    <<: *perl5
+  perl-pplibyaml:
+    <<: *perl
     name: YAML::PP::LibYAML
     homepage: https://metacpan.org/release/YAML-PP-LibYAML
     version: 0.003
     source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-PP-LibYAML-0.003.tar.gz
-    tests: [event, json, yaml, pl]
+    tests: [event, json, yaml, perl]
 
-  perl5-syck:
-    <<: *perl5
+  perl-syck:
+    <<: *perl
     name: YAML::Syck
     homepage: https://metacpan.org/release/YAML-Syck
     version: 1.31
     source: https://cpan.metacpan.org/authors/id/T/TO/TODDR/YAML-Syck-1.31.tar.gz
-    tests: [json, pl]
+    tests: [json, perl]
 
-  perl5-tiny:
-    <<: *perl5
+  perl-tiny:
+    <<: *perl
     name: YAML::Tiny
     homepage: https://metacpan.org/release/YAML-Tiny
     version: 1.73
     source: https://cpan.metacpan.org/authors/id/E/ET/ETHER/YAML-Tiny-1.73.tar.gz
-    tests: [json, pl]
+    tests: [json, perl]
 
-  perl5-xs:
-    <<: *perl5
+  perl-xs:
+    <<: *perl
     name: YAML::XS (libyaml)
     homepage: https://metacpan.org/release/YAML-LibYAML
     version: '0.80'
     source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-LibYAML-0.80.tar.gz
-    tests: [json, pl]
+    tests: [json, perl]
 
-  perl5-yaml:
-    <<: *perl5
+  perl-yaml:
+    <<: *perl
     name: YAML.pm
     homepage: https://metacpan.org/release/YAML
     version: 1.29
     source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-1.29.tar.gz
-    tests: [json, pl]
+    tests: [json, perl]
 
   raku-yamlish:
     <<: *rakudo

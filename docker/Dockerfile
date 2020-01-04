@@ -29,8 +29,8 @@ COPY lua/build /
 COPY lua/testers /yaml/bin/
 COPY node/build /
 COPY node/testers /yaml/bin/
-COPY perl5/build /
-COPY perl5/testers /yaml/bin/
+COPY perl/build /
+COPY perl/testers /yaml/bin/
 COPY rakudo/build /
 COPY rakudo/testers /yaml/bin/
 COPY rakudo/rakudo-runtime /rakudo

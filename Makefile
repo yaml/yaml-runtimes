@@ -2,7 +2,7 @@
 DOTNET = dotnet-yamldotnet
 HASKELL = hs-hsyaml hs-reference
 JAVA = java-snakeyaml
-PERL5 = perl5-pp perl5-pplibyaml perl5-syck perl5-tiny perl5-xs perl5-yaml
+PERL = perl-pp perl-pplibyaml perl-syck perl-tiny perl-xs perl-yaml
 RAKUDO = raku-yamlish
 STATIC = c-libfyaml c-libyaml cpp-yamlcpp
 LUA = lua-lyaml
@@ -14,7 +14,7 @@ RUBY = ruby-psych
 RUNTIME :=
 LIBRARY :=
 
-build: $(DOTNET) $(HASKELL) $(JAVA) $(LUA) $(NIM) $(NODE) $(PERL5) $(RAKUDO) $(PYTHON) $(RUBY) $(STATIC)
+build: $(DOTNET) $(HASKELL) $(JAVA) $(LUA) $(NIM) $(NODE) $(PERL) $(RAKUDO) $(PYTHON) $(RUBY) $(STATIC)
 
 runtime-all:
 	$(MAKE) -C docker runtime-all
@@ -22,7 +22,7 @@ runtime-all:
 dotnet: $(DOTNET)
 haskell: $(HASKELL)
 java: $(JAVA)
-perl5: $(PERL5)
+perl: $(PERL)
 rakudo: $(RAKUDO)
 static: $(STATIC)
 lua: $(LUA)
@@ -46,10 +46,10 @@ $(JAVA):
 	perl bin/build.pl build $@
 	make -C docker/java runtime
 
-$(PERL5):
-	make -C docker/perl5 builder
+$(PERL):
+	make -C docker/perl builder
 	perl bin/build.pl build $@
-	make -C docker/perl5 runtime
+	make -C docker/perl runtime
 
 $(RAKUDO):
 	make -C docker/rakudo builder
@@ -104,7 +104,7 @@ clean-build:
 	rm -rf docker/haskell/build
 	rm -rf docker/java/build
 	rm -rf docker/lua/build
-	rm -rf docker/perl5/build
+	rm -rf docker/perl/build
 	rm -rf docker/rakudo/build
 	rm -rf docker/rakudo/rakudo-runtime
 	rm -rf docker/python/build
@@ -116,7 +116,7 @@ clean-sources:
 	rm -rf docker/haskell/sources
 	rm -rf docker/java/sources
 	rm -rf docker/lua/sources
-	rm -rf docker/perl5/sources
+	rm -rf docker/perl/sources
 	rm -rf docker/rakudo/sources
 	rm -rf docker/python/sources
 	rm -rf docker/static/sources

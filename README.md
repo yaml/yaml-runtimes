@@ -63,8 +63,8 @@ You can also just build a single environment or library:
     make node
     # build C libyaml
     make c-libyaml
-    # build perl5 YAML::PP
-    make perl5-pp
+    # build perl YAML::PP
+    make perl-pp
 
 To list all images, do
 
@@ -83,7 +83,7 @@ This will test each program with a simple YAML file.
 To test only one runtime or library:
 
     make test LIBRARY=c-libyaml
-    make testv RUNTIME=perl5
+    make testv RUNTIME=perl
     make testv RUNTIME=all LIBRARY=hs-hsyaml
     # Test all libraries in runtime-all image
     make testv RUNTIME=all
@@ -137,12 +137,12 @@ Type `make list` to see the following list:
 | js-yaml           | Javascript | [yaml](https://github.com/eemeli/yaml) | 1.6.0    | node    |
 | lua-lyaml         | Lua        | [lyaml](https://github.com/gvvaughan/lyaml) | 6.2.4-1  | lua     |
 | nim-nimyaml       | Nim        | [NimYAML](https://github.com/flyx/NimYAML) | 0.12.0   | static  |
-| perl5-pp          | Perl5      | [YAML::PP](https://metacpan.org/release/YAML-PP) | 0.018    | perl5   |
-| perl5-pplibyaml   | Perl5      | [YAML::PP::LibYAML](https://metacpan.org/release/YAML-PP-LibYAML) | 0.003    | perl5   |
-| perl5-syck        | Perl5      | [YAML::Syck](https://metacpan.org/release/YAML-Syck) | 1.31     | perl5   |
-| perl5-tiny        | Perl5      | [YAML::Tiny](https://metacpan.org/release/YAML-Tiny) | 1.73     | perl5   |
-| perl5-xs          | Perl5      | [YAML::XS (libyaml)](https://metacpan.org/release/YAML-LibYAML) | 0.80     | perl5   |
-| perl5-yaml        | Perl5      | [YAML.pm](https://metacpan.org/release/YAML) | 1.29     | perl5   |
+| perl-pp           | Perl       | [YAML::PP](https://metacpan.org/release/YAML-PP) | 0.018    | perl    |
+| perl-pplibyaml    | Perl       | [YAML::PP::LibYAML](https://metacpan.org/release/YAML-PP-LibYAML) | 0.003    | perl    |
+| perl-syck         | Perl       | [YAML::Syck](https://metacpan.org/release/YAML-Syck) | 1.31     | perl    |
+| perl-tiny         | Perl       | [YAML::Tiny](https://metacpan.org/release/YAML-Tiny) | 1.73     | perl    |
+| perl-xs           | Perl       | [YAML::XS (libyaml)](https://metacpan.org/release/YAML-LibYAML) | 0.80     | perl    |
+| perl-yaml         | Perl       | [YAML.pm](https://metacpan.org/release/YAML) | 1.29     | perl    |
 | py-pyyaml         | Python     | [PyYAML](https://github.com/yaml/pyyaml) | 5.2      | python  |
 | py-ruamel         | Python     | [ruamel.yaml](https://bitbucket.org/ruamel/yaml) | 0.16.5   | python  |
 | raku-yamlish      | Raku       | [YAMLish](https://github.com/Leont/yamlish) | 0.0.5    | rakudo  |
