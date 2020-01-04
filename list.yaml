@@ -29,7 +29,7 @@ runtimes:
 - &rakudo
   build-script: rakudo-install.sh
   runtime: rakudo
-  lang: Perl6
+  lang: Raku
 - &python
   build-script: python-install.sh
   runtime: python
@@ -190,13 +190,13 @@ libraries:
     source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-1.29.tar.gz
     tests: [json, pl]
 
-  perl6-yamlish:
+  raku-yamlish:
     <<: *rakudo
     name: YAMLish
     homepage: https://github.com/Leont/yamlish
     version: 0.0.5
     source: https://github.com/Leont/yamlish/archive/master.zip
-    tests: [json, p6]
+    tests: [json, raku]
 
   py-pyyaml:
     <<: *python
