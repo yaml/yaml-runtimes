@@ -7,6 +7,8 @@ use Test::More;
 use Data::Dumper;
 use FindBin '$Bin';
 use lib "$Bin/../local/lib/perl5";
+use lib "$Bin/../lib";
+use YAMLRuntimes;
 use YAML::PP;
 
 
@@ -22,6 +24,8 @@ my $runtimes = $libs->{runtimes};
 my $container_home = '/tmp/home';
 my $testlibrary = $ENV{LIBRARY};
 my $testruntime = $ENV{RUNTIME};
+
+my %running = YAMLRuntimes::get_containers();
 
 my @tests;
 if ($testlibrary and $libraries->{ $testlibrary }) {
@@ -72,6 +76,11 @@ sub test {
         my $cmd = sprintf
           qq,docker run -i --rm --user %s $prefix/runtime-%s %s-%s <$testdir/%s >$testdir/%s.%s,,
             $<, $runtime, $library, $type, $input, $library, $type;
+        if ($running{"runtime-$runtime"}) {
+            $cmd = sprintf
+              qq,docker exec -i runtime-%s %s-%s <$testdir/%s >$testdir/%s.%s,,
+                $runtime, $library, $type, $input, $library, $type;
+        }
         note $cmd;
         system $cmd;
         my $rc = $?;

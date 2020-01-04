@@ -1,5 +1,6 @@
 # Docker images for YAML Runtimes
 
+* [Dependencies](#Dependencies)
 * [Usage](#Usage)
 * [Build](#Build)
 * [Test](#Test)
@@ -26,9 +27,8 @@ directory.
 There is also a `runtime-all` image which contains all processors (as long as
 we can build all processors on Alpine Linux).
 
-## Usage
+## Dependencies
 
-Requirements:
 * perl
 * YAML::PP perl module
 * jq
@@ -47,6 +47,8 @@ modules. You could also do this manually by setting `PERL5LIB`:
 
     export PERL5LIB=$PWD/local/lib/perl5
 
+## Usage
+
 To list all libraries:
 
     make list
@@ -56,6 +58,8 @@ To list all libraries:
 To build all images, do
 
     make build
+
+Note that this can take a while.
 
 You can also just build a single environment or library:
 
@@ -87,6 +91,26 @@ To test only one runtime or library:
     make testv RUNTIME=all LIBRARY=hs-hsyaml
     # Test all libraries in runtime-all image
     make testv RUNTIME=all
+
+### Daemon
+
+By default, for every test a `docker run` will be executed. To make testing
+a bit faster, you can run the containers in background:
+
+    # Start all containers
+    perl bin/build.pl daemon-start
+    # Only start runtime-perl container
+    perl bin/build.pl daemon-start perl
+
+    # Test
+    make testv
+
+    # Stop all containers
+    perl bin/build.pl daemon-stop
+    # Only stop runtime-perl container
+    perl bin/build.pl daemon-stop perl
+
+Then the tests will run `docker exec` instead.
 
 ### Play
 

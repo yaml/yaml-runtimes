@@ -10,6 +10,8 @@ use Term::ANSIColor qw/ colored /;
 
 use FindBin '$Bin';
 use lib "$Bin/../local/lib/perl5";
+use lib "$Bin/../lib";
+use YAMLRuntimes;
 use YAML::PP;
 
 my $container_home = '/tmp/home';
@@ -66,6 +68,69 @@ elsif ($task eq 'fetch-sources') {
     else {
         for my $library (sort keys %$libraries) {
             source($library);
+        }
+    }
+}
+elsif ($task eq 'daemon-start') {
+    my $runtime = $library;
+    start_daemons($runtime);
+}
+elsif ($task eq 'daemon-stop') {
+    my $runtime = $library;
+    stop_daemons($runtime);
+}
+
+sub start_daemons {
+    my ($runtime) = @_;
+    my %running = YAMLRuntimes::get_containers();
+    my @runtimes;
+    if ($runtime) {
+        @runtimes = ($runtime);
+    }
+    else {
+        @runtimes = map { $_->{runtime} } @$runtimes;
+    }
+    for my $runtime (@runtimes) {
+        if ($running{ "runtime-$runtime" }) {
+            say "runtime-$runtime already running";
+        }
+        else {
+            my $cmd = sprintf q{docker run -d -it --user %d --name runtime-%s %s/runtime-%s},
+                $<, $runtime, $prefix, $runtime;
+            my $rc = system $cmd;
+            if ($rc) {
+                warn "Starting $runtime failed";
+            }
+        }
+    }
+}
+
+sub stop_daemons {
+    my ($runtime) = @_;
+    my %running = YAMLRuntimes::get_containers();
+    my @runtimes;
+    if ($runtime) {
+        @runtimes = ($runtime);
+    }
+    else {
+        @runtimes = map { $_->{runtime} } @$runtimes;
+    }
+    for my $runtime (@runtimes) {
+        if (not $running{ "runtime-$runtime" }) {
+            say "runtime-$runtime not running";
+        }
+        else {
+            say "Stopping runtime-$runtime";
+            my $cmd = sprintf q{docker kill runtime-%s}, $runtime;
+            my $rc = system $cmd;
+            if ($rc) {
+                warn "Killing $runtime failed";
+            }
+            $cmd = sprintf q{docker rm runtime-%s}, $runtime;
+            $rc = system $cmd;
+            if ($rc) {
+                warn "Removing $runtime failed";
+            }
         }
     }
 }
