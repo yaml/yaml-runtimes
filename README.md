@@ -43,7 +43,7 @@ Then install the module with `cpanm`:
     cpanm -l local --notest YAML::PP
 
 The scripts will automatically use the `local/` directory to search for
-modules. You could also do this manyally by setting `PERL5LIB`:
+modules. You could also do this manually by setting `PERL5LIB`:
 
     export PERL5LIB=$PWD/local/lib/perl5
 
@@ -126,26 +126,26 @@ Type `make list` to see the following list:
 
 | ID                | Language   | Name               | Version  | Runtime |
 | ----------------- | ---------- | ------------------ | -------- | ------- |
-| c-libfyaml        | C          | libfyaml           | 0.2      | static  |
-| c-libyaml         | C          | libyaml            | 0.2.2    | static  |
-| cpp-yamlcpp       | C++        | yaml-cpp           | 0.6.2    | static  |
-| dotnet-yamldotnet | C#         | YamlDotNet         | 6.1.2    | dotnet  |
-| hs-hsyaml         | Haskell    | HsYAML             | 0.2      | haskell |
-| hs-reference      | Haskell    | YAMLReference      | master   | haskell |
-| java-snakeyaml    | Java       | SnakeYAML          | 1.25     | java    |
-| js-jsyaml         | Javascript | js-yaml            | 3.13.1   | node    |
-| js-yaml           | Javascript | yaml               | 1.6.0    | node    |
-| lua-lyaml         | Lua        | lyaml              | 6.2.4-1  | lua     |
-| nim-nimyaml       | Nim        | NimYAML            | 0.12.0   | static  |
-| perl5-pp          | Perl5      | YAML::PP           | 0.018    | perl5   |
-| perl5-pplibyaml   | Perl5      | YAML::PP::LibYAML  | 0.003    | perl5   |
-| perl5-syck        | Perl5      | YAML::Syck         | 1.31     | perl5   |
-| perl5-tiny        | Perl5      | YAML::Tiny         | 1.73     | perl5   |
-| perl5-xs          | Perl5      | YAML::XS (libyaml) | 0.80     | perl5   |
-| perl5-yaml        | Perl5      | YAML.pm            | 1.29     | perl5   |
-| perl6-yamlish     | Perl6      | YAMLish            | 0.0.5    | perl6   |
-| py-pyyaml         | Python     | PyYAML             | 5.2      | python  |
-| py-ruamel         | Python     | ruamel.yaml        | 0.16.5   | python  |
-| ruby-psych        | Ruby       | psych              | builtin  | ruby    |
+| c-libfyaml        | C          | [libfyaml](https://github.com/pantoniou/libfyaml) | 0.2      | static  |
+| c-libyaml         | C          | [libyaml](https://github.com/yaml/libyaml) | 0.2.2    | static  |
+| cpp-yamlcpp       | C++        | [yaml-cpp](https://github.com/jbeder/yaml-cpp) | 0.6.2    | static  |
+| dotnet-yamldotnet | C#         | [YamlDotNet](https://github.com/aaubry/YamlDotNet) | 6.1.2    | dotnet  |
+| hs-hsyaml         | Haskell    | [HsYAML](https://github.com/haskell-hvr/HsYAML) | 0.2      | haskell |
+| hs-reference      | Haskell    | [YAMLReference](https://github.com/orenbenkiki/yamlreference) | master   | haskell |
+| java-snakeyaml    | Java       | [SnakeYAML](https://bitbucket.org/asomov/snakeyaml) | 1.25     | java    |
+| js-jsyaml         | Javascript | [js-yaml](https://github.com/nodeca/js-yaml) | 3.13.1   | node    |
+| js-yaml           | Javascript | [yaml](https://github.com/eemeli/yaml) | 1.6.0    | node    |
+| lua-lyaml         | Lua        | [lyaml](https://github.com/gvvaughan/lyaml) | 6.2.4-1  | lua     |
+| nim-nimyaml       | Nim        | [NimYAML](https://github.com/flyx/NimYAML) | 0.12.0   | static  |
+| perl5-pp          | Perl5      | [YAML::PP](https://metacpan.org/release/YAML-PP) | 0.018    | perl5   |
+| perl5-pplibyaml   | Perl5      | [YAML::PP::LibYAML](https://metacpan.org/release/YAML-PP-LibYAML) | 0.003    | perl5   |
+| perl5-syck        | Perl5      | [YAML::Syck](https://metacpan.org/release/YAML-Syck) | 1.31     | perl5   |
+| perl5-tiny        | Perl5      | [YAML::Tiny](https://metacpan.org/release/YAML-Tiny) | 1.73     | perl5   |
+| perl5-xs          | Perl5      | [YAML::XS (libyaml)](https://metacpan.org/release/YAML-LibYAML) | 0.80     | perl5   |
+| perl5-yaml        | Perl5      | [YAML.pm](https://metacpan.org/release/YAML) | 1.29     | perl5   |
+| perl6-yamlish     | Perl6      | [YAMLish](https://github.com/Leont/yamlish) | 0.0.5    | perl6   |
+| py-pyyaml         | Python     | [PyYAML](https://github.com/yaml/pyyaml) | 5.2      | python  |
+| py-ruamel         | Python     | [ruamel.yaml](https://bitbucket.org/ruamel/yaml) | 0.16.5   | python  |
+| ruby-psych        | Ruby       | [psych](https://github.com/ruby/psych) | builtin  | ruby    |
 
 

@@ -39,12 +39,12 @@ if ($task eq 'list') {
     say $output;
 }
 elsif ($task eq 'update-readme') {
-    my $output = list_libraries();
+    my $output = list_libraries(markdown => 1);
     my $readme = "$Bin/../README.md";
     open my $fh, '<', $readme or die $!;
     my $lines = do { local $/; <$fh> };
     close $fh;
-    $lines =~ s/^(\| ID).*\|\n\n/$output\n/s;
+    $lines =~ s/^(\| ID).*\|\n\n/$output\n/sm;
     open $fh, '>', $readme or die $!;
     print $fh $lines;
     close $fh;
@@ -71,6 +71,7 @@ elsif ($task eq 'fetch-sources') {
 }
 
 sub list_libraries {
+    my %args = @_;
     my $output = '';
     my $format = "| %-17s | %-10s | %-18s | %-8s | %-7s |\n";
     $output .= sprintf $format,
@@ -78,8 +79,12 @@ sub list_libraries {
     $output .= sprintf $format, '-'x17, '-'x10, '-'x18, '-'x8, '-'x7;
     for my $id (sort keys %$libraries) {
         my $lib = $libraries->{ $id };
+        my $name = $lib->{name};
+        if ($args{markdown}) {
+            $name = "[$name]($lib->{homepage})";
+        }
         $output .= sprintf $format,
-            $id, @$lib{qw/ lang name version runtime /};
+            $id, $lib->{lang}, $name, @$lib{qw/ version runtime /};
     }
     return $output;
 }
