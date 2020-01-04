@@ -5,4 +5,4 @@
 
 build/
 sources/
-/docker/perl6/rakudo-runtime
+/docker/rakudo/rakudo-runtime

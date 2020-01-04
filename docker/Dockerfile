@@ -31,9 +31,9 @@ COPY node/build /
 COPY node/testers /yaml/bin/
 COPY perl5/build /
 COPY perl5/testers /yaml/bin/
-COPY perl6/build /
-COPY perl6/testers /yaml/bin/
-COPY perl6/rakudo-runtime /rakudo
+COPY rakudo/build /
+COPY rakudo/testers /yaml/bin/
+COPY rakudo/rakudo-runtime /rakudo
 COPY python/build /
 COPY python/testers /yaml/bin/
 COPY ruby/testers /yaml/bin/

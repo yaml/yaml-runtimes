@@ -143,7 +143,7 @@ Type `make list` to see the following list:
 | perl5-tiny        | Perl5      | [YAML::Tiny](https://metacpan.org/release/YAML-Tiny) | 1.73     | perl5   |
 | perl5-xs          | Perl5      | [YAML::XS (libyaml)](https://metacpan.org/release/YAML-LibYAML) | 0.80     | perl5   |
 | perl5-yaml        | Perl5      | [YAML.pm](https://metacpan.org/release/YAML) | 1.29     | perl5   |
-| perl6-yamlish     | Perl6      | [YAMLish](https://github.com/Leont/yamlish) | 0.0.5    | perl6   |
+| perl6-yamlish     | Perl6      | [YAMLish](https://github.com/Leont/yamlish) | 0.0.5    | rakudo  |
 | py-pyyaml         | Python     | [PyYAML](https://github.com/yaml/pyyaml) | 5.2      | python  |
 | py-ruamel         | Python     | [ruamel.yaml](https://bitbucket.org/ruamel/yaml) | 0.16.5   | python  |
 | ruby-psych        | Ruby       | [psych](https://github.com/ruby/psych) | builtin  | ruby    |

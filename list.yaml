@@ -26,9 +26,9 @@ runtimes:
   build-script: perl5-install.sh
   runtime: perl5
   lang: Perl5
-- &perl6
-  build-script: perl6-install.sh
-  runtime: perl6
+- &rakudo
+  build-script: rakudo-install.sh
+  runtime: rakudo
   lang: Perl6
 - &python
   build-script: python-install.sh
@@ -191,7 +191,7 @@ libraries:
     tests: [json, pl]
 
   perl6-yamlish:
-    <<: *perl6
+    <<: *rakudo
     name: YAMLish
     homepage: https://github.com/Leont/yamlish
     version: 0.0.5
