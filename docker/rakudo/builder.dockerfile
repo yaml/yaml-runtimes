@@ -12,15 +12,15 @@ RUN apk update && \
     openssl-dev \
   && true
 
-RUN mkdir /rakudo && cd /rakudo && \
+RUN mkdir /tmp/rakudo && cd /tmp/rakudo && \
     wget https://rakudo.org/dl/star/rakudo-star-2019.03.tar.gz && \
     tar xvf rakudo-star-2019.03.tar.gz && \
-    mv rakudo-star-2019.03/* . && \
-    rm -fr rakudo-star-2019.03 && \
-    rm -fr rakudo-star-2019.03.tar.gz && \
-    perl Configure.pl --backend=moar --gen-moar && \
+    cd rakudo-star-2019.03 && \
+    perl Configure.pl --backend=moar --gen-moar --prefix /rakudo && \
     make && \
     make install && \
+    cd /tmp && \
+    rm -rf /tmp/rakudo && \
   true
 
-ENV PATH="/rakudo/install/bin:/rakudo/install/share/perl6/site/bin:$PATH"
+ENV PATH="/rakudo/share/perl6/site/bin:/rakudo/bin:$PATH"

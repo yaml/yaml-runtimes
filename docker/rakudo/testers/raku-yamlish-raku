@@ -1,5 +1,4 @@
 #!/usr/bin/env perl6
-use lib "/lib";
 
 use YAMLish;
 use Data::Dump;

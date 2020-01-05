@@ -192,14 +192,24 @@ sub build {
         my $source = $lib->{'source'}
             or die "No source for $library";
         my ($filename) = $source =~ m{.*/(.*)\z};
+        my $build_dirs = $lib->{'build-dir'} || [];
+        my @mounts = (qw( %s/utils:/buildutils %s/sources:/sources ));
+        for my $item (@$build_dirs) {
+            my ($build_dir, $mount) = @$item;
+            push @mounts, "%s$build_dir:$mount";
+            make_path "$dir/$build_dir";
+        }
+        if (not @$build_dirs) {
+            push @mounts, "%s/build:/build";
+        }
+        my $mount_options = join ' ', map { sprintf "-v$_", $dir } @mounts;
         my $cmd = sprintf
             'docker run -it --rm --user %s'
-            . ' --env HOME=%s --env VERSION=%s --env SOURCE=%s --env LIBNAME=%s'
-            . ' -v%s/build:/build -v%s/utils:/buildutils -v%s/sources:/sources'
+            . ' --env HOME=%s --env VERSION=%s --env SOURCE=%s --env LIBNAME=%s '
+            . $mount_options
             . " $prefix/%s /buildutils/%s",
             $<,
             $container_home, $version, "/sources/$filename", $library,
-            ($dir) x 3,
             $build_image, $buildscript;
 
         say "Building $library...";

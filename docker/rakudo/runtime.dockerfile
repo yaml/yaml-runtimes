@@ -10,15 +10,15 @@ RUN apk update && \
     g++ \
     git \
   && cd /tmp \
-  && wget https://github.com/rakudo/rakudo/releases/download/2019.07.1/rakudo-2019.07.1.tar.gz \
-  && tar xvf rakudo-2019.07.1.tar.gz \
-  && cd rakudo-2019.07.1 \
+  && wget https://github.com/rakudo/rakudo/releases/download/2019.11/rakudo-2019.11.tar.gz \
+  && tar xvf rakudo-2019.11.tar.gz \
+  && cd rakudo-2019.11 \
   && perl Configure.pl --gen-moar  --backends=moar --prefix /rakudo \
   && make \
   && make install \
   && cd /tmp \
-  && rm rakudo-2019.07.1.tar.gz \
-  && rm -rf rakudo-2019.07.1 \
+  && rm rakudo-2019.11.tar.gz \
+  && rm -rf rakudo-2019.11 \
   && apk del \
     make \
     g++ \
@@ -30,6 +30,14 @@ COPY build /
 COPY testers /yaml/bin/
 
 ENV PATH="/rakudo/bin:$PATH"
-ENV PERL6LIB="inst#/perl6"
+ENV PERL6LIB="inst#/raku"
 
 ENV PATH="/yaml/bin:$PATH"
+
+
+# WORKAROUND: precompile
+# precompile at installation time seems to use a different path
+# for debugging: export RAKUDO_MODULE_DEBUG=1
+
+RUN echo foo | /yaml/bin/raku-yamlish-json
+RUN echo foo | /yaml/bin/raku-yamlish-raku

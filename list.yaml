@@ -28,6 +28,8 @@ runtimes:
   lang: Perl
 - &rakudo
   build-script: rakudo-install.sh
+  build-dir:
+  - [/build/raku, /raku] # [dir, mounted-as]
   runtime: rakudo
   lang: Raku
 - &python
