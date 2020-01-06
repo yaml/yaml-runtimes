@@ -16,7 +16,7 @@ use YAML::PP;
 
 my $container_home = '/tmp/home';
 my $cachedir = "$Bin/../.cache";
-my $prefix = 'yamlrun';
+my $prefix = 'yamlio';
 my $dist = 'alpine';
 
 GetOptions(

@@ -1,7 +1,7 @@
 .PHONY: builder runtime
 
 builder:
-	docker build -t yamlrun/alpine-builder-python -f alpine-builder.dockerfile .
+	docker build -t yamlio/alpine-builder-python -f alpine-builder.dockerfile .
 
 runtime:
-	docker build -t yamlrun/alpine-runtime-python -f alpine-runtime.dockerfile .
+	docker build -t yamlio/alpine-runtime-python -f alpine-runtime.dockerfile .
