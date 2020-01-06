@@ -24,7 +24,7 @@ Each library has one or more programs to process YAML input and output parsing
 events or JSON. In the docker images they can be found under the `/yaml`
 directory.
 
-There is also a `runtime-all` image which contains all processors (as long as
+There is also a `alpine-runtime-all` image which contains all processors (as long as
 we can build all processors on Alpine Linux).
 
 ## Dependencies
@@ -89,7 +89,7 @@ To test only one runtime or library:
     make test LIBRARY=c-libyaml
     make testv RUNTIME=perl
     make testv RUNTIME=all LIBRARY=hs-hsyaml
-    # Test all libraries in runtime-all image
+    # Test all libraries in alpine-runtime-all image
     make testv RUNTIME=all
 
 ### Daemon
@@ -99,7 +99,7 @@ a bit faster, you can run the containers in background:
 
     # Start all containers
     perl bin/build.pl daemon-start
-    # Only start runtime-perl container
+    # Only start alpine-runtime-perl container
     perl bin/build.pl daemon-start perl
 
     # Test
@@ -107,7 +107,7 @@ a bit faster, you can run the containers in background:
 
     # Stop all containers
     perl bin/build.pl daemon-stop
-    # Only stop runtime-perl container
+    # Only stop alpine-runtime-perl container
     perl bin/build.pl daemon-stop perl
 
 Then the tests will run `docker exec` instead.
@@ -116,7 +116,7 @@ Then the tests will run `docker exec` instead.
 
 To play around with the several processors, call them like this:
 
-    docker run -i --rm yamlrun/runtime-static c-libfyaml-event <t/data/input.yaml
+    docker run -i --rm yamlrun/alpine-runtime-static c-libfyaml-event <t/data/input.yaml
 
 ### Example
 
@@ -126,8 +126,8 @@ be:
     make c-libfyaml
     make list-images
     make testv LIBRARY=c-libfyaml
-    docker run -i --rm yamlrun/runtime-static c-libfyaml-event <t/data/input.yaml
-    docker run -i --rm yamlrun/runtime-static c-libfyaml-json <t/data/input.yaml
+    docker run -i --rm yamlrun/alpine-runtime-static c-libfyaml-event <t/data/input.yaml
+    docker run -i --rm yamlrun/alpine-runtime-static c-libfyaml-json <t/data/input.yaml
 
 
 ## Architecture

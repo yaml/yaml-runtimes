@@ -13,6 +13,7 @@ use YAML::PP;
 
 
 my $prefix = 'yamlrun';
+my $dist = 'alpine';
 
 my $yp = YAML::PP->new( schema => [qw/ JSON Merge /] );
 my ($libs) = $yp->load_file("$Bin/../list.yaml");
@@ -73,13 +74,14 @@ sub test {
                 $output = 'output.event.yamlcpp';
             }
         }
+        my $name = "$dist-runtime-$runtime";
         my $cmd = sprintf
-          qq,docker run -i --rm --user %s $prefix/runtime-%s %s-%s <$testdir/%s >$testdir/%s.%s,,
-            $<, $runtime, $library, $type, $input, $library, $type;
-        if ($running{"runtime-$runtime"}) {
+          qq,docker run -i --rm --user %s $prefix/%s %s-%s <$testdir/%s >$testdir/%s.%s,,
+            $<, $name, $library, $type, $input, $library, $type;
+        if ($running{ $name }) {
             $cmd = sprintf
-              qq,docker exec -i runtime-%s %s-%s <$testdir/%s >$testdir/%s.%s,,
-                $runtime, $library, $type, $input, $library, $type;
+              qq,docker exec -i %s %s-%s <$testdir/%s >$testdir/%s.%s,,
+                $name, $library, $type, $input, $library, $type;
         }
         note $cmd;
         system $cmd;

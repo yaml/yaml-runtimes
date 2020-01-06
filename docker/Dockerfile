@@ -42,8 +42,15 @@ COPY static/testers /yaml/bin/
 
 ENV NODE_PATH=/node/node_modules
 ENV PERL5LIB=/perl5/lib/perl5
-ENV PERL6LIB="inst#/perl6"
+ENV PERL6LIB="inst#/raku"
 ENV PYTHONPATH=/python/lib/python3.7/site-packages
 ENV PATH="/rakudo/bin:$PATH"
 
 ENV PATH="/yaml/bin:$PATH"
+
+# WORKAROUND: precompile
+# precompile at installation time seems to use a different path
+# for debugging: export RAKUDO_MODULE_DEBUG=1
+
+RUN echo foo | /yaml/bin/raku-yamlish-json
+RUN echo foo | /yaml/bin/raku-yamlish-raku
