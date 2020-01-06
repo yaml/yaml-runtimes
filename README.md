@@ -116,7 +116,7 @@ Then the tests will run `docker exec` instead.
 
 To play around with the several processors, call them like this:
 
-    docker run -i --rm yamlrun/alpine-runtime-static c-libfyaml-event <t/data/input.yaml
+    docker run -i --rm yamlio/alpine-runtime-static c-libfyaml-event <t/data/input.yaml
 
 ### Example
 
@@ -126,8 +126,8 @@ be:
     make c-libfyaml
     make list-images
     make testv LIBRARY=c-libfyaml
-    docker run -i --rm yamlrun/alpine-runtime-static c-libfyaml-event <t/data/input.yaml
-    docker run -i --rm yamlrun/alpine-runtime-static c-libfyaml-json <t/data/input.yaml
+    docker run -i --rm yamlio/alpine-runtime-static c-libfyaml-event <t/data/input.yaml
+    docker run -i --rm yamlio/alpine-runtime-static c-libfyaml-json <t/data/input.yaml
 
 
 ## Architecture

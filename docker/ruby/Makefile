@@ -1,4 +1,4 @@
 .PHONY: runtime
 
 runtime:
-	docker build -t yamlrun/alpine-runtime-ruby -f alpine-runtime.dockerfile .
+	docker build -t yamlio/alpine-runtime-ruby -f alpine-runtime.dockerfile .

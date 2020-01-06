@@ -12,7 +12,7 @@ use YAMLRuntimes;
 use YAML::PP;
 
 
-my $prefix = 'yamlrun';
+my $prefix = 'yamlio';
 my $dist = 'alpine';
 
 my $yp = YAML::PP->new( schema => [qw/ JSON Merge /] );
