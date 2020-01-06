@@ -1,7 +1,7 @@
 .PHONY: builder runtime
 
 builder:
-	docker build -t yamlrun/builder-perl -f builder.dockerfile .
+	docker build -t yamlrun/alpine-builder-perl -f alpine-builder.dockerfile .
 
 runtime:
-	docker build -t yamlrun/runtime-perl -f runtime.dockerfile .
+	docker build -t yamlrun/alpine-runtime-perl -f alpine-runtime.dockerfile .

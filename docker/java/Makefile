@@ -1,8 +1,8 @@
 .PHONY: builder runtime
 
 builder:
-	docker build -t yamlrun/builder-java -f builder.dockerfile .
+	docker build -t yamlrun/alpine-builder-java -f alpine-builder.dockerfile .
 
 runtime:
-	docker build -t yamlrun/runtime-java -f runtime.dockerfile .
+	docker build -t yamlrun/alpine-runtime-java -f alpine-runtime.dockerfile .
 

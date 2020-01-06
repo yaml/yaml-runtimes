@@ -17,6 +17,7 @@ use YAML::PP;
 my $container_home = '/tmp/home';
 my $cachedir = "$Bin/../.cache";
 my $prefix = 'yamlrun';
+my $dist = 'alpine';
 
 GetOptions(
     'help|h' => \my $help,
@@ -91,12 +92,13 @@ sub start_daemons {
         @runtimes = map { $_->{runtime} } @$runtimes;
     }
     for my $runtime (@runtimes) {
-        if ($running{ "runtime-$runtime" }) {
-            say "runtime-$runtime already running";
+        my $name = "$dist-runtime-$runtime";
+        if ($running{ $name }) {
+            say "$name already running";
         }
         else {
-            my $cmd = sprintf q{docker run -d -it --user %d --name runtime-%s %s/runtime-%s},
-                $<, $runtime, $prefix, $runtime;
+            my $cmd = sprintf q{docker run -d -it --user %d --name %s %s/%s},
+                $<, $name, $prefix, $name;
             my $rc = system $cmd;
             if ($rc) {
                 warn "Starting $runtime failed";
@@ -116,20 +118,21 @@ sub stop_daemons {
         @runtimes = map { $_->{runtime} } @$runtimes;
     }
     for my $runtime (@runtimes) {
-        if (not $running{ "runtime-$runtime" }) {
-            say "runtime-$runtime not running";
+        my $name = "$dist-runtime-$runtime";
+        if (not $running{ $name }) {
+            say "$name not running";
         }
         else {
-            say "Stopping runtime-$runtime";
-            my $cmd = sprintf q{docker kill runtime-%s}, $runtime;
+            say "Stopping $name";
+            my $cmd = sprintf q{docker kill %s}, $name;
             my $rc = system $cmd;
             if ($rc) {
-                warn "Killing $runtime failed";
+                warn "Killing $name failed";
             }
-            $cmd = sprintf q{docker rm runtime-%s}, $runtime;
+            $cmd = sprintf q{docker rm %s}, $name;
             $rc = system $cmd;
             if ($rc) {
-                warn "Removing $runtime failed";
+                warn "Removing $name failed";
             }
         }
     }
@@ -155,7 +158,7 @@ sub list_libraries {
 }
 
 sub list_images {
-    my $cmd = qq,docker images --format "{{.Repository}}\t{{.Tag}}\t{{.ID}}\t{{.CreatedAt}}\t{{.Size}}" "$prefix/runtime-*",;
+    my $cmd = qq,docker images --format "{{.Repository}}\t{{.Tag}}\t{{.ID}}\t{{.CreatedAt}}\t{{.Size}}" "$prefix/$dist-runtime-*",;
     my @lines = qx{$cmd};
     my @image_fields = qw/ image tag id created size /;
     my %images;
@@ -168,7 +171,8 @@ sub list_images {
     }
     for my $item (@$runtimes) {
         my $runtime = $item->{runtime};
-        my $image = "$prefix/runtime-$runtime";
+        my $name = "$dist-runtime-$runtime";
+        my $image = "$prefix/$name";
         my $info = $images{ $image };
         my $fmt_image = "%-25s | %-5s | %-12s | %s | %s";
         my $fmt = "%2s %-17s %-20s %-10s %-7s | %-8s";
@@ -186,7 +190,7 @@ sub list_images {
 
         my @libraries = keys %$libraries;
         $runtime ne 'all' and @libraries = grep {
-            $info->{image} eq "$prefix/runtime-$libraries->{ $_ }->{runtime}"
+            $info->{image} eq "$prefix/$dist-runtime-$libraries->{ $_ }->{runtime}"
         } @libraries;
         for my $name (sort { $a cmp $b } @libraries) {
             my $lib = $libraries->{ $name };
@@ -238,7 +242,7 @@ sub build {
         or die "No version for $library";
     my $runtime = $lib->{'runtime'}
         or die "No runtime for $library";
-    my $build_image = "builder-" . ($lib->{'build-image'} || $runtime);
+    my $build_image = "$dist-builder-" . ($lib->{'build-image'} || $runtime);
 
     my $dir = "$Bin/../docker/$runtime";
     mkdir "$dir/build";
