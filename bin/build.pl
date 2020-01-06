@@ -242,7 +242,7 @@ sub build {
         or die "No version for $library";
     my $runtime = $lib->{'runtime'}
         or die "No runtime for $library";
-    my $build_image = "builder-" . ($lib->{'build-image'} || $runtime);
+    my $build_image = "$dist-builder-" . ($lib->{'build-image'} || $runtime);
 
     my $dir = "$Bin/../docker/$runtime";
     mkdir "$dir/build";
