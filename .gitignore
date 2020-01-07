@@ -2,6 +2,7 @@
 
 /.cache/
 /local/
+/var
 
 build/
 sources/

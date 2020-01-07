@@ -1,7 +1,4 @@
-.PHONY: builder runtime
-
-builder:
-	docker build -t yamlio/alpine-builder-rakudo -f alpine-builder.dockerfile .
+.PHONY: runtime
 
 runtime:
 	docker build -t yamlio/alpine-runtime-rakudo -f alpine-runtime.dockerfile .

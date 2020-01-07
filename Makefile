@@ -1,18 +1,17 @@
+RUNTIME :=
+LIBRARY :=
 
 DOTNET = dotnet-yamldotnet
 HASKELL = hs-hsyaml hs-reference
 JAVA = java-snakeyaml
-PERL = perl-pp perl-pplibyaml perl-syck perl-tiny perl-xs perl-yaml
-RAKUDO = raku-yamlish
-STATIC = c-libfyaml c-libyaml cpp-yamlcpp
 LUA = lua-lyaml
 NIM = nim-nimyaml
 NODE = js-jsyaml js-yaml
+PERL = perl-pp perl-pplibyaml perl-syck perl-tiny perl-xs perl-yaml
 PYTHON = py-pyyaml py-ruamel
+RAKUDO = raku-yamlish
 RUBY = ruby-psych
-
-RUNTIME :=
-LIBRARY :=
+STATIC = c-libfyaml c-libyaml cpp-yamlcpp
 
 build: $(DOTNET) $(HASKELL) $(JAVA) $(LUA) $(NIM) $(NODE) $(PERL) $(RAKUDO) $(PYTHON) $(RUBY) $(STATIC)
 
@@ -22,68 +21,57 @@ runtime-all:
 dotnet: $(DOTNET)
 haskell: $(HASKELL)
 java: $(JAVA)
-perl: $(PERL)
-rakudo: $(RAKUDO)
-static: $(STATIC)
 lua: $(LUA)
 nim: $(NIM)
 node: $(NODE)
+perl: $(PERL)
 python: $(PYTHON)
+rakudo: $(RAKUDO)
 ruby: $(RUBY)
+static: $(STATIC)
 
-$(DOTNET):
-	make -C docker/dotnet builder
-	perl bin/build.pl build $@
-	make -C docker/dotnet runtime
+COMMON = $(DOTNET) $(HASKELL) $(JAVA) $(LUA) $(NODE) $(PERL) $(PYTHON) $(STATIC)
 
-$(HASKELL):
-	make -C docker/haskell builder
-	perl bin/build.pl build $@
-	make -C docker/haskell runtime
+$(DOTNET): RUNTIME = dotnet
+$(HASKELL): RUNTIME = haskell
+$(JAVA): RUNTIME = java
+$(LUA): RUNTIME = lua
+$(NODE): RUNTIME = node
+$(PERL): RUNTIME = perl
+$(PYTHON): RUNTIME = python
+$(STATIC): RUNTIME = static
 
-$(JAVA):
-	make -C docker/java builder
-	perl bin/build.pl build $@
-	make -C docker/java runtime
 
-$(PERL):
-	make -C docker/perl builder
-	perl bin/build.pl build $@
-	make -C docker/perl runtime
+.PRECIOUS: var/docker/builder-%.log
+.PRECIOUS: var/docker/runtime-%.log
+
+var/docker/builder-%.log: docker/%/alpine-builder.dockerfile
+	mkdir -p var/docker
+	docker build -t yamlio/alpine-builder-$* -f docker/$*/alpine-builder.dockerfile . | tee var/docker/builder-$*.log
+
+var/docker/runtime-%.log: docker/%/alpine-runtime.dockerfile
+	mkdir -p var/docker
+	cd docker/$* && docker build -t yamlio/alpine-runtime-$* -f alpine-runtime.dockerfile . | tee ../../var/docker/runtime-$*.log
+
+build-builder-%: var/docker/builder-%.log ;
+
+build-library-%:
+	perl bin/build.pl build $*
+
+build-runtime-%: var/docker/runtime-%.log ;
+
+$(COMMON):
+	$(MAKE) build-builder-$(RUNTIME) build-library-$@ build-runtime-$(RUNTIME)
 
 $(RAKUDO):
-	make -C docker/rakudo builder
-	perl bin/build.pl build $@
+	$(MAKE) build-builder-rakudo build-library-$@
 	make -C docker/rakudo runtime
 
-$(PYTHON):
-	make -C docker/python builder
-	perl bin/build.pl build $@
-	make -C docker/python runtime
-
 $(RUBY):
-	perl bin/build.pl build $@
-	make -C docker/ruby runtime
-
-$(STATIC):
-	make -C docker/static builder
-	perl bin/build.pl build $@
-	make -C docker/static runtime
-
-$(LUA):
-	make -C docker/lua builder
-	perl bin/build.pl build $@
-	make -C docker/lua runtime
+	$(MAKE) build-library-$@ build-runtime-ruby
 
 $(NIM):
-	make -C docker/static builder-nim
-	perl bin/build.pl build $@
-	make -C docker/static runtime
-
-$(NODE):
-	make -C docker/node builder
-	perl bin/build.pl build $@
-	make -C docker/node runtime
+	$(MAKE) build-builder-nim build-library-$@ build-runtime-static
 
 list:
 	perl bin/build.pl list
