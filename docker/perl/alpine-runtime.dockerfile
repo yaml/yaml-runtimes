@@ -10,7 +10,7 @@ RUN apk update && \
 
 ENV PERL5LIB=/perl5/lib/perl5
 
-COPY build /
-COPY testers /yaml/bin/
+COPY var/build/perl /
+COPY docker/perl/testers /yaml/bin/
 
 ENV PATH="/yaml/bin:$PATH"

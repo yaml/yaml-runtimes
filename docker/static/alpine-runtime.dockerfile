@@ -7,7 +7,7 @@ RUN apk update && \
     libstdc++ \
   && true
 
-COPY build /
-COPY testers /yaml/bin/
+COPY var/build/static /
+COPY docker/static/testers /yaml/bin/
 
 ENV PATH="/yaml/bin:$PATH"

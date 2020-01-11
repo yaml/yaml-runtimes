@@ -7,6 +7,7 @@ use Data::Dumper;
 use File::Path qw/ make_path /;
 use Getopt::Long;
 use Term::ANSIColor qw/ colored /;
+use File::Basename qw/ dirname /;
 
 use FindBin '$Bin';
 use lib "$Bin/../local/lib/perl5";
@@ -232,6 +233,7 @@ sub build {
     my ($library) = @_;
     say "Building $library";
     source($library);
+
     my $lib = $libraries->{ $library }
         or die "Library $library not found";
     my $buildscript = $lib->{'build-script'};
@@ -246,9 +248,10 @@ sub build {
         or die "No runtime for $library";
     my $build_image = "$dist-builder-" . ($lib->{'build-image'} || $runtime);
 
+    my $builddir = "$var/build/$runtime";
+    make_path $builddir;
     my $dir = "$Bin/../docker/$runtime";
-    mkdir "$dir/build";
-    my $info_file = "$dir/build/yaml/info/$library";
+    my $info_file = "$builddir/yaml/info/$library";
     if (-e $info_file) {
         my $info = YAML::PP->new->load_file($info_file);
 
@@ -267,11 +270,11 @@ sub build {
         my @mounts = ("$dir/utils:/buildutils",  "$sourcedir/$runtime:/sources");
         for my $item (@$build_dirs) {
             my ($build_dir, $mount) = @$item;
-            push @mounts, "$dir$build_dir:$mount";
-            make_path "$dir/$build_dir";
+            push @mounts, "$Bin/../$build_dir:$mount";
+            make_path "$Bin/../$build_dir";
         }
         if (not @$build_dirs) {
-            push @mounts, "$dir/build:/build";
+            push @mounts, "$builddir:/build";
         }
         my $mount_options = join ' ', map { "-v$_" } @mounts;
         my $cmd = sprintf
@@ -290,7 +293,7 @@ sub build {
     }
     if ($ok) {
         say "ok, built $library $version";
-        make_path "$dir/build/yaml/info";
+        make_path dirname $info_file;
         my $source = $lib->{source} // '';
         my $homepage = $lib->{homepage} // '-';
         my $lang = $lib->{lang} // '-';

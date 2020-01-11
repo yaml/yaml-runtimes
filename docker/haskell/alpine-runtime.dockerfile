@@ -9,7 +9,7 @@ RUN apk update && \
     perl \
   && true
 
-COPY build /
-COPY testers /yaml/bin/
+COPY var/build/haskell /
+COPY docker/haskell/testers /yaml/bin/
 
 ENV PATH="/yaml/bin:$PATH"

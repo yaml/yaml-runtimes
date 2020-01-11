@@ -19,25 +19,25 @@ RUN apk update && \
     libintl \
   && true
 
-COPY dotnet/build /
-COPY dotnet/testers /yaml/bin/
-COPY haskell/build /
-COPY haskell/testers /yaml/bin/
-COPY java/build /
-COPY java/testers /yaml/bin/
-COPY lua/build /
-COPY lua/testers /yaml/bin/
-COPY node/build /
-COPY node/testers /yaml/bin/
-COPY perl/build /
-COPY perl/testers /yaml/bin/
-COPY rakudo/build /
-COPY rakudo/testers /yaml/bin/
-COPY python/build /
-COPY python/testers /yaml/bin/
-COPY ruby/testers /yaml/bin/
-COPY static/build /
-COPY static/testers /yaml/bin/
+COPY var/build/dotnet /
+COPY docker/dotnet/testers /yaml/bin/
+COPY var/build/haskell /
+COPY docker/haskell/testers /yaml/bin/
+COPY var/build/java /
+COPY docker/java/testers /yaml/bin/
+COPY var/build/lua /
+COPY docker/lua/testers /yaml/bin/
+COPY var/build/node /
+COPY docker/node/testers /yaml/bin/
+COPY var/build/perl /
+COPY docker/perl/testers /yaml/bin/
+COPY var/build/rakudo /
+COPY docker/rakudo/testers /yaml/bin/
+COPY var/build/python /
+COPY docker/python/testers /yaml/bin/
+COPY docker/ruby/testers /yaml/bin/
+COPY var/build/static /
+COPY docker/static/testers /yaml/bin/
 
 ENV NODE_PATH=/node/node_modules
 ENV PERL5LIB=/perl5/lib/perl5

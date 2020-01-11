@@ -9,7 +9,7 @@ RUN apk update && \
     yaml-dev \
   && true
 
-COPY build /
-COPY testers /yaml/bin/
+COPY var/build/lua /
+COPY docker/lua/testers /yaml/bin/
 
 ENV PATH="/yaml/bin:$PATH"

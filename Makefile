@@ -16,7 +16,7 @@ STATIC =  c-libfyaml c-libyaml cpp-yamlcpp
 build: $(DOTNET) $(HASKELL) $(JAVA) $(LUA) $(NIM) $(NODE) $(PERL) $(RAKUDO) $(PYTHON) $(RUBY) $(STATIC)
 
 runtime-all:
-	$(MAKE) -C docker runtime-all
+	docker build -t yamlio/alpine-runtime-all  -f docker/Dockerfile .
 
 dotnet:  $(DOTNET)
 haskell: $(HASKELL)
@@ -54,7 +54,7 @@ var/docker/builder-%.log: docker/%/alpine-builder.dockerfile
 
 var/docker/runtime-%.log: docker/%/alpine-runtime.dockerfile
 	mkdir -p var/docker
-	cd docker/$* && docker build -t yamlio/alpine-runtime-$* -f alpine-runtime.dockerfile . | tee ../../var/docker/runtime-$*.log
+	docker build -t yamlio/alpine-runtime-$* -f docker/$*/alpine-runtime.dockerfile . | tee var/docker/runtime-$*.log
 
 build-builder-ruby: ;
 build-builder-%: var/docker/builder-%.log ;

@@ -9,7 +9,7 @@ RUN apk update && \
     busybox \
   && true
 
-COPY build /
-COPY testers /yaml/bin/
+COPY var/build/ruby /
+COPY docker/ruby/testers /yaml/bin/
 
 ENV PATH="/yaml/bin:$PATH"

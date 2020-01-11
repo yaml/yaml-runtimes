@@ -7,8 +7,8 @@ RUN apk update && \
     busybox \
   && true
 
-COPY build /
-COPY testers /yaml/bin/
+COPY var/build/rakudo /
+COPY docker/rakudo/testers /yaml/bin/
 
 ENV PATH="/rakudo/bin:$PATH"
 ENV PERL6LIB="inst#/raku"

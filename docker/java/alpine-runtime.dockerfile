@@ -7,7 +7,7 @@ RUN apk update && \
     openjdk9-jre-headless \
   && true
 
-COPY build /
-COPY testers /yaml/bin/
+COPY var/build/java /
+COPY docker/java/testers /yaml/bin/
 
 ENV PATH="/yaml/bin:$PATH"

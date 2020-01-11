@@ -10,7 +10,7 @@ RUN apk update && \
 
 ENV NODE_PATH=/node/node_modules
 
-COPY build /
-COPY testers /yaml/bin/
+COPY var/build/node /
+COPY docker/node/testers /yaml/bin/
 
 ENV PATH="/yaml/bin:$PATH"

@@ -10,7 +10,7 @@ RUN apk update && \
 
 ENV PYTHONPATH=/python/lib/python3.7/site-packages
 
-COPY build /
-COPY testers /yaml/bin/
+COPY var/build/python /
+COPY docker/python/testers /yaml/bin/
 
 ENV PATH="/yaml/bin:$PATH"
