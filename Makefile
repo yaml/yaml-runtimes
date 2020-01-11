@@ -1,45 +1,46 @@
 RUNTIME :=
 LIBRARY :=
 
-DOTNET = dotnet-yamldotnet
+DOTNET =  dotnet-yamldotnet
 HASKELL = hs-hsyaml hs-reference
-JAVA = java-snakeyaml
-LUA = lua-lyaml
-NIM = nim-nimyaml
-NODE = js-jsyaml js-yaml
-PERL = perl-pp perl-pplibyaml perl-syck perl-tiny perl-xs perl-yaml
-PYTHON = py-pyyaml py-ruamel
-RAKUDO = raku-yamlish
-RUBY = ruby-psych
-STATIC = c-libfyaml c-libyaml cpp-yamlcpp
+JAVA =    java-snakeyaml
+LUA =     lua-lyaml
+NIM =     nim-nimyaml
+NODE =    js-jsyaml js-yaml
+PERL =    perl-pp perl-pplibyaml perl-syck perl-tiny perl-xs perl-yaml
+PYTHON =  py-pyyaml py-ruamel
+RAKUDO =  raku-yamlish
+RUBY =    ruby-psych
+STATIC =  c-libfyaml c-libyaml cpp-yamlcpp
 
 build: $(DOTNET) $(HASKELL) $(JAVA) $(LUA) $(NIM) $(NODE) $(PERL) $(RAKUDO) $(PYTHON) $(RUBY) $(STATIC)
 
 runtime-all:
 	$(MAKE) -C docker runtime-all
 
-dotnet: $(DOTNET)
+dotnet:  $(DOTNET)
 haskell: $(HASKELL)
-java: $(JAVA)
-lua: $(LUA)
-nim: $(NIM)
-node: $(NODE)
-perl: $(PERL)
-python: $(PYTHON)
-rakudo: $(RAKUDO)
-ruby: $(RUBY)
-static: $(STATIC)
+java:    $(JAVA)
+lua:     $(LUA)
+nim:     $(NIM)
+node:    $(NODE)
+perl:    $(PERL)
+python:  $(PYTHON)
+rakudo:  $(RAKUDO)
+ruby:    $(RUBY)
+static:  $(STATIC)
 
-COMMON = $(DOTNET) $(HASKELL) $(JAVA) $(LUA) $(NODE) $(PERL) $(PYTHON) $(STATIC)
+COMMON = $(DOTNET) $(HASKELL) $(JAVA) $(LUA) $(NODE) $(PERL) $(PYTHON) $(RAKUDO) $(STATIC)
 
-$(DOTNET): RUNTIME = dotnet
+$(DOTNET):  RUNTIME = dotnet
 $(HASKELL): RUNTIME = haskell
-$(JAVA): RUNTIME = java
-$(LUA): RUNTIME = lua
-$(NODE): RUNTIME = node
-$(PERL): RUNTIME = perl
-$(PYTHON): RUNTIME = python
-$(STATIC): RUNTIME = static
+$(JAVA):    RUNTIME = java
+$(LUA):     RUNTIME = lua
+$(NODE):    RUNTIME = node
+$(PERL):    RUNTIME = perl
+$(PYTHON):  RUNTIME = python
+$(RAKUDO):  RUNTIME = rakudo
+$(STATIC):  RUNTIME = static
 
 
 .PRECIOUS: var/docker/builder-%.log
@@ -62,10 +63,6 @@ build-runtime-%: var/docker/runtime-%.log ;
 
 $(COMMON):
 	$(MAKE) build-builder-$(RUNTIME) build-library-$@ build-runtime-$(RUNTIME)
-
-$(RAKUDO):
-	$(MAKE) build-builder-rakudo build-library-$@
-	make -C docker/rakudo runtime
 
 $(RUBY):
 	$(MAKE) build-library-$@ build-runtime-ruby
@@ -94,7 +91,6 @@ clean-build:
 	rm -rf docker/lua/build
 	rm -rf docker/perl/build
 	rm -rf docker/rakudo/build
-	rm -rf docker/rakudo/rakudo-runtime
 	rm -rf docker/python/build
 	rm -rf docker/static/build
 	rm -rf docker/node/build

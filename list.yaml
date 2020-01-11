@@ -29,7 +29,8 @@ runtimes:
 - &rakudo
   build-script: rakudo-install.sh
   build-dir:
-  - [/build/raku, /raku] # [dir, mounted-as]
+  - [/build/raku, /raku]  # [dir, mounted-as]
+  - [/build,      /build] # [dir, mounted-as]
   runtime: rakudo
   lang: Raku
 - &python
