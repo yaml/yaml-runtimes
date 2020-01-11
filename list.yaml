@@ -26,6 +26,10 @@ runtimes:
   build-script: perl-install.sh
   runtime: perl
   lang: Perl
+- &python
+  build-script: python-install.sh
+  runtime: python
+  lang: Python
 - &rakudo
   build-script: rakudo-install.sh
   build-dir:
@@ -33,10 +37,6 @@ runtimes:
   - [/build,      /build] # [dir, mounted-as]
   runtime: rakudo
   lang: Raku
-- &python
-  build-script: python-install.sh
-  runtime: python
-  lang: Python
 - &ruby
   runtime: ruby
   lang: Ruby

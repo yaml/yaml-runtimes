@@ -89,12 +89,12 @@ clean-build:
 	rm -rf docker/*/build
 
 clean-sources:
-	rm -rf docker/*/sources
+	rm -rf var/source
 
 clean-cache:
 	rm -rf var/cache
 	rm -rf var/docker
 
 clean-runtime-%:
-	rm -rf docker/$*/sources
+	rm -rf var/source
 	rm -rf docker/$*/build

@@ -15,7 +15,9 @@ use YAMLRuntimes;
 use YAML::PP;
 
 my $container_home = '/tmp/home';
-my $cachedir = "$Bin/../var/cache";
+my $var = "$Bin/../var";
+my $cachedir = "$var/cache";
+my $sourcedir = "$var/source";
 my $prefix = 'yamlio';
 my $dist = 'alpine';
 
@@ -262,16 +264,16 @@ sub build {
             or die "No source for $library";
         my ($filename) = $source =~ m{.*/(.*)\z};
         my $build_dirs = $lib->{'build-dir'} || [];
-        my @mounts = (qw( %s/utils:/buildutils %s/sources:/sources ));
+        my @mounts = ("$dir/utils:/buildutils",  "$sourcedir/$runtime:/sources");
         for my $item (@$build_dirs) {
             my ($build_dir, $mount) = @$item;
-            push @mounts, "%s$build_dir:$mount";
+            push @mounts, "$dir$build_dir:$mount";
             make_path "$dir/$build_dir";
         }
         if (not @$build_dirs) {
-            push @mounts, "%s/build:/build";
+            push @mounts, "$dir/build:/build";
         }
-        my $mount_options = join ' ', map { sprintf "-v$_", $dir } @mounts;
+        my $mount_options = join ' ', map { "-v$_" } @mounts;
         my $cmd = sprintf
             'docker run -it --rm --user %s'
             . ' --env HOME=%s --env VERSION=%s --env SOURCE=%s --env LIBNAME=%s '
@@ -283,7 +285,6 @@ sub build {
 
         say "Building $library...";
         say "# $cmd";
-        chdir $dir;
         my $rc = system $cmd;
         $ok = $rc ? 0 : 1;
     }
@@ -321,7 +322,7 @@ sub source {
     my $source = $lib->{source}
         or return;
     my ($filename) = $source =~ m{.*/(.*)\z};
-    my $srcdir = "$Bin/../docker/$runtime/sources";
+    my $srcdir = "$sourcedir/$runtime";
     make_path $srcdir;
     chdir $srcdir;
     if (-e $filename) {

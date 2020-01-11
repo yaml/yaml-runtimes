@@ -4,5 +4,3 @@
 /var
 
 build/
-sources/
-/docker/rakudo/rakudo-runtime
