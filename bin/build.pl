@@ -15,7 +15,7 @@ use YAMLRuntimes;
 use YAML::PP;
 
 my $container_home = '/tmp/home';
-my $cachedir = "$Bin/../.cache";
+my $cachedir = "$Bin/../var/cache";
 my $prefix = 'yamlio';
 my $dist = 'alpine';
 

@@ -1,6 +1,5 @@
 *.swp
 
-/.cache/
 /local/
 /var
 

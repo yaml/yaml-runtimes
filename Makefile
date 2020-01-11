@@ -30,16 +30,18 @@ rakudo:  $(RAKUDO)
 ruby:    $(RUBY)
 static:  $(STATIC)
 
-COMMON = $(DOTNET) $(HASKELL) $(JAVA) $(LUA) $(NODE) $(PERL) $(PYTHON) $(RAKUDO) $(STATIC)
+COMMON = $(DOTNET) $(HASKELL) $(JAVA) $(LUA) $(NODE) $(PERL) $(PYTHON) $(RAKUDO) $(RUBY) $(STATIC)
 
 $(DOTNET):  RUNTIME = dotnet
 $(HASKELL): RUNTIME = haskell
 $(JAVA):    RUNTIME = java
 $(LUA):     RUNTIME = lua
+$(NIM):     RUNTIME = static
 $(NODE):    RUNTIME = node
 $(PERL):    RUNTIME = perl
 $(PYTHON):  RUNTIME = python
 $(RAKUDO):  RUNTIME = rakudo
+$(RUBY):    RUNTIME = ruby
 $(STATIC):  RUNTIME = static
 
 
@@ -54,21 +56,20 @@ var/docker/runtime-%.log: docker/%/alpine-runtime.dockerfile
 	mkdir -p var/docker
 	cd docker/$* && docker build -t yamlio/alpine-runtime-$* -f alpine-runtime.dockerfile . | tee ../../var/docker/runtime-$*.log
 
+build-builder-ruby: ;
 build-builder-%: var/docker/builder-%.log ;
 
 build-library-%:
 	perl bin/build.pl build $*
+	rm -f var/docker/runtime-$(RUNTIME).log
 
 build-runtime-%: var/docker/runtime-%.log ;
 
 $(COMMON):
-	$(MAKE) build-builder-$(RUNTIME) build-library-$@ build-runtime-$(RUNTIME)
-
-$(RUBY):
-	$(MAKE) build-library-$@ build-runtime-ruby
+	$(MAKE) build-builder-$(RUNTIME) build-library-$@ build-runtime-$(RUNTIME) RUNTIME=$(RUNTIME)
 
 $(NIM):
-	$(MAKE) build-builder-nim build-library-$@ build-runtime-static
+	$(MAKE) build-builder-nim build-library-$@ build-runtime-static RUNTIME=$(RUNTIME)
 
 list:
 	perl bin/build.pl list
@@ -82,26 +83,18 @@ testv:
 README.md: list.yaml
 	perl bin/build.pl update-readme
 
-clean: clean-build clean-sources
+clean: clean-build clean-sources clean-cache
 
 clean-build:
-	rm -rf docker/dotnet/build
-	rm -rf docker/haskell/build
-	rm -rf docker/java/build
-	rm -rf docker/lua/build
-	rm -rf docker/perl/build
-	rm -rf docker/rakudo/build
-	rm -rf docker/python/build
-	rm -rf docker/static/build
-	rm -rf docker/node/build
+	rm -rf docker/*/build
 
 clean-sources:
-	rm -rf docker/dotnet/sources
-	rm -rf docker/haskell/sources
-	rm -rf docker/java/sources
-	rm -rf docker/lua/sources
-	rm -rf docker/perl/sources
-	rm -rf docker/rakudo/sources
-	rm -rf docker/python/sources
-	rm -rf docker/static/sources
-	rm -rf docker/node/sources
+	rm -rf docker/*/sources
+
+clean-cache:
+	rm -rf var/cache
+	rm -rf var/docker
+
+clean-runtime-%:
+	rm -rf docker/$*/sources
+	rm -rf docker/$*/build
