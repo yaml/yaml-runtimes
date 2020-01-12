@@ -170,6 +170,6 @@ Type `make list` to see the following list:
 | py-pyyaml         | Python     | [PyYAML](https://github.com/yaml/pyyaml) | 5.2      | python  |
 | py-ruamel         | Python     | [ruamel.yaml](https://bitbucket.org/ruamel/yaml) | 0.16.5   | python  |
 | raku-yamlish      | Raku       | [YAMLish](https://github.com/Leont/yamlish) | 0.0.5    | rakudo  |
-| ruby-psych        | Ruby       | [psych](https://github.com/ruby/psych) | builtin  | ruby    |
+| ruby-psych        | Ruby       | [psych](https://github.com/ruby/psych) | 3.1.0    | ruby    |
 
 

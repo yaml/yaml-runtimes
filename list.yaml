@@ -40,6 +40,7 @@ runtimes:
 - &ruby
   runtime: ruby
   lang: Ruby
+  build-script: installgem.sh
 - &static
   runtime: static
 
@@ -221,7 +222,8 @@ libraries:
     <<: *ruby
     name: psych
     homepage: https://github.com/ruby/psych
-    version: builtin
+    version: '3.1.0'
+    source: https://rubygems.org/downloads/psych-3.1.0.gem
     tests: [json]
 
 

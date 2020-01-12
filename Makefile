@@ -56,7 +56,6 @@ var/docker/runtime-%.log: docker/%/alpine-runtime.dockerfile
 	mkdir -p var/docker
 	docker build -t yamlio/alpine-runtime-$* -f docker/$*/alpine-runtime.dockerfile . | tee var/docker/runtime-$*.log
 
-build-builder-ruby: ;
 build-builder-%: var/docker/builder-%.log ;
 
 build-library-%:
