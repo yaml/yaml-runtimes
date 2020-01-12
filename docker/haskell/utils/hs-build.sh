@@ -2,7 +2,7 @@
 
 set -ex
 cd /tmp
-cp -p $SOURCE .
+cp $SOURCE .
 
     case $LIBNAME in
     hs-hsyaml)

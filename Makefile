@@ -86,7 +86,7 @@ README.md: list.yaml
 clean: clean-build clean-sources clean-cache
 
 clean-build:
-	rm -rf docker/*/build
+	rm -rf var/build/*
 
 clean-sources:
 	rm -rf var/source
@@ -96,5 +96,5 @@ clean-cache:
 	rm -rf var/docker
 
 clean-runtime-%:
-	rm -rf var/source
+	rm -rf var/source/$*
 	rm -rf docker/$*/build

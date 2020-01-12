@@ -2,7 +2,7 @@
 
 set -ex
 cd /tmp
-cp -p $SOURCE .
+cp $SOURCE .
 
 tar xvf $SOURCE
 cd asomov-snakeyaml-8450addf3473

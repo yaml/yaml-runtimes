@@ -2,7 +2,7 @@
 
 set -x
 cd /tmp
-cp -p $SOURCE .
+cp $SOURCE .
 tar xvf yaml-cpp-$VERSION.tar.gz
 cd yaml-cpp-yaml-cpp-$VERSION
 

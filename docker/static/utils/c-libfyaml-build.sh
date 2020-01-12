@@ -2,7 +2,7 @@
 
 set -x
 cd /tmp
-cp -p $SOURCE .
+cp $SOURCE .
 tar xvf libfyaml-$VERSION.tar.gz
 cd libfyaml-$VERSION
 patch -p1 < /buildutils/libfyaml-patch-qsort.patch

@@ -2,7 +2,7 @@
 
 set -x
 cd /tmp
-cp -p $SOURCE .
+cp $SOURCE .
 tar xvf yaml-$VERSION.tar.gz
 cd yaml-$VERSION
 ./configure --prefix /build

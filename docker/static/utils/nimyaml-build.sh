@@ -3,7 +3,7 @@
 set -x
 
 cd /tmp
-cp -p $SOURCE .
+cp $SOURCE .
 tar xvf v${VERSION}.tar.gz
 cd NimYAML-$VERSION
 nim c -p:$PWD -d:yamlScalarRepInd /buildutils/nimyaml_event.nim

@@ -3,7 +3,7 @@
 set -x
 
 cd /tmp
-cp -p $SOURCE .
+cp $SOURCE .
 tar xvf v$VERSION.tar.gz
 cd yaml-$VERSION
 npm install .
