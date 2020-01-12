@@ -35,9 +35,11 @@ COPY var/build/rakudo /
 COPY docker/rakudo/testers /yaml/bin/
 COPY var/build/python /
 COPY docker/python/testers /yaml/bin/
+COPY var/build/ruby /
 COPY docker/ruby/testers /yaml/bin/
 COPY var/build/static /
 COPY docker/static/testers /yaml/bin/
+COPY var/build/all /
 
 ENV NODE_PATH=/node/node_modules
 ENV PERL5LIB=/perl5/lib/perl5

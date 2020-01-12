@@ -8,6 +8,7 @@ use File::Path qw/ make_path /;
 use Getopt::Long;
 use Term::ANSIColor qw/ colored /;
 use File::Basename qw/ dirname /;
+use File::Glob ':bsd_glob';
 
 use FindBin '$Bin';
 use lib "$Bin/../local/lib/perl5";
@@ -36,6 +37,12 @@ my ($task, $library) = @ARGV;
 
 my $yp = YAML::PP->new( schema => [qw/ JSON Merge /] );
 my ($libs) = $yp->load_file("$Bin/../list.yaml");
+
+my $yr = YAMLRuntimes->new(
+    list => $libs,
+    dist => $dist,
+    prefix => $prefix,
+);
 
 my $libraries = $libs->{libraries};
 my $runtimes = $libs->{runtimes};
@@ -242,10 +249,18 @@ sub build {
 
     my $builddir = "$var/build/$runtime";
     make_path $builddir;
-    my $dir = "$Bin/../docker/$runtime";
-    my $info_file = "$builddir/yaml/info/$library";
-    if (-e $info_file) {
-        my $info = YAML::PP->new->load_file($info_file);
+    my @yaml_files = bsd_glob("$var/build/*/yaml/info/*.yaml");
+    my %all_info;
+    my %rt_info;
+    for my $file (@yaml_files) {
+        my $info = $yp->load_file($file);
+        $all_info{ $info->{ID} } = $info;
+        if ($file =~ m{/$runtime/}) {
+            $rt_info{ $info->{ID} } = $info;
+        }
+    }
+    if ($rt_info{ $library }) {
+        my $info = $rt_info{ $library };
 
         if ($info->{VERSION} eq $version) {
             say "$library version $version is already installed";
@@ -253,6 +268,7 @@ sub build {
         }
     }
 
+    my $dir = "$Bin/../docker/$runtime";
     my $ok = 1;
     if ($buildscript) {
         my $source = $lib->{'source'}
@@ -283,27 +299,56 @@ sub build {
         my $rc = system $cmd;
         $ok = $rc ? 0 : 1;
     }
+    my $info_file = "$builddir/yaml/info/$library.yaml";
+    make_path "$builddir/yaml/info";
     if ($ok) {
         say "ok, built $library $version";
-        make_path dirname $info_file;
         my $source = $lib->{source} // '';
         my $homepage = $lib->{homepage} // '-';
         my $lang = $lib->{lang} // '-';
-        open my $fh, '>', $info_file or die $!;
-        print $fh <<"EOM";
----
-ID: $library
-NAME: $name
-VERSION: '$version'
-SOURCE: $source
-HOMEPAGE: $homepage
-LANG: $lang
-EOM
-        close $fh;
+        my $info = {
+            ID => $library,
+            NAME => $name,
+            VERSION => $version,
+            SOURCE => $source,
+            HOMEPAGE => $homepage,
+            LANG => $lang,
+            TESTS => $lib->{tests} || [],
+        };
+        $yp->dump_file($info_file, $info);
+        $rt_info{ $library } = $info;
+        $all_info{ $library } = $info;
+
     }
     else {
         say "failed";
         unlink $info_file;
+        delete $rt_info{ $library };
+        delete $all_info{ $library };
+    }
+    my $rows = $yr->list_views(\%rt_info);
+    my $csv = $yr->rows_to_csv($rows);
+    my $csvfile = "$builddir/yaml/info/views.csv";
+    open my $fh, '>', "$csvfile.$runtime" or die $!;
+    print $fh $csv;
+    close $fh;
+    unlink $csvfile;
+    symlink "views.csv.$runtime", $csvfile or die $!;
+
+    {
+        my $alldir = "$var/build/all";
+        make_path "$alldir/yaml/info";
+        my $rows = $yr->list_views(\%all_info);
+        my $csv = $yr->rows_to_csv($rows);
+        my $table = $yr->list_views_table($rows);
+        my $csvfile = "$alldir/yaml/info/views.csv";
+        open my $fh, '>', $csvfile or die $!;
+        print $fh $csv;
+        close $fh;
+        my $tablefile = "$alldir/yaml/info/views.table";
+        open $fh, '>', $tablefile or die $!;
+        print $fh $table;
+        close $fh;
     }
 }
 

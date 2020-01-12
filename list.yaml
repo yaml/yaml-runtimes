@@ -2,7 +2,7 @@
 
 runtimes:
 
-- &static
+- &all
   runtime: all
 - &dotnet
   runtime: dotnet
@@ -226,4 +226,11 @@ libraries:
     source: https://rubygems.org/downloads/psych-3.1.0.gem
     tests: [json]
 
-
+formats:
+  event: Event Stream
+  json: JSON
+  yaml: YAML
+  yeast: YEAST Events
+  perl: Perl Native
+  py: Python Native
+  raku: Raku Native
