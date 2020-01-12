@@ -27,6 +27,7 @@ my $testlibrary = $ENV{LIBRARY};
 my $testruntime = $ENV{RUNTIME};
 
 my %running = YAMLRuntimes::get_containers();
+my $images = YAMLRuntimes::get_images("$prefix/$dist-runtime-*");
 
 my @tests;
 if ($testlibrary and $libraries->{ $testlibrary }) {
@@ -50,9 +51,11 @@ else {
         push @tests, $library;
     }
 }
+my $skipped = 0;
 for my $library (@tests) {
-    test($library);
+    $skipped += test($library);
 }
+diag "Skipped $skipped tests" if $skipped;
 
 sub test {
     my ($library) = @_;
@@ -62,6 +65,12 @@ sub test {
         or die "No runtime for $library";
     $runtime = $testruntime if $testruntime;
     my $tests = $lib->{tests} || [];
+    unless ($images->{ "$prefix/$dist-runtime-$runtime" }) {
+        SKIP: {
+            skip "SKIP $runtime, runtime image does not exist", scalar @$tests;
+        }
+        return scalar @$tests;
+    }
     my $testdir = "t/data";
     chdir "$Bin/..";
     for my $type (@$tests) {

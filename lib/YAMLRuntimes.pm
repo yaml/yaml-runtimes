@@ -14,5 +14,20 @@ sub get_containers {
     return %running;
 }
 
+sub get_images {
+    my ($pattern) = @_;
+    my $cmd = qq,docker images --format "{{.Repository}}\t{{.Tag}}\t{{.ID}}\t{{.CreatedAt}}\t{{.Size}}" "$pattern",;
+    my @lines = qx{$cmd};
+    my @image_fields = qw/ image tag id created size /;
+    my %images;
+    for my $line (@lines) {
+        chomp $line;
+        my %info;
+        @info{ @image_fields } = split m/\t/, $line;
+        $images{ $info{image} } = \%info;
+    }
+    return \%images;
+}
+
 
 1;

@@ -161,22 +161,14 @@ sub list_libraries {
 }
 
 sub list_images {
-    my $cmd = qq,docker images --format "{{.Repository}}\t{{.Tag}}\t{{.ID}}\t{{.CreatedAt}}\t{{.Size}}" "$prefix/$dist-runtime-*",;
-    my @lines = qx{$cmd};
-    my @image_fields = qw/ image tag id created size /;
-    my %images;
     make_path $cachedir;
-    for my $line (@lines) {
-        chomp $line;
-        my %info;
-        @info{ @image_fields } = split m/\t/, $line;
-        $images{ $info{image} } = \%info;
-    }
+    my $images = YAMLRuntimes::get_images("$prefix/$dist-runtime-*");
+    my @image_fields = qw/ image tag id created size /;
     for my $item (@$runtimes) {
         my $runtime = $item->{runtime};
         my $name = "$dist-runtime-$runtime";
         my $image = "$prefix/$name";
-        my $info = $images{ $image };
+        my $info = $images->{ $image };
         my $fmt_image = "%-25s | %-5s | %-12s | %s | %s";
         my $fmt = "%2s %-17s %-20s %-10s %-7s | %-8s";
         if ($info) {
