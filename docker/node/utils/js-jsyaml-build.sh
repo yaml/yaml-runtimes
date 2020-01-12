@@ -6,6 +6,7 @@ cd /tmp
 cp -p $SOURCE .
 tar xvf $VERSION.tar.gz
 cd js-yaml-$VERSION
+perl -pi -e 's/"istanbul": "\^0\.4\.5",/"istanbul-classic": "^2019.8.9",/' package.json
 npm install .
 npm pack > pack.filename
 filename=$PWD/"$(cat pack.filename)"
