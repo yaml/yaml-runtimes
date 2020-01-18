@@ -169,14 +169,13 @@ sub list_images {
         my $name = "$dist-runtime-$runtime";
         my $image = "$prefix/$name";
         my $info = $images->{ $image };
-        my $fmt_image = "%-25s | %-5s | %-12s | %s | %s";
-        my $fmt = "%2s %-17s %-20s %-10s %-7s | %-8s";
+        my $fmt_image = "%-29s:%-5s (%-12s) [%s] %6s";
+        my $fmt = "%-20s %-10s %-7s | %-8s";
         if ($info) {
-            say colored (['grey12 bold'], sprintf $fmt_image, @$info{ @image_fields });
+            say colored (['cyan bold'], sprintf $fmt_image, @$info{ @image_fields });
         }
         else {
-            say colored (['grey12 bold'], sprintf $fmt_image, $image, ('-') x 4);
-            say sprintf $fmt, ('') x 6;
+            say colored (['cyan bold'], sprintf $fmt_image, $image, ('-') x 4);
             next;
         }
 
@@ -190,10 +189,11 @@ sub list_images {
         for my $name (sort { $a cmp $b } @libraries) {
             my $lib = $libraries->{ $name };
             my $installed = $info->{installed}->{ $name };
-            say sprintf $fmt,
-                '', $name, @$lib{qw/ name lang version /}, $installed->{VERSION} // '-';
+            say '  '
+                . colored(['bold'], sprintf("%-17s ", $name))
+                . sprintf $fmt,
+                @$lib{qw/ name lang version /}, $installed->{VERSION} // '-';
         }
-        say sprintf $fmt, ('') x 6;
     }
     return;
 }
