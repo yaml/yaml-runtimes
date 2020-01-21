@@ -150,7 +150,7 @@ Type `make list` to see the following list:
 
 | ID                | Language   | Name               | Version  | Runtime |
 | ----------------- | ---------- | ------------------ | -------- | ------- |
-| c-libfyaml        | C          | [libfyaml](https://github.com/pantoniou/libfyaml) | 0.2      | static  |
+| c-libfyaml        | C          | [libfyaml](https://github.com/pantoniou/libfyaml) | 0.5      | static  |
 | c-libyaml         | C          | [libyaml](https://github.com/yaml/libyaml) | 0.2.2    | static  |
 | cpp-yamlcpp       | C++        | [yaml-cpp](https://github.com/jbeder/yaml-cpp) | 0.6.2    | static  |
 | dotnet-yamldotnet | C#         | [YamlDotNet](https://github.com/aaubry/YamlDotNet) | 6.1.2    | dotnet  |
