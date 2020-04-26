@@ -23,6 +23,8 @@ for event in yaml.parse(sys.stdin.read()):
         print()
     elif (name == 'MappingStartEvent'):
         sys.stdout.write('+MAP')
+        if event.flow_style:
+            sys.stdout.write(' {}')
         if (event.anchor):
             sys.stdout.write(' &' + event.anchor)
         if (event.tag):
@@ -31,6 +33,8 @@ for event in yaml.parse(sys.stdin.read()):
 
     elif (name == 'SequenceStartEvent'):
         sys.stdout.write('+SEQ')
+        if event.flow_style:
+            sys.stdout.write(' []')
         if (event.anchor):
             sys.stdout.write(' &' + event.anchor)
         if (event.tag):

@@ -11,7 +11,7 @@ my ($file) = @ARGV;
 my $parser = YAML::PP::LibYAML::Parser->new(
     receiver => sub {
       my ($self, undef, $event) = @_;
-      print encode_utf8(YAML::PP::Common::event_to_test_suite($event)), "\n";
+      print encode_utf8(YAML::PP::Common::event_to_test_suite($event, { flow => 1 })), "\n";
     },
     $file ? (reader => YAML::PP::Reader::File->new) : (),
 );
