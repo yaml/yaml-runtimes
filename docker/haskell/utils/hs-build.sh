@@ -8,7 +8,7 @@ cp $SOURCE .
     hs-hsyaml)
         build_file=yaml-test
         target_file=hsyaml-parser
-        unzip $VERSION.zip
+        unzip v$VERSION.zip
         cd HsYAML-$VERSION
     ;;
     hs-reference)
