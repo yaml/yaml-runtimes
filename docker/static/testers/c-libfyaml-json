@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [ $# -gt 0 ]; then
-    fy-tool -mjson $@
+    fy-tool -mjson --resolve --json=no $@
 else
-    fy-tool -mjson -
+    fy-tool -mjson --resolve --json=no -
 fi
