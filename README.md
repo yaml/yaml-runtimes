@@ -1,5 +1,6 @@
 # Docker images for YAML Runtimes
 
+* [Quickstart](#Quickstart)
 * [Dependencies](#Dependencies)
 * [Usage](#Usage)
 * [Pull images](#Pull-images)
@@ -11,23 +12,43 @@
 * [Architecture](#Architecture)
 * [List of Libraries](#List-of-Libraries)
 
-This repository provides Dockerfiles for several YAML processors. The goal is
-to be able to compare the behaviour of the most common processors.
+This project provides several Dockerfiles for runtime environments for a list
+of YAML processors.
 
-Providing runtime environments makes it easier to test and compare, and
-eventually create bugreports.
+The goal of this project is to be able to play with most available YAML
+libraries out there and compare them.
 
-This repo is built after the idea of the [YAML
-Editor](https://github.com/yaml/yaml-editor). The difference to YAML Editor is
-that the docker images are split up into several ones by language/type to create
-smaller images and allow to only build or download the containers you need.
+Libraries can be tested for bugs, and it makes it easier to try out bugfixes
+for a language for which you don't have any development libraries installed.
+
+It was part of the [YAML Editor](https://github.com/yaml/yaml-editor) and then
+outsourced in its own project.
+
+The YAML editor allows to receive the output of a list of YAML processors in
+vim, with a very helpful automatic tiled layout and nice shortcuts.
+
+It currently can work with only one docker container at a time, that's one
+reason why we build the `alpine-runtime-all` image.
 
 Each library has one or more programs to process YAML input and output parsing
-events or JSON. In the docker images they can be found under the `/yaml`
+events or JSON. In the docker images they can be found under the `/yaml/bin`
 directory.
 
-There is also a `alpine-runtime-all` image which contains all processors (as long as
-we can build all processors on Alpine Linux).
+## Quickstart
+
+To play with PyYAML:
+
+    make docker-pull-python
+    docker run -i --rm yamlio/alpine-runtime-python py-pyyaml-event <t/data/input.yaml
+    docker run -i --rm yamlio/alpine-runtime-python py-pyyaml-json <t/data/input.yaml
+    docker run -i --rm yamlio/alpine-runtime-python py-pyyaml-yaml <t/data/input.yaml
+    docker run -i --rm yamlio/alpine-runtime-python py-pyyaml-py <t/data/input.yaml
+
+To play with libyaml:
+
+    make docker-pull-static
+    docker run -i --rm yamlio/alpine-runtime-static c-libyaml-event <t/data/input.yaml
+    docker run -i --rm yamlio/alpine-runtime-static c-libyaml-yaml <t/data/input.yaml
 
 ## Dependencies
 
@@ -141,29 +162,6 @@ To test only one runtime or library:
     # Test all libraries in alpine-runtime-all image
     make testv RUNTIME=all
 
-### Daemon
-
-By default, for every test a `docker run` will be executed. To make testing
-a bit faster, you can run the containers in background:
-
-    # Start all containers
-    make daemon-start
-    # Only start alpine-runtime-perl container
-    make daemon-start-perl
-
-    # Test
-    make testv
-
-    # Stop all containers
-    make daemon-stop
-    # Only stop alpine-runtime-perl container
-    make daemon-stop-perl
-
-    # List containers
-    make daemon-status
-
-Then the tests will run `docker exec` instead.
-
 ### Example
 
 If you want to test a certain library, for example `c-libfyaml`, the steps would
@@ -218,4 +216,6 @@ Type `make list` to see the following list:
 | raku-yamlish      | Raku       | [YAMLish](https://github.com/Leont/yamlish) | 0.0.5    | rakudo  |
 | ruby-psych        | Ruby       | [psych](https://github.com/ruby/psych) | 3.1.0    | ruby    |
 
+## Contributing
 
+See the [Contributing](Contributing.md) Guidelines
