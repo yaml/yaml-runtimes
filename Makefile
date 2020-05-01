@@ -74,6 +74,8 @@ list:
 	perl bin/build.pl list
 list-images:
 	perl bin/build.pl list-images
+list-views-%:
+	@docker run -i --rm yamlio/alpine-runtime-$* cat /yaml/info/views.csv | cut -d, -f1 | tail -n +2
 test:
 	prove t/10.basic.t
 testv:
@@ -87,6 +89,11 @@ daemon-start-%:
 	perl bin/build.pl daemon-start $*
 daemon-stop-%:
 	perl bin/build.pl daemon-stop $*
+
+docker-push-%:
+	docker push yamlio/alpine-runtime-$*
+docker-pull-%:
+	docker pull yamlio/alpine-runtime-$*
 
 README.md: list.yaml
 	perl bin/build.pl update-readme

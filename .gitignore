@@ -1,5 +1,6 @@
 *.swp
 
 /local/
-/var
+/var/
+/io/
 

@@ -2,9 +2,11 @@
 
 * [Dependencies](#Dependencies)
 * [Usage](#Usage)
+* [Pull images](#Pull-images)
+* [Play](#Play)
+* [Daemon](#Daemon)
 * [Build](#Build)
 * [Test](#Test)
-* [Play](#Play)
 * [Example](#Example)
 * [Architecture](#Architecture)
 * [List of Libraries](#List-of-Libraries)
@@ -52,6 +54,53 @@ modules. You could also do this manually by setting `PERL5LIB`:
 To list all libraries:
 
     make list
+
+### Pull images
+
+    # pull alpine-runtime-static
+    make docker-pull-perl
+    # pull alpine-runtime-node
+    make docker-pull-node
+    # pull alpine-runtime-all
+    make docker-pull-all
+
+### Play
+
+To play around with the several processors, call them like this:
+
+    docker run -i --rm yamlio/alpine-runtime-static c-libfyaml-event <t/data/input.yaml
+
+To get a list of all available views:
+
+    make list-views-static
+    make list-views-all
+
+### Daemon
+
+By default, for every test a `docker run` will be executed. To make testing
+a bit faster, you can run the containers in background:
+
+    # Start all containers
+    make daemon-start
+    # Only start alpine-runtime-perl container
+    make daemon-start-perl
+
+    # Test
+    make testv
+
+    # Stop all containers
+    make daemon-stop
+    # Only stop alpine-runtime-perl container
+    make daemon-stop-perl
+
+    # List containers
+    make daemon-status
+
+Then you can run this instead:
+
+    docker exec -i alpine-runtime-static c-libfyaml-event <t/data/input.yaml
+
+Also the tests (see below) will run `docker exec` instead automatically.
 
 ### Build
 
@@ -114,12 +163,6 @@ a bit faster, you can run the containers in background:
     make daemon-status
 
 Then the tests will run `docker exec` instead.
-
-### Play
-
-To play around with the several processors, call them like this:
-
-    docker run -i --rm yamlio/alpine-runtime-static c-libfyaml-event <t/data/input.yaml
 
 ### Example
 

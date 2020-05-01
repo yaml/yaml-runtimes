@@ -33,7 +33,7 @@ if ($help) {
 }
 
 
-my ($task, $library) = @ARGV;
+my ($task, $library, @args) = @ARGV;
 
 my $yp = YAML::PP->new( schema => [qw/ JSON Merge /] );
 my ($libs) = $yp->load_file("$Bin/../list.yaml");
@@ -92,6 +92,31 @@ elsif ($task eq 'daemon-stop') {
 }
 elsif ($task eq 'daemon-status') {
     status_daemons();
+}
+elsif ($task eq 'io') {
+    my $dir = $library;
+    run_io($dir, @args);
+}
+
+sub run_io {
+    my ($dir, @views) = @_;
+    my %running = YAMLRuntimes::get_containers();
+    for my $view (@views) {
+        my ($lib, $format) = split m/\./, $view;
+        my $data = $libraries->{ $lib };
+        my $runtime = $data->{runtime};
+        my $program = "$lib-$format";
+        my $cmd;
+        my $args = qq{$program <$dir/input.yaml >$dir/$view 2>&1};
+        if ($running{ "alpine-runtime-$runtime" }) {
+            $cmd = qq{docker exec -i alpine-runtime-$runtime $args};
+        }
+        else {
+            $cmd = qq{docker run --rm --user $< -i yamlio/alpine-runtime-$runtime $args};
+        }
+        say "$view";
+        system $cmd;
+    }
 }
 
 sub status_daemons {
