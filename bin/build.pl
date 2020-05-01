@@ -90,6 +90,19 @@ elsif ($task eq 'daemon-stop') {
     my $runtime = $library;
     stop_daemons($runtime);
 }
+elsif ($task eq 'daemon-status') {
+    status_daemons();
+}
+
+sub status_daemons {
+    my %running = YAMLRuntimes::get_containers();
+    unless (keys %running) {
+        say "No daemons running";
+        return;
+    }
+    say "Running:";
+    say for sort keys %running;
+}
 
 sub start_daemons {
     my ($runtime) = @_;

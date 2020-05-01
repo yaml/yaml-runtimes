@@ -79,6 +79,15 @@ test:
 testv:
 	prove -v t/10.basic.t
 
+daemon-status:
+	perl bin/build.pl daemon-status
+daemon-start:
+	perl bin/build.pl daemon-start
+daemon-start-%:
+	perl bin/build.pl daemon-start $*
+daemon-stop-%:
+	perl bin/build.pl daemon-stop $*
+
 README.md: list.yaml
 	perl bin/build.pl update-readme
 

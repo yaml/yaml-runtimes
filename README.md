@@ -98,17 +98,20 @@ By default, for every test a `docker run` will be executed. To make testing
 a bit faster, you can run the containers in background:
 
     # Start all containers
-    perl bin/build.pl daemon-start
+    make daemon-start
     # Only start alpine-runtime-perl container
-    perl bin/build.pl daemon-start perl
+    make daemon-start-perl
 
     # Test
     make testv
 
     # Stop all containers
-    perl bin/build.pl daemon-stop
+    make daemon-stop
     # Only stop alpine-runtime-perl container
-    perl bin/build.pl daemon-stop perl
+    make daemon-stop-perl
+
+    # List containers
+    make daemon-status
 
 Then the tests will run `docker exec` instead.
 
@@ -150,25 +153,25 @@ Type `make list` to see the following list:
 
 | ID                | Language   | Name               | Version  | Runtime |
 | ----------------- | ---------- | ------------------ | -------- | ------- |
-| c-libfyaml        | C          | [libfyaml](https://github.com/pantoniou/libfyaml) | 0.5      | static  |
-| c-libyaml         | C          | [libyaml](https://github.com/yaml/libyaml) | 0.2.2    | static  |
-| cpp-yamlcpp       | C++        | [yaml-cpp](https://github.com/jbeder/yaml-cpp) | 0.6.2    | static  |
-| dotnet-yamldotnet | C#         | [YamlDotNet](https://github.com/aaubry/YamlDotNet) | 6.1.2    | dotnet  |
-| hs-hsyaml         | Haskell    | [HsYAML](https://github.com/haskell-hvr/HsYAML) | 0.2      | haskell |
+| c-libfyaml        | C          | [libfyaml](https://github.com/pantoniou/libfyaml) | 0.5.4    | static  |
+| c-libyaml         | C          | [libyaml](https://github.com/yaml/libyaml) | 0.2.4    | static  |
+| cpp-yamlcpp       | C++        | [yaml-cpp](https://github.com/jbeder/yaml-cpp) | 0.6.3    | static  |
+| dotnet-yamldotnet | C#         | [YamlDotNet](https://github.com/aaubry/YamlDotNet) | 8.0.0    | dotnet  |
+| hs-hsyaml         | Haskell    | [HsYAML](https://github.com/haskell-hvr/HsYAML) | 0.2.1.0  | haskell |
 | hs-reference      | Haskell    | [YAMLReference](https://github.com/orenbenkiki/yamlreference) | master   | haskell |
-| java-snakeyaml    | Java       | [SnakeYAML](https://bitbucket.org/asomov/snakeyaml) | 1.25     | java    |
+| java-snakeyaml    | Java       | [SnakeYAML](https://bitbucket.org/asomov/snakeyaml) | 1.26     | java    |
 | js-jsyaml         | Javascript | [js-yaml](https://github.com/nodeca/js-yaml) | 3.13.1   | node    |
-| js-yaml           | Javascript | [yaml](https://github.com/eemeli/yaml) | 1.6.0    | node    |
-| lua-lyaml         | Lua        | [lyaml](https://github.com/gvvaughan/lyaml) | 6.2.4-1  | lua     |
-| nim-nimyaml       | Nim        | [NimYAML](https://github.com/flyx/NimYAML) | 0.12.0   | static  |
-| perl-pp           | Perl       | [YAML::PP](https://metacpan.org/release/YAML-PP) | 0.018    | perl    |
+| js-yaml           | Javascript | [yaml](https://github.com/eemeli/yaml) | 1.9.2    | node    |
+| lua-lyaml         | Lua        | [lyaml](https://github.com/gvvaughan/lyaml) | 6.2.5    | lua     |
+| nim-nimyaml       | Nim        | [NimYAML](https://github.com/flyx/NimYAML) | 0.13.1   | static  |
+| perl-pp           | Perl       | [YAML::PP](https://metacpan.org/release/YAML-PP) | 0.021    | perl    |
 | perl-pplibyaml    | Perl       | [YAML::PP::LibYAML](https://metacpan.org/release/YAML-PP-LibYAML) | 0.003    | perl    |
-| perl-syck         | Perl       | [YAML::Syck](https://metacpan.org/release/YAML-Syck) | 1.31     | perl    |
+| perl-syck         | Perl       | [YAML::Syck](https://metacpan.org/release/YAML-Syck) | 1.32     | perl    |
 | perl-tiny         | Perl       | [YAML::Tiny](https://metacpan.org/release/YAML-Tiny) | 1.73     | perl    |
-| perl-xs           | Perl       | [YAML::XS (libyaml)](https://metacpan.org/release/YAML-LibYAML) | 0.80     | perl    |
-| perl-yaml         | Perl       | [YAML.pm](https://metacpan.org/release/YAML) | 1.29     | perl    |
-| py-pyyaml         | Python     | [PyYAML](https://github.com/yaml/pyyaml) | 5.2      | python  |
-| py-ruamel         | Python     | [ruamel.yaml](https://bitbucket.org/ruamel/yaml) | 0.16.5   | python  |
+| perl-xs           | Perl       | [YAML::XS (libyaml)](https://metacpan.org/release/YAML-LibYAML) | 0.81     | perl    |
+| perl-yaml         | Perl       | [YAML.pm](https://metacpan.org/release/YAML) | 1.3      | perl    |
+| py-pyyaml         | Python     | [PyYAML](https://github.com/yaml/pyyaml) | 5.3.1    | python  |
+| py-ruamel         | Python     | [ruamel.yaml](https://bitbucket.org/ruamel/yaml) | 0.16.10  | python  |
 | raku-yamlish      | Raku       | [YAMLish](https://github.com/Leont/yamlish) | 0.0.5    | rakudo  |
 | ruby-psych        | Ruby       | [psych](https://github.com/ruby/psych) | 3.1.0    | ruby    |
 
