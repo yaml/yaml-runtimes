@@ -16,6 +16,10 @@ $emitter->set_writer($writer);
 my $parser = YAML::PP::Parser->new(
   receiver => sub {
     my ($self, $type, $info) = @_;
+    if ($type eq 'sequence_start_event' or $type eq 'mapping_start_event') {
+        delete $info->{style};
+    }
+
     $emitter->$type($info);
   },
 );
