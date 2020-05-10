@@ -77,3 +77,8 @@ and it will build the builder image (if necessary) and the runtime image.
 Test:
 
     make testv LIBRARY=js-foo
+
+To rebuild the same version, do
+
+    rm var/build/node/yaml/info/js-foo.yaml
+    make js-foo

@@ -127,13 +127,18 @@ int main(int argc, char** argv) {
         }
     }
 
-    if (filename != "") {
-        std::ifstream in(filename);
-        in.seekg(std::ios_base::beg);
-        run(in);
-    }
-    else {
-        run(std::cin);
+    try {
+        if (filename != "") {
+            std::ifstream in(filename);
+            in.seekg(std::ios_base::beg);
+            run(in);
+        }
+        else {
+            run(std::cin);
+        }
+    } catch( YAML::ParserException ex ) {
+        std::cerr << "Exception:\n" << ex.what() << std::endl;
+        return 1;
     }
     return 0;
 }
