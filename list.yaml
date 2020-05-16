@@ -61,8 +61,8 @@ libraries:
     name: libfyaml
     homepage: https://github.com/pantoniou/libfyaml
     lang: C
-    source: https://github.com/pantoniou/libfyaml/releases/download/v0.5.4/libfyaml-0.5.4.tar.gz
-    version: 0.5.4
+    source: https://github.com/pantoniou/libfyaml/releases/download/v0.5.7/libfyaml-0.5.7.tar.gz
+    version: 0.5.7
     build-script: c-libfyaml-build.sh
     tests: [event, json, yaml]
 
@@ -80,8 +80,8 @@ libraries:
     <<: *dotnet
     name: YamlDotNet
     homepage: https://github.com/aaubry/YamlDotNet
-    source: https://github.com/aaubry/YamlDotNet/archive/v8.0.0.tar.gz
-    version: 8.0.0
+    source: https://github.com/aaubry/YamlDotNet/archive/v8.1.1.tar.gz
+    version: 8.1.1
     tests: [event, json]
 
   hs-hsyaml:
@@ -122,8 +122,8 @@ libraries:
     <<: *node
     name: yaml
     homepage: https://github.com/eemeli/yaml
-    version: 1.9.2
-    source: https://github.com/eemeli/yaml/archive/v1.9.2.tar.gz
+    version: 1.10.0
+    source: https://github.com/eemeli/yaml/archive/v1.10.0.tar.gz
     build-script: js-yaml-build.sh
     tests: [event, json, yaml]
 
@@ -150,8 +150,8 @@ libraries:
     <<: *perl
     name: YAML::PP
     homepage: https://metacpan.org/release/YAML-PP
-    version: 0.021
-    source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-PP-0.021.tar.gz
+    version: 0.022
+    source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-PP-0.022.tar.gz
     tests: [event, json, yaml, perl]
 
   perl-pplibyaml:
@@ -182,15 +182,15 @@ libraries:
     <<: *perl
     name: YAML::XS (libyaml)
     homepage: https://metacpan.org/release/YAML-LibYAML
-    version: '0.81'
-    source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-LibYAML-0.81.tar.gz
+    version: '0.82'
+    source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-LibYAML-0.82.tar.gz
     tests: [json, perl]
 
   perl-yaml:
     <<: *perl
     name: YAML.pm
     homepage: https://metacpan.org/release/YAML
-    version: 1.30
+    version: '1.30'
     source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-1.30.tar.gz
     tests: [json, perl]
 

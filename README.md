@@ -194,23 +194,23 @@ Type `make list` to see the following list:
 
 | ID                | Language   | Name               | Version  | Runtime |
 | ----------------- | ---------- | ------------------ | -------- | ------- |
-| c-libfyaml        | C          | [libfyaml](https://github.com/pantoniou/libfyaml) | 0.5.4    | static  |
+| c-libfyaml        | C          | [libfyaml](https://github.com/pantoniou/libfyaml) | 0.5.7    | static  |
 | c-libyaml         | C          | [libyaml](https://github.com/yaml/libyaml) | 0.2.4    | static  |
 | cpp-yamlcpp       | C++        | [yaml-cpp](https://github.com/jbeder/yaml-cpp) | 0.6.3    | static  |
-| dotnet-yamldotnet | C#         | [YamlDotNet](https://github.com/aaubry/YamlDotNet) | 8.0.0    | dotnet  |
+| dotnet-yamldotnet | C#         | [YamlDotNet](https://github.com/aaubry/YamlDotNet) | 8.1.1    | dotnet  |
 | hs-hsyaml         | Haskell    | [HsYAML](https://github.com/haskell-hvr/HsYAML) | 0.2.1.0  | haskell |
 | hs-reference      | Haskell    | [YAMLReference](https://github.com/orenbenkiki/yamlreference) | master   | haskell |
 | java-snakeyaml    | Java       | [SnakeYAML](https://bitbucket.org/asomov/snakeyaml) | 1.26     | java    |
 | js-jsyaml         | Javascript | [js-yaml](https://github.com/nodeca/js-yaml) | 3.13.1   | node    |
-| js-yaml           | Javascript | [yaml](https://github.com/eemeli/yaml) | 1.9.2    | node    |
+| js-yaml           | Javascript | [yaml](https://github.com/eemeli/yaml) | 1.10.0   | node    |
 | lua-lyaml         | Lua        | [lyaml](https://github.com/gvvaughan/lyaml) | 6.2.5    | lua     |
 | nim-nimyaml       | Nim        | [NimYAML](https://github.com/flyx/NimYAML) | 0.13.1   | static  |
-| perl-pp           | Perl       | [YAML::PP](https://metacpan.org/release/YAML-PP) | 0.021    | perl    |
+| perl-pp           | Perl       | [YAML::PP](https://metacpan.org/release/YAML-PP) | 0.022    | perl    |
 | perl-pplibyaml    | Perl       | [YAML::PP::LibYAML](https://metacpan.org/release/YAML-PP-LibYAML) | 0.003    | perl    |
 | perl-syck         | Perl       | [YAML::Syck](https://metacpan.org/release/YAML-Syck) | 1.32     | perl    |
 | perl-tiny         | Perl       | [YAML::Tiny](https://metacpan.org/release/YAML-Tiny) | 1.73     | perl    |
-| perl-xs           | Perl       | [YAML::XS (libyaml)](https://metacpan.org/release/YAML-LibYAML) | 0.81     | perl    |
-| perl-yaml         | Perl       | [YAML.pm](https://metacpan.org/release/YAML) | 1.3      | perl    |
+| perl-xs           | Perl       | [YAML::XS (libyaml)](https://metacpan.org/release/YAML-LibYAML) | 0.82     | perl    |
+| perl-yaml         | Perl       | [YAML.pm](https://metacpan.org/release/YAML) | 1.30     | perl    |
 | py-pyyaml         | Python     | [PyYAML](https://github.com/yaml/pyyaml) | 5.3.1    | python  |
 | py-ruamel         | Python     | [ruamel.yaml](https://bitbucket.org/ruamel/yaml) | 0.16.10  | python  |
 | raku-yamlish      | Raku       | [YAMLish](https://github.com/Leont/yamlish) | 0.0.5    | rakudo  |
