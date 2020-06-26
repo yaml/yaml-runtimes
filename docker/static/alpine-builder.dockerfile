@@ -1,4 +1,4 @@
-FROM alpine:3.10.2
+FROM alpine:3.15.0
 
 RUN apk update && \
   apk add \
@@ -12,5 +12,6 @@ RUN apk update && \
     g++ \
     m4 \
     cmake \
+    go \
   && true
 

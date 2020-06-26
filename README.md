@@ -203,6 +203,7 @@ Type `make list` to see the following list:
 | c-libyaml         | C          | [libyaml](https://github.com/yaml/libyaml) | 0.2.5    | static  |
 | cpp-yamlcpp       | C++        | [yaml-cpp](https://github.com/jbeder/yaml-cpp) | 0.7.0    | static  |
 | dotnet-yamldotnet | C#         | [YamlDotNet](https://github.com/aaubry/YamlDotNet) | 11.2.1   | dotnet  |
+| go-yaml           | Go         | [go-yaml](https://github.com/goccy/go-yaml) | v2       | static  |
 | hs-hsyaml         | Haskell    | [HsYAML](https://github.com/haskell-hvr/HsYAML) | 0.2.1.0  | haskell |
 | hs-reference      | Haskell    | [YAMLReference](https://github.com/orenbenkiki/yamlreference) | master   | haskell |
 | java-snakeyaml    | Java       | [SnakeYAML](https://bitbucket.org/asomov/snakeyaml) | 1.29     | java    |

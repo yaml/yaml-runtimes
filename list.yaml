@@ -66,6 +66,16 @@ libraries:
     build-script: c-libfyaml-build.sh
     tests: [event, json, yaml]
 
+  go-yaml:
+    <<: *static
+    name: go-yaml
+    homepage: https://github.com/goccy/go-yaml
+    lang: Go
+    source: https://github.com/goccy/go-yaml
+    version: v2
+    build-script: go-yaml-build.sh
+    tests: [json]
+
   cpp-yamlcpp:
     <<: *static
     name: yaml-cpp
