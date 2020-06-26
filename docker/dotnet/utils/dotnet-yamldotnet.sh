@@ -2,9 +2,6 @@
 
 set -x
 
-# to suppress "Welcome to .NET.." FTUE message
-touch "$HOME"/.dotnet/"$(dotnet --version)".dotnetFirstUseSentinel
-
 cp -r /buildutils /tmp/buildutils
 build () {
     dotnet publish /tmp/buildutils/"$1" \
