@@ -2,6 +2,7 @@ RUNTIME :=
 LIBRARY :=
 
 DOTNET =  dotnet-yamldotnet
+GO =      go
 HASKELL = hs-hsyaml hs-reference
 JAVA =    java-snakeyaml
 LUA =     lua-lyaml
@@ -13,12 +14,13 @@ RAKUDO =  raku-yamlish
 RUBY =    ruby-psych
 STATIC =  c-libfyaml c-libyaml cpp-yamlcpp
 
-build: $(DOTNET) $(HASKELL) $(JAVA) $(LUA) $(NIM) $(NODE) $(PERL) $(RAKUDO) $(PYTHON) $(RUBY) $(STATIC)
+build: $(DOTNET) $(GO) $(HASKELL) $(JAVA) $(LUA) $(NIM) $(NODE) $(PERL) $(RAKUDO) $(PYTHON) $(RUBY) $(STATIC)
 
 runtime-all:
 	docker build -t yamlio/alpine-runtime-all  -f docker/Dockerfile .
 
 dotnet:  $(DOTNET)
+go:      $(GO)
 haskell: $(HASKELL)
 java:    $(JAVA)
 lua:     $(LUA)
@@ -30,9 +32,10 @@ rakudo:  $(RAKUDO)
 ruby:    $(RUBY)
 static:  $(STATIC)
 
-COMMON = $(DOTNET) $(HASKELL) $(JAVA) $(LUA) $(NODE) $(PERL) $(PYTHON) $(RAKUDO) $(RUBY) $(STATIC)
+COMMON = $(DOTNET) $(GO) $(HASKELL) $(JAVA) $(LUA) $(NODE) $(PERL) $(PYTHON) $(RAKUDO) $(RUBY) $(STATIC)
 
 $(DOTNET):  RUNTIME = dotnet
+$(GO):      RUNTIME = go
 $(HASKELL): RUNTIME = haskell
 $(JAVA):    RUNTIME = java
 $(LUA):     RUNTIME = lua
