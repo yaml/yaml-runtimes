@@ -2,7 +2,7 @@ RUNTIME :=
 LIBRARY :=
 
 DOTNET =  dotnet-yamldotnet
-GO =      go
+GO =      go-goccy
 HASKELL = hs-hsyaml hs-reference
 JAVA =    java-snakeyaml
 LUA =     lua-lyaml

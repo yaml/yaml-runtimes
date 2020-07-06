@@ -8,6 +8,9 @@ runtimes:
   runtime: dotnet
   build-script: dotnet-yamldotnet.sh
   lang: C#
+- &go
+  runtime: go
+  lang: Go
 - &haskell
   runtime: haskell
   build-script: hs-build.sh
@@ -83,6 +86,15 @@ libraries:
     source: https://github.com/aaubry/YamlDotNet/archive/v8.1.1.tar.gz
     version: 8.1.1
     tests: [event, json]
+
+  go-goccy:
+    <<: *go
+    name: goccy/go-yaml
+    homepage: https://github.com/goccy/go-yaml
+    source: https://github.com/goccy/go-yaml/archive/v1.7.17.zip
+    version: 1.7.17
+    build-script: go-goccy-build.sh
+    tests: [json]
 
   hs-hsyaml:
     <<: *haskell
