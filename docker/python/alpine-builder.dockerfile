@@ -5,6 +5,11 @@ RUN apk update && \
     less \
     git \
     python3 \
+    python3-dev \
+    py3-pip \
+    gcc \
+    musl \
+    musl-dev \
     wget \
   && true
 
