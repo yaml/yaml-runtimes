@@ -44,7 +44,7 @@ COPY var/build/all /
 ENV NODE_PATH=/node/node_modules
 ENV PERL5LIB=/perl5/lib/perl5
 ENV PERL6LIB="inst#/raku"
-ENV PYTHONPATH=/python/lib/python3.7/site-packages
+ENV PYTHONPATH=/python/lib/python3.8/site-packages
 ENV PATH="/rakudo/bin:$PATH"
 
 ENV PATH="/yaml/bin:$PATH"

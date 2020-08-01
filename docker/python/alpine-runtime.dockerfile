@@ -8,7 +8,7 @@ RUN apk update && \
     busybox \
   && true
 
-ENV PYTHONPATH=/python/lib/python3.7/site-packages
+ENV PYTHONPATH=/python/lib/python3.8/site-packages
 
 COPY var/build/python /
 COPY docker/python/testers /yaml/bin/
