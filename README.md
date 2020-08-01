@@ -197,7 +197,7 @@ Type `make list` to see the following list:
 | c-libfyaml        | C          | [libfyaml](https://github.com/pantoniou/libfyaml) | 0.5.7    | static  |
 | c-libyaml         | C          | [libyaml](https://github.com/yaml/libyaml) | 0.2.4    | static  |
 | cpp-yamlcpp       | C++        | [yaml-cpp](https://github.com/jbeder/yaml-cpp) | 0.6.3    | static  |
-| dotnet-yamldotnet | C#         | [YamlDotNet](https://github.com/aaubry/YamlDotNet) | 8.1.1    | dotnet  |
+| dotnet-yamldotnet | C#         | [YamlDotNet](https://github.com/aaubry/YamlDotNet) | 8.1.2    | dotnet  |
 | hs-hsyaml         | Haskell    | [HsYAML](https://github.com/haskell-hvr/HsYAML) | 0.2.1.0  | haskell |
 | hs-reference      | Haskell    | [YAMLReference](https://github.com/orenbenkiki/yamlreference) | master   | haskell |
 | java-snakeyaml    | Java       | [SnakeYAML](https://bitbucket.org/asomov/snakeyaml) | 1.26     | java    |

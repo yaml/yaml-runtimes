@@ -80,8 +80,8 @@ libraries:
     <<: *dotnet
     name: YamlDotNet
     homepage: https://github.com/aaubry/YamlDotNet
-    source: https://github.com/aaubry/YamlDotNet/archive/v8.1.1.tar.gz
-    version: 8.1.1
+    source: https://github.com/aaubry/YamlDotNet/archive/v8.1.2.tar.gz
+    version: 8.1.2
     tests: [event, json]
 
   hs-hsyaml:
