@@ -254,7 +254,11 @@ sub info_from_image {
         my $cmd = "docker run -i --rm -v$Bin/../docker/global:/utils '$image' /utils/info.sh";
 #        say "# $cmd";
         my $out = qx{$cmd};
-        return if $?;
+        my $rc = $?;
+        if ($rc) {
+            warn "info.sh exited with $rc:\n$out";
+            return;
+        }
         @docs = $yp->load_string($out);
         $yp->dump_file($infofile, @docs);
     }

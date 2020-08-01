@@ -27,7 +27,7 @@ sub get_containers {
 
 sub get_images {
     my ($pattern) = @_;
-    my $cmd = qq,docker images --format "{{.Repository}}\t{{.Tag}}\t{{.ID}}\t{{.CreatedAt}}\t{{.Size}}" "$pattern",;
+    my $cmd = qq,docker images --format "{{.Repository}}\t{{.Tag}}\t{{.ID}}\t{{.CreatedAt}}\t{{.Size}}" "$pattern" | grep -v '<none>',;
     my @lines = qx{$cmd};
     my @image_fields = qw/ image tag id created size /;
     my %images;
