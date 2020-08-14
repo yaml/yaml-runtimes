@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ master ]
+  push:
+    branches: [ master ]
+    tags: '*'
+
+jobs:
+  runtimes-build-and-test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install prerequisites
+        run: |
+          sudo apt update
+          sudo apt -y install cpanminus
+          cpanm --sudo --notest YAML::PP
+
+      - uses: actions/checkout@v2
+
+      - name: Build all runtimes
+        run: make build
+
+      - name: Run tests
+        run: make testv
+        continue-on-error: true
