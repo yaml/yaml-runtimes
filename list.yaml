@@ -154,6 +154,15 @@ libraries:
     source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-PP-0.022.tar.gz
     tests: [event, json, yaml, perl]
 
+  perl-refparser:
+    <<: *perl
+    name: RefParser
+    build-script: refparser-install.sh
+    homepage: https://github.com/yaml/yaml-reference-parser
+    version: 0.001
+    source: https://github.com/yaml/yaml-reference-parser/archive/master.zip
+    tests: [event]
+
   perl-pplibyaml:
     <<: *perl
     name: YAML::PP::LibYAML

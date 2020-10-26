@@ -1,0 +1,3 @@
+#!/bin/sh
+
+/perl5/bin/yaml-parser --events
