@@ -30,7 +30,10 @@ my %running = YAMLRuntimes::get_containers();
 my $images = YAMLRuntimes::get_images("$prefix/$dist-runtime-*");
 
 my @tests;
-if ($testlibrary and $libraries->{ $testlibrary }) {
+if ($testlibrary) {
+    unless ($libraries->{ $testlibrary }) {
+        die "$testlibrary not found";
+    }
     push @tests, $testlibrary;
 }
 elsif ($testruntime and $testruntime eq 'all') {
