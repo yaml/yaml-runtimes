@@ -157,10 +157,9 @@ libraries:
   perl-refparser:
     <<: *perl
     name: RefParser
-    build-script: refparser-install.sh
-    homepage: https://github.com/yaml/yaml-reference-parser
-    version: 0.001
-    source: https://github.com/yaml/yaml-reference-parser/archive/master.zip
+    homepage: https://metacpan.org/release/YAML-Parser
+    version: 0.0.3
+    source: https://cpan.metacpan.org/authors/id/I/IN/INGY/YAML-Parser-0.0.3.tar.gz
     tests: [event]
 
   perl-pplibyaml:

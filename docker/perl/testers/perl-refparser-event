@@ -1,3 +1,15 @@
-#!/bin/sh
+#!/usr/bin/env perl
 
-/perl5/bin/yaml-parser --events
+use v5.18;
+
+use YAML::Parser;
+use Encode;
+
+my $receiver = PerlYamlReferenceParserTestReceiver->new;
+my $input = do { local $/; <> };
+my $output = YAML::Parser->new(receiver => $receiver)
+ ->parse($input)
+ ->receiver
+ ->output;
+
+print encode_utf8($output);
