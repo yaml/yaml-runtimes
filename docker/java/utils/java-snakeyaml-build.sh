@@ -6,7 +6,7 @@ cp $SOURCE .
 
 tar xvf $SOURCE
 # There must be a better way than having a commit sha in the tarball...?
-cd asomov-snakeyaml-e91772b1bc0b
+cd asomov-snakeyaml-b28f0b4d87c6
 #export SNAKEYAML_VERSION=$(xmlstarlet sel -t -v '/_:project/_:version' pom.xml)
 mvn clean install
 

@@ -104,8 +104,8 @@ libraries:
     <<: *java
     name: SnakeYAML
     homepage: https://bitbucket.org/asomov/snakeyaml
-    source: https://bitbucket.org/asomov/snakeyaml/get/snakeyaml-1.26.tar.gz
-    version: 1.26
+    source: https://bitbucket.org/asomov/snakeyaml/get/snakeyaml-1.28.tar.gz
+    version: 1.28
     build-script: java-snakeyaml-build.sh
     tests: [event, json]
 
