@@ -6,7 +6,7 @@ use YAML::Parser;
 use Encode;
 
 my $receiver = PerlYamlReferenceParserTestReceiver->new;
-my $input = do { local $/; <> };
+my $input = decode_utf8 do { local $/; <> };
 my $output = YAML::Parser->new(receiver => $receiver)
  ->parse($input)
  ->receiver
