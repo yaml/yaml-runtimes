@@ -1,0 +1,15 @@
+#!/usr/bin/env perl
+
+use v5.18;
+
+use YAML::Parser;
+use Encode;
+
+my $receiver = PerlYamlReferenceParserTestReceiver->new;
+my $input = decode_utf8 do { local $/; <> };
+my $output = YAML::Parser->new(receiver => $receiver)
+ ->parse($input)
+ ->receiver
+ ->output;
+
+print encode_utf8($output);
