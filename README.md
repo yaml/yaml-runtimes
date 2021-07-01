@@ -1,5 +1,7 @@
 # Docker images for YAML Runtimes
 
+![.github/workflows/main.yaml/badge.svg](https://github.com/yaml/yaml-runtimes/workflows/CI/badge.svg)
+
 * [Quickstart](#Quickstart)
 * [Dependencies](#Dependencies)
 * [Usage](#Usage)
