@@ -20,7 +20,7 @@
 
     <properties>
         <!-- can be changed from command line -->
-        <snakeversion>1.17</snakeversion>
+        <snakeversion>1.26</snakeversion>
     </properties>
 
     <dependencyManagement>
