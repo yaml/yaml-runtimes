@@ -150,8 +150,8 @@ libraries:
     <<: *perl
     name: YAML::PP
     homepage: https://metacpan.org/release/YAML-PP
-    version: 0.027
-    source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-PP-0.027.tar.gz
+    version: 0.029
+    source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-PP-0.029.tar.gz
     tests: [event, json, yaml, perl]
 
   perl-refparser:
