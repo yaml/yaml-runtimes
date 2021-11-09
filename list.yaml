@@ -61,8 +61,8 @@ libraries:
     name: libfyaml
     homepage: https://github.com/pantoniou/libfyaml
     lang: C
-    source: https://github.com/pantoniou/libfyaml/releases/download/v0.7.1/libfyaml-0.7.1.tar.gz
-    version: 0.7.1
+    source: https://github.com/pantoniou/libfyaml/releases/download/v0.7.2/libfyaml-0.7.2.tar.gz
+    version: 0.7.2
     build-script: c-libfyaml-build.sh
     tests: [event, json, yaml]
 
@@ -150,8 +150,8 @@ libraries:
     <<: *perl
     name: YAML::PP
     homepage: https://metacpan.org/release/YAML-PP
-    version: 0.029
-    source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-PP-0.029.tar.gz
+    version: '0.030'
+    source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-PP-0.030.tar.gz
     tests: [event, json, yaml, perl]
 
   perl-refparser:

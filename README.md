@@ -194,7 +194,7 @@ Type `make list` to see the following list:
 
 | ID                | Language   | Name               | Version  | Runtime |
 | ----------------- | ---------- | ------------------ | -------- | ------- |
-| c-libfyaml        | C          | [libfyaml](https://github.com/pantoniou/libfyaml) | 0.7.1    | static  |
+| c-libfyaml        | C          | [libfyaml](https://github.com/pantoniou/libfyaml) | 0.7.2    | static  |
 | c-libyaml         | C          | [libyaml](https://github.com/yaml/libyaml) | 0.2.5    | static  |
 | cpp-yamlcpp       | C++        | [yaml-cpp](https://github.com/jbeder/yaml-cpp) | 0.7.0    | static  |
 | dotnet-yamldotnet | C#         | [YamlDotNet](https://github.com/aaubry/YamlDotNet) | 11.2.1   | dotnet  |
@@ -205,7 +205,7 @@ Type `make list` to see the following list:
 | js-yaml           | Javascript | [yaml](https://github.com/eemeli/yaml) | 2.0.0-8  | node    |
 | lua-lyaml         | Lua        | [lyaml](https://github.com/gvvaughan/lyaml) | 6.2.7    | lua     |
 | nim-nimyaml       | Nim        | [NimYAML](https://github.com/flyx/NimYAML) | 0.13.1   | static  |
-| perl-pp           | Perl       | [YAML::PP](https://metacpan.org/release/YAML-PP) | 0.029    | perl    |
+| perl-pp           | Perl       | [YAML::PP](https://metacpan.org/release/YAML-PP) | 0.030    | perl    |
 | perl-pplibyaml    | Perl       | [YAML::PP::LibYAML](https://metacpan.org/release/YAML-PP-LibYAML) | 0.005    | perl    |
 | perl-refparser    | Perl       | [RefParser](https://metacpan.org/release/YAML-Parser) | 0.0.3    | perl    |
 | perl-syck         | Perl       | [YAML::Syck](https://metacpan.org/release/YAML-Syck) | 1.34     | perl    |
