@@ -12,10 +12,10 @@ RUN apk update && \
   && true
 
 RUN mkdir /nim && cd /nim && \
-  wget https://nim-lang.org/download/nim-0.20.2-linux_x64.tar.xz && \
-  tar xvf nim-0.20.2-linux_x64.tar.xz && \
-  cd nim-0.20.2/ && \
+  wget https://nim-lang.org/download/nim-1.6.0.tar.xz && \
+  tar xvf nim-1.6.0.tar.xz && \
+  cd nim-1.6.0/ && \
   sh build.sh && \
   bin/nim c koch && \
   ./koch tools && \
-  ln -s /nim/nim-0.20.2//bin/nim /bin/nim
+  ln -s /nim/nim-1.6.0/bin/nim /bin/nim

@@ -140,8 +140,8 @@ libraries:
     name: NimYAML
     homepage: https://github.com/flyx/NimYAML
     lang: Nim
-    source: https://github.com/flyx/NimYAML/archive/v0.13.1.tar.gz
-    version: 0.13.1
+    source: https://github.com/flyx/NimYAML/archive/v0.16.0.tar.gz
+    version: 0.16.0
     build-script: nimyaml-build.sh
     tests: [event]
     build-image: nim
