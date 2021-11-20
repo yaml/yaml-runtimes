@@ -1,0 +1,7 @@
+#!/bin/bash
+source "$YAML_RUNTIMES_ROOT/lib/list.sh"
+source "$YAML_RUNTIMES_ROOT/lib/runtimes.sh"
+
+[[ $# -eq 0 ]] && set -- "${YAML_RUNTIMES[@]}"
+stop-running $*
+start-not-running $*

@@ -1,0 +1,6 @@
+[[ -n ${ZSH_VERSION-} ]] &&
+  YAML_RUNTIMES_ROOT="$0" ||
+  YAML_RUNTIMES_ROOT="${BASH_SOURCE[0]}"
+export YAML_RUNTIMES_ROOT="$(cd "$(dirname $YAML_RUNTIMES_ROOT)"; pwd)"
+
+export PATH="$YAML_RUNTIMES_ROOT/bin:$PATH"

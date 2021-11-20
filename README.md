@@ -36,9 +36,11 @@ directory.
 
 ## Quickstart
 
+    source /path/to/yaml-runtimes/.rc
+
 To play with PyYAML:
 
-    make docker-pull-python
+    yamlrun-docker-pull python
     docker run -i --rm yamlio/alpine-runtime-python py-pyyaml-event <t/data/input.yaml
     docker run -i --rm yamlio/alpine-runtime-python py-pyyaml-json <t/data/input.yaml
     docker run -i --rm yamlio/alpine-runtime-python py-pyyaml-yaml <t/data/input.yaml
@@ -46,12 +48,13 @@ To play with PyYAML:
 
 To play with libyaml:
 
-    make docker-pull-static
+    yamlrun-docker-pull static
     docker run -i --rm yamlio/alpine-runtime-static c-libyaml-event <t/data/input.yaml
     docker run -i --rm yamlio/alpine-runtime-static c-libyaml-yaml <t/data/input.yaml
 
 ## Dependencies
 
+For some operations, you need to install the following dependencies:
 * perl
 * YAML::PP perl module
 * jq
@@ -102,20 +105,22 @@ By default, for every test a `docker run` will be executed. To make testing
 a bit faster, you can run the containers in background:
 
     # Start all containers
-    make daemon-start
+    yamlrun-docker-start
     # Only start alpine-runtime-perl container
-    make daemon-start-perl
+    yamlrun-docker-start perl
 
     # Test
     make testv
 
     # Stop all containers
-    make daemon-stop
+    yamlrun-docker-stop
     # Only stop alpine-runtime-perl container
-    make daemon-stop-perl
+    yamlrun-docker-stop perl
 
     # List containers
-    make daemon-status
+    yamlrun-docker-status
+    # Restart all
+    yamlrun-docker-restart
 
 Then you can run this instead:
 

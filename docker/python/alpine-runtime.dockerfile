@@ -6,6 +6,7 @@ RUN apk update && \
     python3 \
     wget \
     busybox \
+    inotify-tools \
   && true
 
 ENV PYTHONPATH=/python/lib/python3.7/site-packages
@@ -14,3 +15,5 @@ COPY var/build/python /
 COPY docker/python/testers /yaml/bin/
 
 ENV PATH="/yaml/bin:$PATH"
+
+ENV RUNTIME=python

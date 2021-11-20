@@ -5,6 +5,7 @@ RUN apk update && \
     less \
     wget \
     busybox \
+    inotify-tools \
   && true
 
 COPY var/build/rakudo /
@@ -22,3 +23,5 @@ ENV PATH="/yaml/bin:$PATH"
 
 RUN echo foo | /yaml/bin/raku-yamlish-json
 RUN echo foo | /yaml/bin/raku-yamlish-raku
+
+ENV RUNTIME=rakudo

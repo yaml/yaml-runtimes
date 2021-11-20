@@ -7,9 +7,12 @@ RUN apk update && \
     libffi \
     gmp \
     perl \
+    inotify-tools \
   && true
 
 COPY var/build/haskell /
 COPY docker/haskell/testers /yaml/bin/
 
 ENV PATH="/yaml/bin:$PATH"
+
+ENV RUNTIME=haskell

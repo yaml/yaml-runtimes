@@ -97,6 +97,14 @@ elsif ($task eq 'io') {
     my $dir = $library;
     run_io($dir, @args);
 }
+elsif ($task eq 'update') {
+    my @runtimes = map { "alpine-runtime-$_" } grep { $_ ne 'all' } map { $_->{runtime} } @$runtimes;
+    open my $fh, '>', "$Bin/../lib/list.sh" or die $!;
+    print $fh <<"EOM";
+export YAML_RUNTIMES=(@runtimes)
+EOM
+    close $fh;
+}
 
 sub run_io {
     my ($dir, @views) = @_;
@@ -137,7 +145,7 @@ sub start_daemons {
         @runtimes = ($runtime);
     }
     else {
-        @runtimes = map { $_->{runtime} } @$runtimes;
+        @runtimes = grep { $_ ne 'all' } map { $_->{runtime} } @$runtimes;
     }
     for my $runtime (@runtimes) {
         my $name = "$dist-runtime-$runtime";
@@ -145,8 +153,8 @@ sub start_daemons {
             say "$name already running";
         }
         else {
-            my $cmd = sprintf q{docker run -d -it --user %d --name %s %s/%s},
-                $<, $name, $prefix, $name;
+            my $cmd = sprintf q{docker run -d -it --rm --user %d --name %s -v%s/shared:/shared -v%s/scripts:/scripts %s/%s /scripts/run.sh},
+                $<, $name, $ENV{PWD}, $ENV{PWD}, $prefix, $name;
             my $rc = system $cmd;
             if ($rc) {
                 warn "Starting $runtime failed";
