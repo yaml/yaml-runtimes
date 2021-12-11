@@ -1,0 +1,26 @@
+---
+tasks:
+- init: |
+    source .rc
+    yamlrun-docker-pull
+    git clone https://github.com/yaml/yaml-editor.git --depth 1 -b daemon /workspace/yaml-editor
+    (cd /workspace/yaml-editor && make build)
+    sudo apt-get -y install cpanminus
+    cpanm -n -l /workspace/perl5 YAML::PP Mojolicious
+    export PERL5LIB=/workspace/perl5/lib/perl5
+    PATH=/workspace/perl5/bin:$PATH
+  command: |
+    export PERL5LIB=/workspace/perl5/lib/perl5
+    PATH=/workspace/perl5/bin:$PATH
+    source /workspace/yaml-editor/.rc
+    source .rc
+    yamlrun-docker-start
+    yamlrun-docker-status
+    echo "Hello!"
+    echo "type: yaml-editor -g --shareddir \$PWD/shared 1 4 perl-pp.event perl-refparser.event"
+    echo "type: morbo bin/web.pl"
+
+github:
+  prebuilds:
+    master: true
+    branches: true
