@@ -43,6 +43,11 @@ runtimes:
   build-script: installgem.sh
 - &static
   runtime: static
+- &yaml
+  runtime: yaml
+  lang: YAML
+  build-script: perl-install.sh
+
 
 libraries:
 
@@ -104,7 +109,7 @@ libraries:
 
   hs-reference:
     <<: *haskell
-    name: YAMLReference
+    name: YAML Old Reference Parser
     homepage: https://github.com/orenbenkiki/yamlreference
     source: https://github.com/orenbenkiki/yamlreference/archive/master.zip
     version: master
@@ -163,14 +168,6 @@ libraries:
     version: '0.030'
     source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-PP-0.030.tar.gz
     tests: [event, json, yaml, perl]
-
-  perl-refparser:
-    <<: *perl
-    name: RefParser
-    homepage: https://metacpan.org/release/YAML-Parser
-    version: 0.0.3
-    source: https://cpan.metacpan.org/authors/id/I/IN/INGY/YAML-Parser-0.0.3.tar.gz
-    tests: [event]
 
   perl-pplibyaml:
     <<: *perl
@@ -243,6 +240,14 @@ libraries:
     version: '4.0.1'
     source: https://rubygems.org/downloads/psych-4.0.1.gem
     tests: [json]
+
+  yaml-refparser:
+    <<: *yaml
+    name: New Reference Parser
+    homepage: https://metacpan.org/release/YAML-Parser
+    version: 0.0.4
+    source: https://cpan.metacpan.org/authors/id/I/IN/INGY/YAML-Parser-0.0.4.tar.gz
+    tests: [event]
 
 formats:
   event: Event Stream
