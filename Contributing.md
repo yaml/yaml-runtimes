@@ -39,7 +39,7 @@ one for running, without the development libraries installed.
     ├── alpine-runtime.dockerfile
 
 Then there is a `testers/` directory which contains the programs to run the
-YAML processor. These are symlinks to compiled excutables, shell wrappers, or
+YAML processor. These are symlinks to compiled executables, shell wrappers, or
 script files:
 
     ├── testers

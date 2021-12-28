@@ -4,7 +4,7 @@ RUN apk update && \
   apk add \
     less \
     busybox \
-    openjdk9-jre-headless \
+    openjdk8-jre \
     inotify-tools \
   && true
 

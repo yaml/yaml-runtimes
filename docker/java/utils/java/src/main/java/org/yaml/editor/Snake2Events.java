@@ -86,8 +86,6 @@ public class Snake2Events {
                     (final Event e) -> "-DOC" + (((DocumentEndEvent)e).getExplicit() ? " ..." : ""));
             doPut(DocumentStartEvent.class,
                     (final Event e) -> "+DOC" +(((DocumentStartEvent)e).getExplicit() ? " ---" : ""));
-            doPut(MappingEndEvent.class,
-                    (final Event e) -> "-MAP");
             doPut(MappingStartEvent.class,
                     (final Event e) -> "+MAP" + flowInd(e, "{}") + tagAndAnchor(e));
             doPut(MappingEndEvent.class,
