@@ -61,17 +61,17 @@ libraries:
     name: libfyaml
     homepage: https://github.com/pantoniou/libfyaml
     lang: C
-    source: https://github.com/pantoniou/libfyaml/releases/download/v0.7.2/libfyaml-0.7.2.tar.gz
-    version: 0.7.2
+    source: https://github.com/pantoniou/libfyaml/releases/download/v0.7.4/libfyaml-0.7.4.tar.gz
+    version: 0.7.4
     build-script: c-libfyaml-build.sh
     tests: [event, json, yaml]
 
   go-yaml:
     <<: *static
     name: go-yaml
-    homepage: https://github.com/goccy/go-yaml
+    homepage: https://github.com/go-yaml/yaml
     lang: Go
-    source: https://github.com/goccy/go-yaml
+    source: https://github.com/go-yaml/yaml
     version: v2
     build-script: go-yaml-build.sh
     tests: [json]
@@ -113,9 +113,9 @@ libraries:
   java-snakeyaml:
     <<: *java
     name: SnakeYAML
-    homepage: https://bitbucket.org/asomov/snakeyaml
-    source: https://bitbucket.org/asomov/snakeyaml/get/snakeyaml-1.29.tar.gz
-    version: 1.29
+    homepage: https://bitbucket.org/snakeyaml/snakeyaml/
+    source: https://bitbucket.org/snakeyaml/snakeyaml/get/snakeyaml-1.30.tar.gz
+    version: '1.30'
     build-script: java-snakeyaml-build.sh
     tests: [event, json]
 
@@ -160,16 +160,16 @@ libraries:
     <<: *perl
     name: YAML::PP
     homepage: https://metacpan.org/release/YAML-PP
-    version: '0.030'
-    source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-PP-0.030.tar.gz
+    version: '0.031'
+    source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-PP-0.031.tar.gz
     tests: [event, json, yaml, perl]
 
   perl-refparser:
     <<: *perl
-    name: RefParser
+    name: Generated RefParser
     homepage: https://metacpan.org/release/YAML-Parser
-    version: 0.0.3
-    source: https://cpan.metacpan.org/authors/id/I/IN/INGY/YAML-Parser-0.0.3.tar.gz
+    version: 0.0.5
+    source: https://cpan.metacpan.org/authors/id/I/IN/INGY/YAML-Parser-0.0.5.tar.gz
     tests: [event]
 
   perl-pplibyaml:
@@ -232,8 +232,8 @@ libraries:
     <<: *python
     homepage: https://bitbucket.org/ruamel/yaml
     name: ruamel.yaml
-    version: 0.16.10
-    source: https://files.pythonhosted.org/packages/16/8b/54a26c1031595e5edd0e616028b922d78d8ffba8bc775f0a4faeada846cc/ruamel.yaml-0.16.10.tar.gz
+    version: 0.17.19
+    source: https://files.pythonhosted.org/packages/c8/90/759f358f3f8770246fea741d50e9535c138d630aad1a62ec46dd63f327ef/ruamel.yaml-0.17.19.tar.gz
     tests: [event, json, py, yaml]
 
   ruby-psych:

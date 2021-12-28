@@ -199,27 +199,27 @@ Type `make list` to see the following list:
 
 | ID                | Language   | Name               | Version  | Runtime |
 | ----------------- | ---------- | ------------------ | -------- | ------- |
-| c-libfyaml        | C          | [libfyaml](https://github.com/pantoniou/libfyaml) | 0.7.2    | static  |
+| c-libfyaml        | C          | [libfyaml](https://github.com/pantoniou/libfyaml) | 0.7.4    | static  |
 | c-libyaml         | C          | [libyaml](https://github.com/yaml/libyaml) | 0.2.5    | static  |
 | cpp-yamlcpp       | C++        | [yaml-cpp](https://github.com/jbeder/yaml-cpp) | 0.7.0    | static  |
 | dotnet-yamldotnet | C#         | [YamlDotNet](https://github.com/aaubry/YamlDotNet) | 11.2.1   | dotnet  |
-| go-yaml           | Go         | [go-yaml](https://github.com/goccy/go-yaml) | v2       | static  |
+| go-yaml           | Go         | [go-yaml](https://github.com/go-yaml/yaml) | v2       | static  |
 | hs-hsyaml         | Haskell    | [HsYAML](https://github.com/haskell-hvr/HsYAML) | 0.2.1.0  | haskell |
 | hs-reference      | Haskell    | [YAMLReference](https://github.com/orenbenkiki/yamlreference) | master   | haskell |
-| java-snakeyaml    | Java       | [SnakeYAML](https://bitbucket.org/asomov/snakeyaml) | 1.29     | java    |
+| java-snakeyaml    | Java       | [SnakeYAML](https://bitbucket.org/snakeyaml/snakeyaml/) | 1.30     | java    |
 | js-jsyaml         | Javascript | [js-yaml](https://github.com/nodeca/js-yaml) | 4.1.0    | node    |
 | js-yaml           | Javascript | [yaml](https://github.com/eemeli/yaml) | 2.0.0-8  | node    |
 | lua-lyaml         | Lua        | [lyaml](https://github.com/gvvaughan/lyaml) | 6.2.7    | lua     |
 | nim-nimyaml       | Nim        | [NimYAML](https://github.com/flyx/NimYAML) | 0.16.0   | static  |
-| perl-pp           | Perl       | [YAML::PP](https://metacpan.org/release/YAML-PP) | 0.030    | perl    |
+| perl-pp           | Perl       | [YAML::PP](https://metacpan.org/release/YAML-PP) | 0.031    | perl    |
 | perl-pplibyaml    | Perl       | [YAML::PP::LibYAML](https://metacpan.org/release/YAML-PP-LibYAML) | 0.005    | perl    |
-| perl-refparser    | Perl       | [RefParser](https://metacpan.org/release/YAML-Parser) | 0.0.3    | perl    |
+| perl-refparser    | Perl       | [Generated RefParser](https://metacpan.org/release/YAML-Parser) | 0.0.5    | perl    |
 | perl-syck         | Perl       | [YAML::Syck](https://metacpan.org/release/YAML-Syck) | 1.34     | perl    |
 | perl-tiny         | Perl       | [YAML::Tiny](https://metacpan.org/release/YAML-Tiny) | 1.73     | perl    |
 | perl-xs           | Perl       | [YAML::XS (libyaml)](https://metacpan.org/release/YAML-LibYAML) | 0.83     | perl    |
 | perl-yaml         | Perl       | [YAML.pm](https://metacpan.org/release/YAML) | 1.30     | perl    |
 | py-pyyaml         | Python     | [PyYAML](https://github.com/yaml/pyyaml) | 5.4.1    | python  |
-| py-ruamel         | Python     | [ruamel.yaml](https://bitbucket.org/ruamel/yaml) | 0.16.10  | python  |
+| py-ruamel         | Python     | [ruamel.yaml](https://bitbucket.org/ruamel/yaml) | 0.17.19  | python  |
 | raku-yamlish      | Raku       | [YAMLish](https://github.com/Leont/yamlish) | 0.0.6    | rakudo  |
 | ruby-psych        | Ruby       | [psych](https://github.com/ruby/psych) | 4.0.1    | ruby    |
 
