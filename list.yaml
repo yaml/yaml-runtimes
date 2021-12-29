@@ -117,7 +117,7 @@ libraries:
     source: https://bitbucket.org/snakeyaml/snakeyaml/get/snakeyaml-1.30.tar.gz
     version: '1.30'
     build-script: java-snakeyaml-build.sh
-    tests: [event, json]
+    tests: [event, json, yaml]
 
   js-jsyaml:
     <<: *node
