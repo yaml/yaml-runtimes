@@ -4,13 +4,15 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class Snake2Json {
     /**
      * Convert a YAML character stream into a JSON character stream.
      * This is not directly in {@see main} to facilitate JUnit tests.
-     * @param in Stream to read YAML from
+     *
+     * @param in  Stream to read YAML from
      * @param out Stream to write JSON to
      */
     void yamlToJson(final InputStream in, final Appendable out) throws IOException {

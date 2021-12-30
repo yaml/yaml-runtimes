@@ -1,11 +1,14 @@
 package org.yaml.editor;
 
-import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.DumperOptions;
+import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.events.*;
 import org.yaml.snakeyaml.reader.UnicodeReader;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,9 +29,9 @@ public class Snake2Events {
 
         private String tag(final Event e) {
             if (e instanceof CollectionStartEvent) {
-                return ((CollectionStartEvent)e).getTag();
+                return ((CollectionStartEvent) e).getTag();
             } else if (e instanceof ScalarEvent) {
-                return ((ScalarEvent)e).getTag();
+                return ((ScalarEvent) e).getTag();
             } else {
                 throw new IllegalArgumentException(e.getClass().toString());
             }
@@ -36,9 +39,9 @@ public class Snake2Events {
 
         private String anchor(final Event e) {
             if (e instanceof CollectionStartEvent) {
-                return ((CollectionStartEvent)e).getAnchor();
+                return ((CollectionStartEvent) e).getAnchor();
             } else if (e instanceof ScalarEvent) {
-                return ((ScalarEvent)e).getAnchor();
+                return ((ScalarEvent) e).getAnchor();
             } else {
                 throw new IllegalArgumentException(e.getClass().toString());
             }
@@ -61,14 +64,26 @@ public class Snake2Events {
             final StringBuilder builder = new StringBuilder(" ");
             final ScalarEvent ev = (ScalarEvent) e;
             builder.append(ev.getScalarStyle().getChar() == null ? ':' : ev.getScalarStyle().getChar());
-            for (char c: ev.getValue().toCharArray()) {
+            for (char c : ev.getValue().toCharArray()) {
                 switch (c) {
-                    case '\b': builder.append("\\b"); break;
-                    case '\t': builder.append("\\t"); break;
-                    case '\n': builder.append("\\n"); break;
-                    case '\r': builder.append("\\r"); break;
-                    case '\\': builder.append("\\\\"); break;
-                    default: builder.append(c); break;
+                    case '\b':
+                        builder.append("\\b");
+                        break;
+                    case '\t':
+                        builder.append("\\t");
+                        break;
+                    case '\n':
+                        builder.append("\\n");
+                        break;
+                    case '\r':
+                        builder.append("\\r");
+                        break;
+                    case '\\':
+                        builder.append("\\\\");
+                        break;
+                    default:
+                        builder.append(c);
+                        break;
                 }
             }
             return builder.toString();
@@ -81,11 +96,11 @@ public class Snake2Events {
 
         {
             doPut(AliasEvent.class,
-                    (final Event e) -> "=ALI *" + ((AliasEvent)e).getAnchor());
+                    (final Event e) -> "=ALI *" + ((AliasEvent) e).getAnchor());
             doPut(DocumentEndEvent.class,
-                    (final Event e) -> "-DOC" + (((DocumentEndEvent)e).getExplicit() ? " ..." : ""));
+                    (final Event e) -> "-DOC" + (((DocumentEndEvent) e).getExplicit() ? " ..." : ""));
             doPut(DocumentStartEvent.class,
-                    (final Event e) -> "+DOC" +(((DocumentStartEvent)e).getExplicit() ? " ---" : ""));
+                    (final Event e) -> "+DOC" + (((DocumentStartEvent) e).getExplicit() ? " ---" : ""));
             doPut(MappingStartEvent.class,
                     (final Event e) -> "+MAP" + flowInd(e, "{}") + tagAndAnchor(e));
             doPut(MappingEndEvent.class,
@@ -95,7 +110,7 @@ public class Snake2Events {
             doPut(SequenceEndEvent.class,
                     (final Event e) -> "-SEQ");
             doPut(SequenceStartEvent.class,
-                    (final Event e) -> "+SEQ" +  flowInd(e, "[]") + tagAndAnchor(e));
+                    (final Event e) -> "+SEQ" + flowInd(e, "[]") + tagAndAnchor(e));
             doPut(StreamEndEvent.class,
                     (final Event e) -> "-STR");
             doPut(StreamStartEvent.class,
@@ -106,7 +121,7 @@ public class Snake2Events {
 
     void yamlToEvents(final InputStream in, final Writer out) throws IOException {
         final Yaml yaml = new Yaml();
-        for (final Event event: yaml.parse(new UnicodeReader(in))) {
+        for (final Event event : yaml.parse(new UnicodeReader(in))) {
             out.write(renderers.get(event.getClass()).write(event));
             out.write('\n');
         }
