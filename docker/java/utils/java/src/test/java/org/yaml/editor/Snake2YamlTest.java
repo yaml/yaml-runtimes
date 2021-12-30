@@ -21,6 +21,13 @@ public class Snake2YamlTest {
 
     @Test
     public void simpleIntArray() throws IOException {
-        checkConversion("- 1\n- 2\n- 3", "- 1\n- 2\n- 3\n\n");
+        checkConversion("- 1\n- 2\n- 3", "- 1\n- 2\n- 3\n");
+    }
+
+    @Test
+    public void oneDocument() throws IOException {
+        checkConversion("---\n" +
+                "foo: bar\n", "---\n" +
+                "foo: bar\n");
     }
 }

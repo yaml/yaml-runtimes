@@ -3,6 +3,7 @@ package org.yaml.editor;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.emitter.Emitter;
+import org.yaml.snakeyaml.events.DocumentStartEvent;
 import org.yaml.snakeyaml.events.Event;
 import org.yaml.snakeyaml.reader.UnicodeReader;
 
@@ -10,6 +11,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.io.Writer;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Snake2Yaml {
     /**
@@ -23,9 +26,31 @@ public class Snake2Yaml {
         DumperOptions options = new DumperOptions();
         Emitter emitter = new Emitter(new Out(out), options);
         for (Event event : input.parse(new UnicodeReader(in))) {
-            emitter.emit(event);
+            if (event.is(Event.ID.DocumentStart)) {
+                DocumentStartEvent start = (DocumentStartEvent) event;
+                if (start.getTags() != null && tagsAreTheSame(start.getTags())) {
+                    emitter.emit(new DocumentStartEvent(null, null, start.getExplicit(), start.getVersion(),
+                            new HashMap<>()));
+                } else {
+                    emitter.emit(event);
+                }
+            } else {
+                emitter.emit(event);
+            }
         }
-        out.append('\n');
+    }
+
+    /**
+     * Check if the tags are only default and can be ignored when dumping
+     * I wonder how it works in PyYAML without this check, because the tags in parser and emitter are reversed
+     *
+     * @param tags - tags in the DocumentStartEvent
+     * @return true when only default tags are present
+     */
+    private boolean tagsAreTheSame(Map<String, String> tags) {
+        if (tags.size() != 2) return false;
+        if (!tags.containsKey("!") || !tags.containsKey("!!")) return false;
+        else return true;
     }
 
     public static void main(final String[] args) throws IOException {
