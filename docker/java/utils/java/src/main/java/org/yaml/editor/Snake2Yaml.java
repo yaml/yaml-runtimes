@@ -42,7 +42,8 @@ public class Snake2Yaml {
 
     /**
      * Check if the tags are only default and can be ignored when dumping
-     * I wonder how it works in PyYAML without this check, because the tags in parser and emitter are reversed
+     * We have to compensate issue in SnakeYAML - the tags should be empty
+     * Probably, something to fix in SnakeYAML
      *
      * @param tags - tags in the DocumentStartEvent
      * @return true when only default tags are present
