@@ -5,9 +5,6 @@ RUN apk update && \
     less \
     vim \
     wget \
-    musl \
-    maven \
-    xmlstarlet \
     openjdk8 \
   && true
 
