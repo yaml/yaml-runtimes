@@ -3,7 +3,7 @@ LIBRARY :=
 
 DOTNET =  dotnet-yamldotnet
 HASKELL = hs-hsyaml hs-reference
-JAVA =    java-snakeyaml
+JAVA =    java-snakeyaml java-snakeengine
 LUA =     lua-lyaml
 NIM =     nim-nimyaml
 NODE =    js-jsyaml js-yaml
