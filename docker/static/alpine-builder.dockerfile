@@ -13,5 +13,6 @@ RUN apk update && \
     m4 \
     cmake \
     go \
+    cargo \
   && true
 

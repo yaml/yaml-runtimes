@@ -225,6 +225,7 @@ Type `make list` to see the following list:
 | py-ruamel         | Python     | [ruamel.yaml](https://bitbucket.org/ruamel/yaml) | 0.17.20  | python  |
 | raku-yamlish      | Raku       | [YAMLish](https://github.com/Leont/yamlish) | 0.0.6    | rakudo  |
 | ruby-psych        | Ruby       | [psych](https://github.com/ruby/psych) | 4.0.3    | ruby    |
+| rust-yamlrust     | Rust       | [yaml](https://github.com/chyh1990/yaml-rust) | 0.4.4    | static  |
 
 ## Contributing
 

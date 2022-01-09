@@ -41,6 +41,10 @@ runtimes:
   runtime: ruby
   lang: Ruby
   build-script: installgem.sh
+- &rust
+  runtime: static
+  lang: Rust
+  build-script: installrust.sh
 - &static
   runtime: static
 
@@ -243,6 +247,14 @@ libraries:
     version: '4.0.3'
     source: https://rubygems.org/downloads/psych-4.0.3.gem
     tests: [json]
+
+  rust-yamlrust:
+    <<: *rust
+    name: yaml
+    homepage: https://github.com/chyh1990/yaml-rust
+    version: 0.4.4
+    source: https://github.com/chyh1990/yaml-rust/archive/refs/tags/0.4.4.zip
+    tests: [event]
 
 formats:
   event: Event Stream

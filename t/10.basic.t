@@ -85,6 +85,11 @@ sub test {
                 # document start or end
                 $output = 'output.event.yamlcpp';
             }
+            elsif ($library eq 'rust-yamlrust') {
+                # yamlrust does not have information about implicit
+                # document start or end
+                $output = 'output.event.yamlrust';
+            }
         }
         my $name = "$dist-runtime-$runtime";
         my $cmd = sprintf
