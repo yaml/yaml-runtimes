@@ -18,7 +18,7 @@ public class SnakeEngine2Yaml {
    * @param in  Stream to read YAML from
    * @param out Stream to write YAML to
    */
-  void yamlToYaml(final InputStream in, final PrintStream out) throws IOException {
+  void yamlToYaml(final InputStream in, final PrintStream out) {
     Parse parser = new Parse(LoadSettings.builder().build());
     Emitter emitter = new Emitter(DumpSettings.builder().build(), new MyDumperWriter(out));
     for (Event event : parser.parseInputStream(in)) {
@@ -26,7 +26,7 @@ public class SnakeEngine2Yaml {
     }
   }
 
-  public static void main(final String[] args) throws IOException {
+  public static void main(final String[] args) {
     new SnakeEngine2Yaml().yamlToYaml(System.in, System.out);
   }
 

@@ -23,4 +23,9 @@ public class SnakeEngine2YamlTest {
   public void simpleIntArray() throws IOException {
     checkConversion("- 1\n- 2\n- 3", "- 1\n- 2\n- 3\n");
   }
+
+  @Test
+  public void simpleMap() throws IOException {
+    checkConversion("---\nfoo: bar\n", "---\nfoo: bar\n");
+  }
 }
