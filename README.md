@@ -209,7 +209,8 @@ Type `make list` to see the following list:
 | go-yaml           | Go         | [go-yaml](https://github.com/go-yaml/yaml) | v2       | static  |
 | hs-hsyaml         | Haskell    | [HsYAML](https://github.com/haskell-hvr/HsYAML) | 0.2.1.0  | haskell |
 | hs-reference      | Haskell    | [YAMLReference](https://github.com/orenbenkiki/yamlreference) | master   | haskell |
-| java-snakeyaml    | Java       | [SnakeYAML](https://bitbucket.org/snakeyaml/snakeyaml/) | 1.30     | java    |
+| java-snakeengine  | Java       | [SnakeYAML Engine](https://bitbucket.org/snakeyaml/snakeyaml-engine) | 2.4-SNAPSHOT | java    |
+| java-snakeyaml    | Java       | [SnakeYAML](https://bitbucket.org/snakeyaml/snakeyaml/) | 1.31-SNAPSHOT | java    |
 | js-jsyaml         | Javascript | [js-yaml](https://github.com/nodeca/js-yaml) | 4.1.0    | node    |
 | js-yaml           | Javascript | [yaml](https://github.com/eemeli/yaml) | 2.0.0-10 | node    |
 | lua-lyaml         | Lua        | [lyaml](https://github.com/gvvaughan/lyaml) | 6.2.7    | lua     |
