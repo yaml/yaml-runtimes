@@ -8,12 +8,12 @@ import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import org.junit.Test;
 
-public class Snake2JsonTest {
+public class SnakeEngine2JsonTest {
 
   private void checkConversion(final String input, final String expected) throws IOException {
     final StringWriter sw = new StringWriter();
-    new Snake2Json().yamlToJson(new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8)),
-        sw);
+    new SnakeEngine2Json().yamlToJson(
+        new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8)), sw);
     assertEquals(expected, sw.toString());
   }
 

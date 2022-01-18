@@ -118,9 +118,18 @@ libraries:
     <<: *java
     name: SnakeYAML
     homepage: https://bitbucket.org/snakeyaml/snakeyaml/
-    source: https://bitbucket.org/snakeyaml/snakeyaml/get/snakeyaml-1.30.tar.gz
-    version: '1.30'
+    source: https://bitbucket.org/snakeyaml/snakeyaml/get/master.tar.gz
+    version: '1.31-SNAPSHOT'
     build-script: java-snakeyaml-build.sh
+    tests: [event, json, yaml]
+
+  java-snakeengine:
+    <<: *java
+    name: SnakeYAML Engine
+    homepage: https://bitbucket.org/snakeyaml/snakeyaml-engine
+    source: https://bitbucket.org/snakeyaml/snakeyaml-engine/get/master.tar.gz
+    version: '2.4-SNAPSHOT'
+    build-script: java-snakeyaml-engine-build.sh
     tests: [event, json, yaml]
 
   js-jsyaml:

@@ -9,13 +9,13 @@ import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import org.junit.Test;
 
-public class Snake2YamlTest {
+public class SnakeEngine2YamlTest {
 
   private void checkConversion(final String input, final String expected) throws IOException {
     ByteArrayOutputStream uu = new ByteArrayOutputStream();
     final PrintStream sw = new PrintStream(uu);
-    new Snake2Yaml().yamlToYaml(new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8)),
-        sw);
+    new SnakeEngine2Yaml().yamlToYaml(
+        new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8)), sw);
     assertEquals(expected, uu.toString());
   }
 
@@ -25,9 +25,7 @@ public class Snake2YamlTest {
   }
 
   @Test
-  public void oneDocument() throws IOException {
-    checkConversion("---\n" +
-        "foo: bar\n", "---\n" +
-        "foo: bar\n");
+  public void simpleMap() throws IOException {
+    checkConversion("---\nfoo: bar\n", "---\nfoo: bar\n");
   }
 }

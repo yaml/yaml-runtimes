@@ -8,11 +8,11 @@ import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import org.junit.Test;
 
-public class Snake2EventsTest {
+public class SnakeEngine2EventsTest {
 
   private void checkConversion(final String input, final String expected) throws IOException {
     final StringWriter sw = new StringWriter();
-    new Snake2Events().yamlToEvents(
+    new SnakeEngine2Events().yamlToEvents(
         new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8)), sw);
     assertEquals(expected, sw.toString());
   }

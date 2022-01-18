@@ -18,7 +18,8 @@
 
     <properties>
         <!-- can be changed from command line -->
-        <snakeversion>1.30</snakeversion>
+        <snakeversion>1.31-SNAPSHOT</snakeversion>
+        <snakeengineversion>2.4-SNAPSHOT</snakeengineversion>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
     </properties>
@@ -28,6 +29,11 @@
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
             <version>${snakeversion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.snakeyaml</groupId>
+            <artifactId>snakeyaml-engine</artifactId>
+            <version>${snakeengineversion}</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -41,6 +47,13 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <repositories>
+        <repository>
+            <id>Sonatype-public</id>
+            <name>SnakeYAML repository</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </repository>
+    </repositories>
 
     <build>
         <plugins>
