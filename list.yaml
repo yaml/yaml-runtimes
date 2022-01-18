@@ -61,8 +61,8 @@ libraries:
     name: libfyaml
     homepage: https://github.com/pantoniou/libfyaml
     lang: C
-    source: https://github.com/pantoniou/libfyaml/releases/download/v0.7.4/libfyaml-0.7.4.tar.gz
-    version: 0.7.4
+    source: https://github.com/pantoniou/libfyaml/releases/download/v0.7.11/libfyaml-0.7.11.tar.gz
+    version: 0.7.11
     build-script: c-libfyaml-build.sh
     tests: [event, json, yaml]
 
@@ -132,8 +132,8 @@ libraries:
     <<: *node
     name: yaml
     homepage: https://github.com/eemeli/yaml
-    version: 2.0.0-8
-    source: https://github.com/eemeli/yaml/archive/refs/tags/v2.0.0-8.tar.gz
+    version: 2.0.0-10
+    source: https://github.com/eemeli/yaml/archive/refs/tags/v2.0.0-10.tar.gz
     build-script: js-yaml-build.sh
     tests: [event, json, yaml]
 
@@ -224,24 +224,24 @@ libraries:
     <<: *python
     name: PyYAML
     homepage: https://github.com/yaml/pyyaml
-    version: '5.4.1'
-    source: https://files.pythonhosted.org/packages/a0/a4/d63f2d7597e1a4b55aa3b4d6c5b029991d3b824b5bd331af8d4ab1ed687d/PyYAML-5.4.1.tar.gz
+    version: '6.0'
+    source: https://files.pythonhosted.org/packages/36/2b/61d51a2c4f25ef062ae3f74576b01638bebad5e045f747ff12643df63844/PyYAML-6.0.tar.gz
     tests: [event, json, py, yaml]
 
   py-ruamel:
     <<: *python
     homepage: https://bitbucket.org/ruamel/yaml
     name: ruamel.yaml
-    version: 0.17.19
-    source: https://files.pythonhosted.org/packages/c8/90/759f358f3f8770246fea741d50e9535c138d630aad1a62ec46dd63f327ef/ruamel.yaml-0.17.19.tar.gz
+    version: 0.17.20
+    source: https://files.pythonhosted.org/packages/2d/b1/b672cbe8be9ea09d85d2be8c3693811362295aa8483849e85b41caaadb85/ruamel.yaml-0.17.20.tar.gz
     tests: [event, json, py, yaml]
 
   ruby-psych:
     <<: *ruby
     name: psych
     homepage: https://github.com/ruby/psych
-    version: '4.0.1'
-    source: https://rubygems.org/downloads/psych-4.0.1.gem
+    version: '4.0.3'
+    source: https://rubygems.org/downloads/psych-4.0.3.gem
     tests: [json]
 
 formats:
