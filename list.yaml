@@ -65,8 +65,8 @@ libraries:
     name: libfyaml
     homepage: https://github.com/pantoniou/libfyaml
     lang: C
-    source: https://github.com/pantoniou/libfyaml/releases/download/v0.7.11/libfyaml-0.7.11.tar.gz
-    version: 0.7.11
+    source: https://github.com/pantoniou/libfyaml/releases/download/v0.7.12/libfyaml-0.7.12.tar.gz
+    version: 0.7.12
     build-script: c-libfyaml-build.sh
     tests: [event, json, yaml]
 

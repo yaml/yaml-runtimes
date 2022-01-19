@@ -130,3 +130,18 @@ pull-images() {
     done
 }
 
+push-images() {
+    local args re cmd runtime
+    get-runtime-args $*
+    for runtime in "${args[@]}"; do
+        if echo "$runtime" | grep -qE "$re"; then
+            echo "pushing $runtime..."
+            cmd=(docker push yamlio/$runtime)
+            echo "${cmd[@]}"
+            set -x
+            "${cmd[@]}"
+            set +x
+        fi
+    done
+}
+
