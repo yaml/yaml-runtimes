@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ ! -t 0 ]; then
+    # if input comes from stdin, ryml wants a `-`
+    ryml-yaml-events $@ -
+else
+    ryml-yaml-events $@
+fi
