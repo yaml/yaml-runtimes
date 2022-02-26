@@ -85,8 +85,8 @@ libraries:
     name: rapidyaml
     homepage: https://github.com/biojppm/rapidyaml
     lang: C++
-    version: 0.3.0
-    source: https://github.com/biojppm/rapidyaml/releases/download/v0.3.0/rapidyaml-0.3.0-src.tgz
+    version: 0.4.0
+    source: https://github.com/biojppm/rapidyaml/releases/download/v0.4.0/rapidyaml-0.4.0-src.tgz
     build-script: cpp-rapidyaml-build.sh
     tests: [event]
 
