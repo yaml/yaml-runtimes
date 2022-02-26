@@ -80,6 +80,16 @@ libraries:
     build-script: go-yaml-build.sh
     tests: [json]
 
+  cpp-rapidyaml:
+    <<: *static
+    name: rapidyaml
+    homepage: https://github.com/biojppm/rapidyaml
+    lang: C++
+    version: 0.4.0
+    source: https://github.com/biojppm/rapidyaml/releases/download/v0.4.0/rapidyaml-0.4.0-src.tgz
+    build-script: cpp-rapidyaml-build.sh
+    tests: [event]
+
   cpp-yamlcpp:
     <<: *static
     name: yaml-cpp
