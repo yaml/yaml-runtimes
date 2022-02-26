@@ -85,10 +85,6 @@ sub test {
                 # document start or end
                 $output = 'output.event.yamlcpp';
             }
-            elsif ($library eq 'cpp-rapidyaml') {
-                # rapidyaml outputs '-STR ..'` if there was '---'
-                $output = 'output.event.rapid';
-            }
             elsif ($library eq 'rust-yamlrust') {
                 # yamlrust does not have information about implicit
                 # document start or end
