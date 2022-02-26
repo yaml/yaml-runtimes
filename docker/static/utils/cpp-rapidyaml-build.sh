@@ -3,8 +3,7 @@
 set -x
 cd /tmp
 
-# the tool is not yet in any release, and requires building.
-git clone --recursive https://github.com/biojppm/rapidyaml
+git clone --recursive --depth 1 --branch v0.4.0 https://github.com/biojppm/rapidyaml
 
 cmake --version
 cmake -S rapidyaml -B rapidyaml/build -DRYML_BUILD_TOOLS=ON -DRYML_WITH_TAB_TOKENS=ON -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=Debug
