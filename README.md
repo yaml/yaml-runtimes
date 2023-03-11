@@ -215,7 +215,7 @@ Type `make list` to see the following list:
 | js-jsyaml         | Javascript | [js-yaml](https://github.com/nodeca/js-yaml) | 4.1.0    | node    |
 | js-yaml           | Javascript | [yaml](https://github.com/eemeli/yaml) | 2.0.0-10 | node    |
 | lua-lyaml         | Lua        | [lyaml](https://github.com/gvvaughan/lyaml) | 6.2.7    | lua     |
-| nim-nimyaml       | Nim        | [NimYAML](https://github.com/flyx/NimYAML) | 0.16.0   | static  |
+| nim-nimyaml       | Nim        | [NimYAML](https://github.com/flyx/NimYAML) | 1.1.0   | static  |
 | perl-pp           | Perl       | [YAML::PP](https://metacpan.org/release/YAML-PP) | 0.031    | perl    |
 | perl-pplibyaml    | Perl       | [YAML::PP::LibYAML](https://metacpan.org/release/YAML-PP-LibYAML) | 0.005    | perl    |
 | perl-refparser    | Perl       | [Generated RefParser](https://metacpan.org/release/YAML-Parser) | 0.0.5    | perl    |
