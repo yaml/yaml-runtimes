@@ -204,7 +204,7 @@ Type `make list` to see the following list:
 | ----------------- | ---------- | ------------------ | -------- | ------- |
 | c-libfyaml        | C          | [libfyaml](https://github.com/pantoniou/libfyaml) | 0.7.12   | static  |
 | c-libyaml         | C          | [libyaml](https://github.com/yaml/libyaml) | 0.2.5    | static  |
-| cpp-rapidyaml     | C++        | [rapidyaml](https://github.com/biojppm/rapidyaml) | 0.4.0    | static  |
+| cpp-rapidyaml     | C++        | [rapidyaml](https://github.com/biojppm/rapidyaml) | 0.7.0    | static  |
 | cpp-yamlcpp       | C++        | [yaml-cpp](https://github.com/jbeder/yaml-cpp) | 0.8.0    | static  |
 | dotnet-yamldotnet | C#         | [YamlDotNet](https://github.com/aaubry/YamlDotNet) | 11.2.1   | dotnet  |
 | go-yaml           | Go         | [go-yaml](https://github.com/go-yaml/yaml) | v2       | static  |

@@ -11,7 +11,7 @@ PERL =    perl-pp perl-pplibyaml perl-syck perl-tiny perl-xs perl-yaml perl-refp
 PYTHON =  py-pyyaml py-ruamel
 #RAKUDO =  raku-yamlish
 RUBY =    ruby-psych
-STATIC =  c-libfyaml c-libyaml cpp-rapidyaml cpp-yamlcpp go-yaml rust-yamlrust
+STATIC =  c-libfyaml c-libyaml cpp-rapidyaml cpp-rapidengine cpp-yamlcpp go-yaml rust-yamlrust
 
 build: $(DOTNET) $(HASKELL) $(LUA) $(NIM) $(NODE) $(PERL) $(PYTHON) $(RUBY) $(STATIC)
 
