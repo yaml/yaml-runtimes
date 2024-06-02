@@ -179,8 +179,8 @@ libraries:
     <<: *perl
     name: YAML::PP
     homepage: https://metacpan.org/release/YAML-PP
-    version: '0.031'
-    source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-PP-0.031.tar.gz
+    version: '0.38.0'
+    source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-PP-v0.38.0.tar.gz
     tests: [event, json, yaml, perl]
 
   perl-refparser:
@@ -211,24 +211,24 @@ libraries:
     <<: *perl
     name: YAML::Tiny
     homepage: https://metacpan.org/release/YAML-Tiny
-    version: 1.73
-    source: https://cpan.metacpan.org/authors/id/E/ET/ETHER/YAML-Tiny-1.73.tar.gz
+    version: 1.74
+    source: https://cpan.metacpan.org/authors/id/E/ET/ETHER/YAML-Tiny-1.74.tar.gz
     tests: [json, perl]
 
   perl-xs:
     <<: *perl
     name: YAML::XS (libyaml)
     homepage: https://metacpan.org/release/YAML-LibYAML
-    version: '0.83'
-    source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-LibYAML-0.83.tar.gz
+    version: '0.89'
+    source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-LibYAML-0.89.tar.gz
     tests: [json, perl]
 
   perl-yaml:
     <<: *perl
     name: YAML.pm
     homepage: https://metacpan.org/release/YAML
-    version: '1.30'
-    source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-1.30.tar.gz
+    version: '1.31'
+    source: https://cpan.metacpan.org/authors/id/I/IN/INGY/YAML-1.31.tar.gz
     tests: [json, perl]
 
 #  raku-yamlish:
