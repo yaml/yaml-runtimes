@@ -12,9 +12,9 @@ runtimes:
   runtime: haskell
   build-script: hs-build.sh
   lang: Haskell
-- &java
-  runtime: java
-  lang: Java
+#- &java
+#  runtime: java
+#  lang: Java
 - &lua
   runtime: lua
   build-script: lua-build.sh
@@ -30,21 +30,17 @@ runtimes:
   build-script: python-install.sh
   runtime: python
   lang: Python
-- &rakudo
-  build-script: rakudo-install.sh
-  build-dir:
-  - [var/build/rakudo/raku, /raku]  # [dir, mounted-as]
-  - [var/build/rakudo,      /build] # [dir, mounted-as]
-  runtime: rakudo
-  lang: Raku
+#- &rakudo
+#  build-script: rakudo-install.sh
+#  build-dir:
+#  - [var/build/rakudo/raku, /raku]  # [dir, mounted-as]
+#  - [var/build/rakudo,      /build] # [dir, mounted-as]
+#  runtime: rakudo
+#  lang: Raku
 - &ruby
   runtime: ruby
   lang: Ruby
   build-script: installgem.sh
-- &rust
-  runtime: static
-  lang: Rust
-  build-script: installrust.sh
 - &static
   runtime: static
 
@@ -124,23 +120,23 @@ libraries:
     version: master
     tests: [yeast]
 
-  java-snakeyaml:
-    <<: *java
-    name: SnakeYAML
-    homepage: https://bitbucket.org/snakeyaml/snakeyaml/
-    source: https://bitbucket.org/snakeyaml/snakeyaml/get/master.tar.gz
-    version: '1.31-SNAPSHOT'
-    build-script: java-snakeyaml-build.sh
-    tests: [event, json, yaml]
-
-  java-snakeengine:
-    <<: *java
-    name: SnakeYAML Engine
-    homepage: https://bitbucket.org/snakeyaml/snakeyaml-engine
-    source: https://bitbucket.org/snakeyaml/snakeyaml-engine/get/master.tar.gz
-    version: '2.4-SNAPSHOT'
-    build-script: java-snakeyaml-engine-build.sh
-    tests: [event, json, yaml]
+#  java-snakeyaml:
+#    <<: *java
+#    name: SnakeYAML
+#    homepage: https://bitbucket.org/snakeyaml/snakeyaml/
+#    source: https://bitbucket.org/snakeyaml/snakeyaml/get/master.tar.gz
+#    version: '1.31-SNAPSHOT'
+#    build-script: java-snakeyaml-build.sh
+#    tests: [event, json, yaml]
+#
+#  java-snakeengine:
+#    <<: *java
+#    name: SnakeYAML Engine
+#    homepage: https://bitbucket.org/snakeyaml/snakeyaml-engine
+#    source: https://bitbucket.org/snakeyaml/snakeyaml-engine/get/master.tar.gz
+#    version: '2.4-SNAPSHOT'
+#    build-script: java-snakeyaml-engine-build.sh
+#    tests: [event, json, yaml]
 
   js-jsyaml:
     <<: *node
@@ -235,20 +231,20 @@ libraries:
     source: https://cpan.metacpan.org/authors/id/T/TI/TINITA/YAML-1.30.tar.gz
     tests: [json, perl]
 
-  raku-yamlish:
-    <<: *rakudo
-    name: YAMLish
-    homepage: https://github.com/Leont/yamlish
-    version: 0.0.6
-    source: https://github.com/Leont/yamlish/archive/master.zip
-    tests: [json, raku]
+#  raku-yamlish:
+#    <<: *rakudo
+#    name: YAMLish
+#    homepage: https://github.com/Leont/yamlish
+#    version: 0.0.6
+#    source: https://github.com/Leont/yamlish/archive/master.zip
+#    tests: [json, raku]
 
   py-pyyaml:
     <<: *python
     name: PyYAML
     homepage: https://github.com/yaml/pyyaml
-    version: '6.0'
-    source: https://files.pythonhosted.org/packages/36/2b/61d51a2c4f25ef062ae3f74576b01638bebad5e045f747ff12643df63844/PyYAML-6.0.tar.gz
+    version: '5.3.1'
+    source: https://files.pythonhosted.org/packages/64/c2/b80047c7ac2478f9501676c988a5411ed5572f35d1beff9cae07d321512c/PyYAML-5.3.1.tar.gz
     tests: [event, json, py, yaml]
 
   py-ruamel:
@@ -268,7 +264,9 @@ libraries:
     tests: [json]
 
   rust-yamlrust:
-    <<: *rust
+    <<: *static
+    lang: Rust
+    build-script: installrust.sh
     name: yaml
     homepage: https://github.com/chyh1990/yaml-rust
     version: 0.4.4
@@ -282,4 +280,4 @@ formats:
   yeast: YEAST Events
   perl: Perl Native
   py: Python Native
-  raku: Raku Native
+#  raku: Raku Native

@@ -1,4 +1,4 @@
-FROM alpine:3.10.2
+FROM alpine:3.15.2
 
 RUN apk update && \
   apk add \
@@ -9,7 +9,7 @@ RUN apk update && \
     inotify-tools \
   && true
 
-ENV PYTHONPATH=/python/lib/python3.7/site-packages
+ENV PYTHONPATH=/python/lib/python3.9/site-packages
 
 COPY var/build/python /
 COPY docker/python/testers /yaml/bin/

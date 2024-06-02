@@ -3,44 +3,44 @@ LIBRARY :=
 
 DOTNET =  dotnet-yamldotnet
 HASKELL = hs-hsyaml hs-reference
-JAVA =    java-snakeyaml java-snakeengine
+#JAVA =    java-snakeyaml java-snakeengine
 LUA =     lua-lyaml
 NIM =     nim-nimyaml
 NODE =    js-jsyaml js-yaml
 PERL =    perl-pp perl-pplibyaml perl-syck perl-tiny perl-xs perl-yaml perl-refparser
 PYTHON =  py-pyyaml py-ruamel
-RAKUDO =  raku-yamlish
+#RAKUDO =  raku-yamlish
 RUBY =    ruby-psych
 STATIC =  c-libfyaml c-libyaml cpp-rapidyaml cpp-yamlcpp go-yaml rust-yamlrust
 
-build: $(DOTNET) $(HASKELL) $(JAVA) $(LUA) $(NIM) $(NODE) $(PERL) $(RAKUDO) $(PYTHON) $(RUBY) $(STATIC)
+build: $(DOTNET) $(HASKELL) $(LUA) $(NIM) $(NODE) $(PERL) $(PYTHON) $(RUBY) $(STATIC)
 
 runtime-all:
 	docker build -t yamlio/alpine-runtime-all  -f docker/Dockerfile .
 
 dotnet:  $(DOTNET)
 haskell: $(HASKELL)
-java:    $(JAVA)
+#java:    $(JAVA)
 lua:     $(LUA)
 nim:     $(NIM)
 node:    $(NODE)
 perl:    $(PERL)
 python:  $(PYTHON)
-rakudo:  $(RAKUDO)
+#rakudo:  $(RAKUDO)
 ruby:    $(RUBY)
 static:  $(STATIC)
 
-COMMON = $(DOTNET) $(HASKELL) $(JAVA) $(LUA) $(NODE) $(PERL) $(PYTHON) $(RAKUDO) $(RUBY) $(STATIC)
+COMMON = $(DOTNET) $(HASKELL) $(LUA) $(NODE) $(PERL) $(PYTHON) $(RUBY) $(STATIC)
 
 $(DOTNET):  RUNTIME = dotnet
 $(HASKELL): RUNTIME = haskell
-$(JAVA):    RUNTIME = java
+#$(JAVA):    RUNTIME = java
 $(LUA):     RUNTIME = lua
 $(NIM):     RUNTIME = static
 $(NODE):    RUNTIME = node
 $(PERL):    RUNTIME = perl
 $(PYTHON):  RUNTIME = python
-$(RAKUDO):  RUNTIME = rakudo
+#$(RAKUDO):  RUNTIME = rakudo
 $(RUBY):    RUNTIME = ruby
 $(STATIC):  RUNTIME = static
 
