@@ -151,8 +151,8 @@ libraries:
     <<: *node
     name: yaml
     homepage: https://github.com/eemeli/yaml
-    version: 2.0.0-10
-    source: https://github.com/eemeli/yaml/archive/refs/tags/v2.0.0-10.tar.gz
+    version: 2.4.3
+    source: https://github.com/eemeli/yaml/archive/refs/tags/v2.4.3.tar.gz
     build-script: js-yaml-build.sh
     tests: [event, json, yaml]
 

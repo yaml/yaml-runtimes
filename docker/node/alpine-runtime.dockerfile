@@ -1,4 +1,4 @@
-FROM alpine:3.10.2
+FROM alpine:3.20
 
 RUN apk update && \
   apk add \

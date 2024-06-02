@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs')
-const { testEvents } = require('yaml/dist/test-events')
+const { testEvents } = require('/node/node_modules/yaml/dist/test-events.js')
 
 const src = fs.readFileSync('/dev/stdin').toString()
 const { events, error } = testEvents(src)
