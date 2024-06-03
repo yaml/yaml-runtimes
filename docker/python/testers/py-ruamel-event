@@ -2,9 +2,11 @@
 
 import sys
 import pprint
-import ruamel.yaml
+from ruamel.yaml import YAML
 
-for event in ruamel.yaml.parse(sys.stdin.read()):
+yaml = YAML(typ='safe', pure=True)
+
+for event in yaml.parse(sys.stdin.read()):
     name = event.__class__.__name__
     if (name == 'StreamStartEvent'):
         print('+STR')

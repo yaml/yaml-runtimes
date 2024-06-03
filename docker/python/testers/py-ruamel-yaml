@@ -2,11 +2,12 @@
 
 import sys
 import pprint
-import ruamel.yaml
+from ruamel.yaml import YAML
+
+yaml=YAML(typ='rt', pure=True)
 
 events = []
-for event in ruamel.yaml.parse(sys.stdin.read()):
+for event in yaml.parse(sys.stdin.read()):
     events.append(event)
 
-output = ruamel.yaml.emit(events)
-sys.stdout.write(output)
+yaml.emit(events, stream=sys.stdout)

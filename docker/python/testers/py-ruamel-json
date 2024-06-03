@@ -2,8 +2,10 @@
 
 import sys
 import pprint
-import ruamel.yaml
+from ruamel.yaml import YAML
 import json
+
+yaml = YAML(typ='safe', pure=True)
 
 def generic_constructor(loader, tag, node):
     classname = node.__class__.__name__
@@ -14,9 +16,9 @@ def generic_constructor(loader, tag, node):
     else:
         return loader.construct_scalar(node)
 
-ruamel.yaml.add_multi_constructor('', generic_constructor)
+yaml.constructor.add_multi_constructor('', generic_constructor)
 
-for doc in ruamel.yaml.load_all(sys.stdin.read(), Loader=ruamel.yaml.Loader):
+for doc in yaml.load_all(sys.stdin.read()):
     try:
         print(json.dumps(doc, sort_keys=True, skipkeys=True, indent=2))
     except:
