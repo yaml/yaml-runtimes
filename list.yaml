@@ -160,8 +160,8 @@ libraries:
     <<: *lua
     name: lyaml
     homepage: https://github.com/gvvaughan/lyaml
-    source: https://luarocks.org/manifests/gvvaughan/lyaml-6.2.7-1.src.rock
-    version: 6.2.7
+    source: https://luarocks.org/manifests/gvvaughan/lyaml-6.2.8-1.src.rock
+    version: 6.2.8
     tests: [json]
 
   nim-nimyaml:
