@@ -3,8 +3,8 @@
 set -x
 cd /tmp
 cp $SOURCE .
-tar xvf yaml-cpp-$VERSION.tar.gz
-cd yaml-cpp-yaml-cpp-$VERSION
+tar xvf $VERSION.tar.gz
+cd yaml-cpp-$VERSION
 
 mkdir build
 cd build
