@@ -211,7 +211,7 @@ Type `make list` to see the following list:
 | hs-hsyaml         | Haskell    | [HsYAML](https://github.com/haskell-hvr/HsYAML) | 0.2.1.0  | haskell |
 | hs-reference      | Haskell    | [YAMLReference](https://github.com/orenbenkiki/yamlreference) | master   | haskell |
 | js-jsyaml         | Javascript | [js-yaml](https://github.com/nodeca/js-yaml) | 4.1.0    | node    |
-| js-yaml           | Javascript | [yaml](https://github.com/eemeli/yaml) | 2.4.3    | node    |
+| js-yaml           | Javascript | [yaml](https://github.com/eemeli/yaml) | 2.4.5    | node    |
 | lua-lyaml         | Lua        | [lyaml](https://github.com/gvvaughan/lyaml) | 6.2.8    | lua     |
 | nim-nimyaml       | Nim        | [NimYAML](https://github.com/flyx/NimYAML) | 0.16.0   | static  |
 | perl-pp           | Perl       | [YAML::PP](https://metacpan.org/release/YAML-PP) | 0.38.0   | perl    |
