@@ -2,7 +2,7 @@
 
 if [ ! -t 0 ]; then
     # if input comes from stdin, ryml wants a `-`
-    ryml-yaml-events -t $@ -
+    ryml-yaml-events -s $@ -
 else
-    ryml-yaml-events -t $@
+    ryml-yaml-events -s $@
 fi
