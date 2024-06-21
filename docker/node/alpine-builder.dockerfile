@@ -6,6 +6,7 @@ RUN apk update && \
     git \
     nodejs \
     npm \
+    perl \
     wget \
     rsync \
   && true
